@@ -75,9 +75,9 @@ export const checkAuth = () => async (dispatch) => {
     const {user, accessToken} = response.data;
     dispatch(setUser(user));
     localStorage.setItem('token', accessToken);
-    history.replace('/main');
+    // history.replace('/main');
   }catch(err) {
-    dispatch(setError(error));
+    dispatch(setError(err));
   }
 finally{
   dispatch(disableLoader());
