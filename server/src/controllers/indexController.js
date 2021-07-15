@@ -3,9 +3,9 @@ const Project = require("../models/project-model")
 class IndexController {
   async index(req, res, next) {
     try {
-      const project = await Project.find()
-      console.log(project);
-      return res.json(project)
+      const projects = await Project.find()
+      console.log(projects);
+      return res.json(projects)
     } catch (err) {
       next(err);
     }
@@ -13,3 +13,5 @@ class IndexController {
 }
 
 module.exports = new IndexController();
+
+
