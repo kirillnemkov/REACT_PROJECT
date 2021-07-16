@@ -14,7 +14,6 @@
 }
 .modalka__content {
   font-family: sans-serif;
-  background: linear-gradient(#141e30, #243b55);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,10 +21,12 @@
   background-color: white;
   transform: scale(0.5s);
   transition: 0.4s all;
+  min-width: 60rem;
 }
 .modalka.active{
   opacity: 1;
   pointer-events: all;
+  z-index: 101
 }
 .modalka__content.active {
   transform: scale(1);
