@@ -1,14 +1,19 @@
 import './Modal.css'
 
-const Modal = ({ active, setActive, children }) => {
+const Modal = ({ setMessage, setForgotPasswordFormFields, setModalActive, modalActive, children }) => {
     return (
         <div
-            className={active ? 'modalka active' : 'modalka'}
-            onClick={() => setActive(false)}
+            className={modalActive ? 'modalka active' : 'modalka'}
+            onClick={() => {
+              setModalActive(false)
+              setForgotPasswordFormFields({email: ''})
+              setMessage(null)
+            }
+            }
         >
             <div
                 className={
-                    active ? 'modalka__content active' : 'modalka__content'
+                  modalActive ? 'modalka__content active' : 'modalka__content'
                 }
                 onClick={(e) => e.stopPropagation()}
             >

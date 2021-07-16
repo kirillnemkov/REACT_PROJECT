@@ -14,5 +14,7 @@ userRouter.post("/auth/signin", UserController.signIn);
 userRouter.post("/auth/signout", UserController.signOut);
 userRouter.post("/auth/activate/:link", UserController.activate);
 userRouter.get("/auth/refresh", UserController.refresh);
+userRouter.post("/auth/resetPasswordLetter", UserController.sendResetPasswordLetter);
+userRouter.post("/auth/newPassword/:link", UserController.updatePassword);
 
 module.exports = userRouter;

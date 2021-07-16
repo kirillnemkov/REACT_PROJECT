@@ -1,7 +1,6 @@
 import { Alert } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
 import { confirmAuth } from '../../redux/actions/user.ac'
 import { useDispatch } from 'react-redux'
 const { Heading } = Alert
