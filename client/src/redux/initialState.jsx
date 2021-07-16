@@ -1,8 +1,9 @@
 const initState = {
   files: [],
+  posts: [],
   user: null,
   loader: false,
-  error: null
+  error: null,
 }
 
 const getInitState = () => {

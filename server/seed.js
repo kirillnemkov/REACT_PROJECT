@@ -14,7 +14,7 @@ async function main() {
       facebook: "https://www.facebook.com/public/%D0%9A%D0%B8%D1%80%D0%B8%D0%BB%D0%BB-%D0%9D%D0%B5%D0%BC%D0%BA%D0%BE%D0%B2",
       image: "https://cdn22.img.ria.ru/images/07e5/04/11/1728680670_69:0:702:356_1920x0_80_0_0_52075a1fd589d6abe4a5b56f7c48d63c.png",
       date: "July 2021 - leopards",
-      likes: 5,
+      likes: 37,
     },
     {
       name: "Made by Elbrus",
@@ -27,7 +27,7 @@ async function main() {
       facebook: "https://ru-ru.facebook.com/michelemorroneofficial",
       image: "https://i.pinimg.com/originals/8e/60/6d/8e606dd037c25ad8cb39f415034fe074.jpg",
       date: "July 2021 - leopards",
-      likes: 371,
+      likes: 22,
     },
   ];
   await Project.insertMany(project);
