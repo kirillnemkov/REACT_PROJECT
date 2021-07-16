@@ -3,7 +3,7 @@ import styles from "./style.module.css"
 
 export default function CardList() {
     return (
-    <div className="container" style={{paddingTop: "50px"}}>
+    <div className="container" style={{paddingTop: "80px"}}>
     <div className="row row-cols-1 row-cols-md-3 g-4">
   <div className={`col ${styles.col}`}>
     <div className={`card ${styles.card}`}>

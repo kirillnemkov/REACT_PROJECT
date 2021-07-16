@@ -1,12 +1,9 @@
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import clsx from 'clsx';
-
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import clsx from 'clsx';
+import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
-import {Toolbar, IconButton, CardMedia, Drawer, ListItemIcon, ListItemText, ListItem,List} from "@material-ui/core";
+import {makeStyles, Button, MenuItem, Menu, Toolbar, IconButton,
+   CardMedia, SwipeableDrawer, ListItemIcon, ListItemText, ListItem,List} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -28,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between"
   },
   list: {
-    width: 170,
+    width: 200,
   },
   fullList: {
     width: 'auto',
@@ -53,14 +50,16 @@ export default function ButtonAppBar() {
     setState({ ...state, [anchor]: open });
   };
 
+  const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
   const list = (anchor) => (
     <div className={clsx(classes.list, {[classes.fullList]: anchor === 'top' || anchor === 'bottom',})}
       role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
       <List>
-        {['Tag', 'Tag', 'Tag', 'Tag', 'Tag', 'Tag', 'Tag', 'Tag'].map((text, index) => (
+        {['tagtag', 'tagtag', 'tagtag', 'Tag', 'Tag', 'Tag'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>#</ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemText primary={`#${text}`} />
+            {/* <ListItemIcon></ListItemIcon> */}
           </ListItem>
         ))}
       </List>
@@ -76,16 +75,16 @@ export default function ButtonAppBar() {
             {['left'].map((anchor) => (
               <React.Fragment key={anchor}>
                 <Button onClick={toggleDrawer(anchor, true)}>Категории</Button>
-                <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                   {list(anchor)}
-                </Drawer>
+                </SwipeableDrawer>
               </React.Fragment>
             ))}
           </div>
           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleClose}>Tag</MenuItem>
           </Menu>
-          <CardMedia component="img" className={classes.media} image="images/elbruslogotip.jpg" title="logo"/>
+          <Link to="/"><CardMedia component="img" className={classes.media} image="images/elbruslogotip.jpg" title="logo"/></Link>
             <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
           </Toolbar>
         </AppBar>

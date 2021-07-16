@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from 'react-router-dom'
+import { Route, Switch,} from 'react-router-dom'
 import ActivationSuccess from './components/ActivationSuccess/ActivationSuccess'
 import Navbar from './components/Navbar/Navbar'
 import CardList from './components/CardList/CardList.jsx'
@@ -7,9 +7,9 @@ import SignupSuccessMessage from './components/Signup-success-message/Signup-suc
 function App() {
     return (
         <>
-            <CardList />
+            <Navbar />
             <Switch>
-                <Navbar />
+                <CardList />
                 <Route exact path="/activation/success/:link">
                     <ActivationSuccess />
                 </Route>
