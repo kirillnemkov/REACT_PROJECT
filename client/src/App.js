@@ -2,6 +2,8 @@ import { Route, Switch, Redirect } from 'react-router-dom'
 import ActivationSuccess from './components/ActivationSuccess/ActivationSuccess'
 import SignupSuccessMessage from './components/Signup-success-message/Signup-success-message'
 import UserProfile from './components/UserProfile/UserProfile'
+import './'
+
 
 function App() {
     return (
