@@ -70,7 +70,7 @@ const UserProfile = () => {
             </Paper>
 
             <div className={styles.skills_container}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{ height: 400, width: '100%', marginTop: '3%' }}>
                     <Diagram />
                 </div>
             </div>
@@ -84,20 +84,29 @@ const UserProfile = () => {
             </div>
 
 
+            <div className={styles.links_container}>
+                <div className={styles.links_item}>
+                    <p>url</p>
+                    <img src="/sites.png" className={styles.links_img}></img>
+                </div>
+                <div className={styles.links_item}>
+                    <p> gitHub</p>
+                    <img src='/github.png' className={styles.links_img}></img>
+                </div>
+                <div className={styles.links_item}>
+                    <p>twitter</p>
+                    <img src='/twitter.png' className={styles.links_img}></img>
+                </div>
+                <div className={styles.links_item}>
+                    <p>instagram</p>
+                    <img src="/instagram.png" className={styles.links_img}></img>
+                </div>
+                <div className={styles.links_item}>
+                    <p> facebook</p>
+                    <img src="/facebook.png" className={styles.links_img}></img>
+                </div>
+            </div>
 
-
-            {/* <div className="links">
-                url
-                gitHub
-                twitter
-                instagram
-                facebook
-            </div> */}
-
-
-            {/* <div className="about">
-                <h2>about</h2>
-            </div> */}
         </div>
     )
 }

@@ -1,7 +1,6 @@
 // install (please make sure versions match peerDependencies)
 // yarn add @nivo/core @nivo/pie
 import { ResponsivePie } from '@nivo/pie'
-
 // make sure parent container have a defined height when using
 // responsive component, otherwise height will be 0 and
 // no chart will be rendered.
@@ -9,38 +8,38 @@ import { ResponsivePie } from '@nivo/pie'
 // you'll often use just a few of them.
 const data = [
     {
-      "id": "erlang",
-      "label": "erlang",
-      "value": 20,
-      "color": "hsl(84, 70%, 50%)"
+        "id": "erlang",
+        "label": "erlang",
+        "value": 20,
+        "color": "hsl(84, 70%, 50%)"
     },
     {
-      "id": "c",
-      "label": "c",
-      "value": 70,
-      "color": "hsl(131, 70%, 50%)"
+        "id": "c",
+        "label": "c",
+        "value": 70,
+        "color": "hsl(131, 70%, 50%)"
     },
     {
-      "id": "php",
-      "label": "php",
-      "value": 20,
-      "color": "hsl(4, 70%, 50%)"
+        "id": "php",
+        "label": "php",
+        "value": 20,
+        "color": "hsl(4, 70%, 50%)"
     },
     {
-      "id": "scala",
-      "label": "scala",
-      "value": 20,
-      "color": "hsl(257, 70%, 50%)"
+        "id": "scala",
+        "label": "scala",
+        "value": 20,
+        "color": "hsl(257, 70%, 50%)"
     },
     {
-      "id": "haskell",
-      "label": "haskell",
-      "value": 20,
-      "color": "hsl(250, 70%, 50%)"
+        "id": "haskell",
+        "label": "haskell",
+        "value": 20,
+        "color": "hsl(250, 70%, 50%)"
     }
-  ]
+]
 const MyResponsivePie = () => (
-    
+
     <ResponsivePie
         data={data}
         margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
@@ -49,14 +48,14 @@ const MyResponsivePie = () => (
         cornerRadius={3}
         activeOuterRadiusOffset={8}
         borderWidth={1}
-        borderColor={{ from: 'color', modifiers: [ [ 'darker', 0.2 ] ] }}
+        borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
         arcLinkLabelsSkipAngle={10}
         arcLinkLabelsTextColor="#333333"
         arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: 'color' }}
-        colors={{scheme: 'dark2'}}
+        colors={{ scheme: 'dark2' }}
         arcLabelsSkipAngle={10}
-        arcLabelsTextColor={{ from: 'color', modifiers: [ [ 'darker', 2 ] ] }}
+        arcLabelsTextColor={{ from: 'color', modifiers: [['darker', 2]] }}
         defs={[
             {
                 id: 'dots',
