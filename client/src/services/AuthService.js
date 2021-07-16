@@ -16,4 +16,8 @@ export default class AuthService {
   static async confirmAuth(link) {
     return $api.post(`api/v1/auth/activate/${link}`)
   }
+  
+  static async sendResetPasswordLetter(payload) {
+    return $api.post(`api/v1/auth/resetPasswordLetter`, payload)
+  }
 }

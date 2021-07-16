@@ -1,14 +1,15 @@
 import './Modal.css'
+import { useState } from 'react'
 
-const Modal = ({ active, setActive, children }) => {
+const Modal = ({setModalActive, modalActive, children}) => {
     return (
         <div
-            className={active ? 'modalka active' : 'modalka'}
-            onClick={() => setActive(false)}
+            className={modalActive ? 'modalka active' : 'modalka'}
+            onClick={() => setModalActive(false)}
         >
             <div
                 className={
-                    active ? 'modalka__content active' : 'modalka__content'
+                  modalActive ? 'modalka__content active' : 'modalka__content'
                 }
                 onClick={(e) => e.stopPropagation()}
             >
