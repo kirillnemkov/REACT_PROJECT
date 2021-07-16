@@ -1,19 +1,17 @@
-import { useState } from 'react'
+import './ForgotPasswordForm.css'
 
-const ForgotPasswordForm = () => {
-    const [email, setEmail] = useState({ email: '' })
-    const [messageSuccess, setMessageSuccess] = useState(false)
+const ForgotPasswordForm = ({ setForgotPasswordFormFields, forgotPasswordFormFields, submitHandler, changeHandler, message }) => {
 
     return (
         <div className="modalka_wrapper">
             <h2>Введите email, который вы указывали при регистрации</h2>
-            <form onSubmit={submitHandler}>
+            <form onSubmit={(e) => submitHandler(e, forgotPasswordFormFields, setForgotPasswordFormFields)}>
                 <div className="modalka_form_wrapper">
                     <input
                         className="modalka_input"
-                        placeHolder="Email"
-                        value={formFields.newEmail}
-                        onChange={changeHandler}
+                        placeholder="Email"
+                        value={forgotPasswordFormFields.email}
+                        onChange={(e)=> changeHandler(e, setForgotPasswordFormFields)}
                         type="email"
                         data-id="email"
                     />
@@ -22,8 +20,7 @@ const ForgotPasswordForm = () => {
                     </button>
                 </div>
                 <span>
-                    {messageSuccess &&
-                        'Письмо с инструкцией для обновления пароля успешно отправлено на указанный адрес'}
+                    {message && message}
                 </span>
             </form>
         </div>

@@ -1,47 +1,77 @@
 import './AuthForm-form.css'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { signIn, signUp, sendResetPasswordLetter } from '../../redux/actions/user.ac'
+import {
+    signIn,
+    signUp,
+    sendResetPasswordLetter,
+} from '../../redux/actions/user.ac'
 import Modal from '../Modal/Modal'
 import ForgotPasswordForm from '../ForgotPasswordForm/ForgotPasswordForm'
+import SignInContainer from '../SignInContainer/SignInContainer'
+import SignUpContainer from '../SignUpContainer/SignUpContainer'
+import { mailSentSuccessMsg } from '../../constants/constants'
 
 const AuthForm = () => {
-    const [formFields, setFormFields] = useState({})
+    const [signUpFormFields, setSignUpFormFields] = useState({
+        username: '',
+        email: '',
+        password: '',
+    })
+
+    const [signInFormFields, setSignInFormFields] = useState({
+        email: '',
+        password: '',
+    })
+
+    const [forgotPasswordFormFields, setForgotPasswordFormFields] = useState({
+        email: '',
+    })
 
     const container = useRef()
     let history = useHistory()
     const dispatch = useDispatch()
     const error = useSelector((state) => state.error)
+    useEffect(() => {
+        error && setMessage(error)
+    }, [error])
     const [modalActive, setModalActive] = useState(false)
-    const [messageSuccess, setMessageSuccess] = useState(false)
+    const [message, setMessage] = useState(null)
 
-     function submitHandler(e) {
+    function submitHandler(e, formFields, setFormFields) {
         e.preventDefault()
         let payload = Object.entries(formFields).filter((el) =>
             el[1] ? el[1].trim() : el[1]
         )
         if (payload.length) {
-            if (e.target.dataset.id === 'signup') {
-                dispatch(signIn(payload, history, error))
-            }
-            if (e.target.dataset.id === 'newEmail') {
-              dispatch(sendResetPasswordLetter(payload, error))
-              setMessageSuccess(true)
+            if (e.target.dataset.id === 'signinForm') {
+                setFormFields({
+                    email: '',
+                    password: '',
+                })
+                dispatch(signIn(formFields, history, error))
+            } else if (e.target.dataset.id === 'signupForm') {
+                setFormFields({
+                    username: '',
+                    email: '',
+                    password: '',
+                })
+                dispatch(signUp(formFields, history, error))
             } else {
-                dispatch(signUp(payload, history, error))
+                dispatch(sendResetPasswordLetter(formFields, error))
+                error ? setMessage(error) : setMessage(mailSentSuccessMsg)
+                setFormFields({
+                    email: '',
+                })
             }
         }
     }
 
-    function changeHandler(e) {
-      const field = e.target.dataset.id
-      const newValue = e.target.value
-      if(e.target.dataset.id === 'newEmail') { 
-        setFormFields({ [field]: newValue })
-      } else {
+    function changeHandler(e, setFormFields) {
+        const field = e.target.dataset.id
+        const newValue = e.target.value
         setFormFields((prev) => ({ ...prev, [field]: newValue }))
-      }
     }
 
     function toggleHandler(e) {
@@ -55,60 +85,23 @@ const AuthForm = () => {
     return (
         <>
             <div ref={container} className="container" id="container">
-                <div className="form-container sign-up-container">
-                    <form onSubmit={submitHandler}>
-                        <h1>Создать аккаунт</h1>
-                        <input
-                            type="text"
-                            placeholder="Username"
-                            value={formFields.username}
-                            onChange={changeHandler}
-                            data-id="username"
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={formFields.email}
-                            onChange={changeHandler}
-                            data-id="email"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={formFields.password}
-                            onChange={changeHandler}
-                            data-id="password"
-                        />
-                        <button data-id="signup">Зарегистрироваться</button>
-                    </form>
-                </div>
-                <div className="form-container sign-in-container">
-                    <form onSubmit={submitHandler}>
-                        <h1>Вход</h1>
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={formFields.email}
-                            onChange={changeHandler}
-                            data-id="email"
-                        />
-                        <input
-                            type="password"
-                            placeholder="Password"
-                            value={formFields.password}
-                            onChange={changeHandler}
-                            data-id="password"
-                        />
-                        <a onClick={() => setModalActive(true)}>
-                            Забыли пароль?
-                        </a>
-                        <button data-id="signin">Войти</button>
-                    </form>
-                </div>
+                <SignUpContainer
+                    setSignUpFormFields={setSignUpFormFields}
+                    submitHandler={submitHandler}
+                    changeHandler={changeHandler}
+                    signUpFormFields={signUpFormFields}
+                />
+                <SignInContainer
+                    setSignInFormFields={setSignInFormFields}
+                    submitHandler={submitHandler}
+                    changeHandler={changeHandler}
+                    signInFormFields={signInFormFields}
+                    setModalActive={setModalActive}
+                />
                 <div className="overlay-container">
                     <div className="overlay">
                         <div className="overlay-panel overlay-left">
-                            <h1>Мы соскучились!</h1>
+                            <h1>Скорее залетай на сайт!</h1>
                             <p>
                                 Если у тебя уже есть аккаунт, кликни на кнопку
                                 ниже!
@@ -138,8 +131,19 @@ const AuthForm = () => {
                     </div>
                 </div>
             </div>
-            <Modal setModalActive={setModalActive} modalActive={modalActive}>
-              <ForgotPasswordForm />
+            <Modal
+                setModalActive={setModalActive}
+                setMessage={setMessage}
+                setForgotPasswordFormFields={setForgotPasswordFormFields}
+                modalActive={modalActive}
+            >
+                <ForgotPasswordForm
+                    setForgotPasswordFormFields={setForgotPasswordFormFields}
+                    submitHandler={submitHandler}
+                    changeHandler={changeHandler}
+                    message={message}
+                    forgotPasswordFormFields={forgotPasswordFormFields}
+                />
             </Modal>
         </>
     )

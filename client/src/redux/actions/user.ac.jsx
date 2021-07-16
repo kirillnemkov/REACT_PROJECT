@@ -17,12 +17,14 @@ export const deleteUser = () => ({
 export const signUp = (payload, history, errors) => async (dispatch) => {
     dispatch(enableLoader())
     try {
-        const response = await AuthService.signUp(payload)
+        await AuthService.signUp(payload)
         if (errors) dispatch(deleteError())
         history.replace('/signUp/success')
     } catch (error) {
-        const { message } = error.response.data
-        dispatch(setError(message))
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
     } finally {
         dispatch(disableLoader())
     }
@@ -38,8 +40,10 @@ export const signIn = (payload, history, errors) => async (dispatch) => {
         if (errors) dispatch(deleteError())
         history.replace('/main')
     } catch (error) {
-        const { message } = error.response.data
-        dispatch(setError(message))
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
     } finally {
         dispatch(disableLoader())
     }
@@ -53,8 +57,10 @@ export const signOut = (errors) => async (dispatch) => {
         if (errors) dispatch(deleteError())
         localStorage.removeItem('token')
     } catch (error) {
-        const { message } = error.response.data
-        dispatch(setError(message))
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
     } finally {
         dispatch(disableLoader())
     }
@@ -70,8 +76,10 @@ export const confirmAuth = (link, history, errors) => async (dispatch) => {
         if (errors) dispatch(deleteError())
         history.replace('/main')
     } catch (error) {
-        const { message } = error.response.data
-        dispatch(setError(message))
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
     } finally {
         dispatch(disableLoader())
     }
@@ -89,22 +97,46 @@ export const checkAuth = (history, errors) => async (dispatch) => {
         if (errors) dispatch(deleteError())
         history.replace('/main')
     } catch (error) {
-        const { message } = error.response.data
-        dispatch(setError(message))
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
     } finally {
         dispatch(disableLoader())
     }
 }
 
-export const sendResetPasswordLetter = (payload, errors) => async (dispatch) => {
-    try {
-        dispatch(enableLoader())
-        await AuthService.sendResetPasswordLetter(payload)
-        if (errors) dispatch(deleteError())
-    } catch (error) {
-        const { message } = error.response.data
-        dispatch(setError(message))
-    } finally {
-        dispatch(disableLoader())
-    }
-}
+export const sendResetPasswordLetter =
+    (payload, errors) => async (dispatch) => {
+        try {
+            dispatch(enableLoader())
+            await AuthService.sendResetPasswordLetter(payload)
+            if (errors) dispatch(deleteError())
+        } catch (error) {
+            const message = error?.response?.data?.message
+            message
+                ? dispatch(setError(message))
+                : dispatch(setError('Возникли технические проблемы на сервере'))
+        } finally {
+            dispatch(disableLoader())
+        }
+      }
+        
+        export const updatePassword = (link, errors, history, payload) => async (dispatch) => {
+          try {
+            dispatch(enableLoader())
+              const response = await AuthService.updatePassword(payload, link)
+              const { user, accessToken } = response.data
+              dispatch(setUser(user))
+              localStorage.setItem('token', accessToken)
+              if (errors) dispatch(deleteError())
+              history.push('/main')
+          } catch (error) {
+              const message = error?.response?.data?.message
+              message
+                  ? dispatch(setError(message))
+                  : dispatch(setError('Возникли технические проблемы на сервере'))
+          } finally {
+              dispatch(disableLoader())
+          }
+        }

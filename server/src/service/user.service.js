@@ -8,15 +8,19 @@ const ApiError = require("../exceptions/api-error");
 
 class UserService {
   async signUp({ email, password, username }) {
-    const candidate = await User.findOne({ email });
+    let candidate = await User.findOne({ email });
     if (candidate) {
       throw ApiError.BadRequest(
         `Пользователь с почтовым адресом уже существует`
       );
     }
+    candidate = await User.findOne({ username });
+    if (candidate) {
+      throw ApiError.BadRequest(`Пользователь с таким логином уже существует`);
+    }
     const hashPassword = await bcrypt.hash(password, 11);
     const activationLink = uuid.v4();
-    const newUser = await User.create({
+    await User.create({
       username,
       password: hashPassword,
       activationLink,
@@ -78,6 +82,31 @@ class UserService {
     }
     const user = await User.findById(userData.id);
     const userDto = new UserDto(user);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    tokenService.saveToken(userDto.id, tokens.refreshToken);
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
+
+  async sendResetPasswordLetter(email) {
+    const activationLink = uuid.v4();
+    const currentUser = await User.findOneAndUpdate({email}, { activationLink: activationLink });
+    if (!currentUser) {
+      throw ApiError.BadRequest(`Пользователь c таким email не найден`);
+    } else {
+      await mailService.sendResetPasswordLink(
+        email,
+        `${process.env.CLIENT_URL}/resetPassword/${activationLink}`
+      );
+    }
+  }
+
+  async updatePassword({ password, activationLink }) {
+    const hashPassword = await bcrypt.hash(password, 11);
+    const currentUser = await User.findOneAndUpdate({activationLink}, { password: hashPassword })
+    const userDto = new UserDto(currentUser);
     const tokens = tokenService.generateTokens({ ...userDto });
     tokenService.saveToken(userDto.id, tokens.refreshToken);
     return {

@@ -1,11 +1,15 @@
 import './Modal.css'
-import { useState } from 'react'
 
-const Modal = ({setModalActive, modalActive, children}) => {
+const Modal = ({ setMessage, setForgotPasswordFormFields, setModalActive, modalActive, children }) => {
     return (
         <div
             className={modalActive ? 'modalka active' : 'modalka'}
-            onClick={() => setModalActive(false)}
+            onClick={() => {
+              setModalActive(false)
+              setForgotPasswordFormFields({email: ''})
+              setMessage(null)
+            }
+            }
         >
             <div
                 className={
