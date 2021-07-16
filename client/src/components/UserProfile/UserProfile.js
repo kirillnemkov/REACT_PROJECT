@@ -4,6 +4,7 @@ import SendIcon from '@material-ui/icons/Send';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import Diagram from '../Daigram/Diagram'
+import SocialLinks from '../SocialLinks/SocialLinks';
 // import { useEffect, useState } from 'react';
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -84,28 +85,7 @@ const UserProfile = () => {
             </div>
 
 
-            <div className={styles.links_container}>
-                <div className={styles.links_item}>
-                    <p>url</p>
-                    <img src="/sites.png" className={styles.links_img}></img>
-                </div>
-                <div className={styles.links_item}>
-                    <p> gitHub</p>
-                    <img src='/github.png' className={styles.links_img}></img>
-                </div>
-                <div className={styles.links_item}>
-                    <p>twitter</p>
-                    <img src='/twitter.png' className={styles.links_img}></img>
-                </div>
-                <div className={styles.links_item}>
-                    <p>instagram</p>
-                    <img src="/instagram.png" className={styles.links_img}></img>
-                </div>
-                <div className={styles.links_item}>
-                    <p> facebook</p>
-                    <img src="/facebook.png" className={styles.links_img}></img>
-                </div>
-            </div>
+            <SocialLinks />
 
         </div>
     )
