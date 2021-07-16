@@ -85,21 +85,6 @@ export const confirmAuth = (link, history, errors) => async (dispatch) => {
     }
 }
 
-<<<<<<< HEAD
-export const checkAuth = () => async (dispatch) => {
-  try{
-    dispatch(enableLoader());
-    const response = await axios.get(`${host}/api/v1/auth/refresh`, {withCredentials: true});
-    const {user, accessToken} = response.data;
-    dispatch(setUser(user));
-    localStorage.setItem('token', accessToken);
-    // history.replace('/main');
-  }catch(err) {
-    dispatch(setError(err));
-  }
-finally{
-  dispatch(disableLoader());
-=======
 export const checkAuth = (history, errors) => async (dispatch) => {
     try {
         dispatch(enableLoader())
@@ -119,7 +104,6 @@ export const checkAuth = (history, errors) => async (dispatch) => {
     } finally {
         dispatch(disableLoader())
     }
->>>>>>> 5f79def2a5140a5848f8b855d00073b2c549d317
 }
 
 export const sendResetPasswordLetter =

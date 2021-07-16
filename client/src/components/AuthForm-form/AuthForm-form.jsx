@@ -84,7 +84,8 @@ const AuthForm = () => {
 
     return (
         <>
-            <div ref={container} className="container" id="container">
+        <div className='wrapper'>
+            <div ref={container} className="auth-container" id="container">
                 <SignUpContainer
                     setSignUpFormFields={setSignUpFormFields}
                     submitHandler={submitHandler}
@@ -145,6 +146,7 @@ const AuthForm = () => {
                     forgotPasswordFormFields={forgotPasswordFormFields}
                 />
             </Modal>
+            </div>
         </>
     )
 }
