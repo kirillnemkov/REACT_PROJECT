@@ -4,7 +4,8 @@ class ProjectController {
   async getProject(req, res, next) {
     try {
       console.log(req.params);
-      const oneProject = await Project.find(req.params);
+      const { id } = req.params;
+      const oneProject = await Project.findById(id);
       return res.json(oneProject);
     } catch (err) {
       next(err);
