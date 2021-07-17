@@ -11,9 +11,10 @@ function App() {
     return (
         <>
             <Navbar />
+            <CardList />
             <Switch>
                 <Route path="/">
-                    <CardList />
+                    
                 </Route>
                 <Route exact path="/profile">
                     <UserProfile />
