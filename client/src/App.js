@@ -11,11 +11,7 @@ function App() {
     return (
         <>
             <Navbar />
-            <CardList />
             <Switch>
-                <Route path="/">
-                    
-                </Route>
                 <Route exact path="/profile">
                     <UserProfile />
                 </Route>
@@ -30,6 +26,9 @@ function App() {
                 </Route>
                 <Route exact path="/signUp/success">
                     <SignupSuccessMessage />
+                </Route>
+                <Route path="/">
+                    <CardList />
                 </Route>
             </Switch>
         </>
