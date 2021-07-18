@@ -30,7 +30,7 @@ app.use(
 app.use("/api/v1", userRouter);
 app.use("/api/v1/files", fileRouter);
 app.use("/", indexRouter);
-app.use("/user", profileRouter);
+app.use("/profile", profileRouter);
 app.use("/project", projectRouter);
 
 app.use(errorMiddleware);

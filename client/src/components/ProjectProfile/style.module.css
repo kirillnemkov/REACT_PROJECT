@@ -1,0 +1,34 @@
+.projectcont{
+  margin-top: 30px;
+}
+
+.imgcont{
+  position: relative;
+  margin: 8% 11% 7%;
+  width: 700px;
+  height: 500px;
+}
+
+.projectimg{
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  height: 100%;
+}
+
+.projectbottom{
+  border-radius: 0 0 20px 20px;
+  background-color: #e4e4e4;
+  height: 40px;
+  color: #888888;
+}
+
+.urllink {
+  color: white;
+  text-decoration: none;
+  padding: 20px !important; 
+}
+
+.urllink:hover{
+  color: white;
+}
+

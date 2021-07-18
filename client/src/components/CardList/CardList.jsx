@@ -5,12 +5,11 @@ import styles from './style.module.css'
 import { getPosts } from '../../redux/actions/posts.ac'
 
 export default function CardList() {
-    const dispatch = useDispatch()
-    const posts = useSelector((state) => state.posts)
-
-    useEffect(() => {
-        dispatch(getPosts())
-    }, [])
+  const dispatch = useDispatch()
+  const posts = useSelector((state) => state.posts)
+  useEffect(() => {
+    dispatch(getPosts())
+  }, [])
 
     return (
         <div className="container" style={{ paddingTop: '80px' }}>
@@ -20,12 +19,8 @@ export default function CardList() {
                         <div key={el._id} className={`col ${styles.col}`}>
                             <div className={`card ${styles.card}`}>
                                 <div className={`picture ${styles.picture}`}>
-                                    <Link to={el._id}>
-                                        <img
-                                            src={el.image}
-                                            className="card-img-top"
-                                            alt={el.name}
-                                        />
+                                    <Link to={`/project/${el._id}`}>
+                                        <img src={el.image} className="card-img-top" alt={el.name} />
                                     </Link>
                                 </div>
                                 <div className="card-body">

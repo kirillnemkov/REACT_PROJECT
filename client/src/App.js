@@ -6,14 +6,15 @@ import SignupSuccessMessage from './components/Signup-success-message/Signup-suc
 import AuthForm from './components/AuthForm-form/AuthForm-form'
 import ResetPasswordForm from './components/ResetPasswordForm/ResetPasswordForm'
 import UserProfile from './components/UserProfile/UserProfile'
+import ProjectProfile from './components/ProjectProfile/ProjectProfile'
 
 function App() {
     return (
         <>
             <Navbar />
             <Switch>
-                <Route path="/">
-                    <CardList />
+                <Route exact path="/project/:id">
+                    <ProjectProfile />
                 </Route>
                 <Route exact path="/profile">
                     <UserProfile />
@@ -29,6 +30,9 @@ function App() {
                 </Route>
                 <Route exact path="/signUp/success">
                     <SignupSuccessMessage />
+                </Route>
+                <Route path="/">
+                    <CardList />
                 </Route>
             </Switch>
         </>

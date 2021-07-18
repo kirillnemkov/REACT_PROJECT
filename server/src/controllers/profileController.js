@@ -11,15 +11,15 @@ class ProfileController {
       next(err);
     }
   }
-  async createProfile(req, res, next) {
-    try {
-      console.log(req.body);
-      const newUser = await User.create(req.body);
-      return res.json(newUser);
-    } catch (err) {
-      next(err);
-    }
-  }
+  // async createProfile(req, res, next) {
+  //   try {
+  //     console.log(req.body);
+  //     const newUser = await User.create(req.body);
+  //     return res.json(newUser);
+  //   } catch (err) {
+  //     next(err);
+  //   }
+  // }
   async editProfile(req, res, next) {
     try {
       console.log(req.body);

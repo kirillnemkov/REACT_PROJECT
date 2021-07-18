@@ -13,6 +13,8 @@ const ProjectSchema = mongoose.Schema({
   facebook: { type: String },
   image: { type: String },
   date: { type: String },
+  views: { type: Number },
+  tags: [{ type: String }],
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);
