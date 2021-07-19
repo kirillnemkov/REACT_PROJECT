@@ -32,8 +32,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         backgroundColor: 'white',
     },
-    form: {
-        width: '70%',
+    formContainer: {
         margin: '0 auto'
     },
     IconButton: {
@@ -48,7 +47,7 @@ const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) =
     const onSubmit = (data) => console.log(data)
 
     return (
-        <><form onSubmit={handleSubmit(onSubmit)} className={classes.form} noValidate autoComplete="off">
+        <><form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer} noValidate autoComplete="off">
             <div className={styles.formContainer}>
 
 

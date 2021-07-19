@@ -1,40 +1,55 @@
 import { ResponsivePie } from '@nivo/pie'
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 const data = [
     {
         "id": "erlang",
         "label": "erlang",
         "value": 20,
-        "color": "hsl(84, 70%, 50%)"
+
     },
     {
         "id": "c",
         "label": "c",
         "value": 70,
-        "color": "hsl(131, 70%, 50%)"
+
     },
     {
         "id": "php",
         "label": "php",
         "value": 20,
-        "color": "hsl(4, 70%, 50%)"
+
     },
     {
         "id": "scala",
         "label": "scala",
         "value": 20,
-        "color": "hsl(257, 70%, 50%)"
+
     },
     {
         "id": "haskell",
         "label": "haskell",
         "value": 20,
-        "color": "hsl(250, 70%, 50%)"
+
     }
 ]
-const MyResponsivePie = () => (
-    <div style={{ height: 500, width: '100%' }}>
+
+
+const MyResponsivePie = () => {
+    const skills = useSelector((state) => state.user.skills)
+
+    const arr = Object.entries(skills).map((el) => el.filter((el, i, arr) => el))
+    const data = arr.filter((el) => el.length > 1 ? el : null)
+
+    const newObj = data.reduce((acc, item) => {
+        acc.push({ id: item[0], lable: item[0], value: item[1],   })
+        return acc
+    }, [])
+    console.log(newObj)
+
+    return (<div style={{ height: 500, width: '100%' }}>
         <ResponsivePie
-            data={data}
+            data={newObj}
             margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
             innerRadius={0.5}
             padAngle={0.7}
@@ -90,7 +105,7 @@ const MyResponsivePie = () => (
                 },
                 {
                     match: {
-                        id: 'python'
+                        id: 'Python'
                     },
                     id: 'dots'
                 },
@@ -114,7 +129,7 @@ const MyResponsivePie = () => (
                 },
                 {
                     match: {
-                        id: 'javascript'
+                        id: 'Javascript'
                     },
                     id: 'lines'
                 }
@@ -145,7 +160,7 @@ const MyResponsivePie = () => (
                 }
             ]}
         />
-    </div>
-)
+    </div>)
+}
 
 export default MyResponsivePie

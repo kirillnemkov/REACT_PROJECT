@@ -3,6 +3,7 @@ const initState = {
   user: null,
   loader: false,
   error: null,
+  skills: {}
 }
 
 const getInitState = () => {

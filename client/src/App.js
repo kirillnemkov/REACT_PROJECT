@@ -20,6 +20,9 @@ function App() {
                 <Route exact path="/profile">
                     <UserProfile />
                 </Route>
+                <Route exact path="/profile/:id">
+                    <UserProfile />
+                </Route>
                 <Route exact path="/auth">
                     <AuthForm />
                 </Route>

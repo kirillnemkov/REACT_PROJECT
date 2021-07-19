@@ -20,6 +20,17 @@ class ProfileController {
       next(err);
     }
   }
+
+  async editProfileSkills(req, res, next) {
+    try {
+      const { id } = req.params;
+      const editUserSkills = await User.findByIdAndUpdate(id , {skills: req.body} , { new: true });
+      console.log(editUserSkills)
+      return res.json(editUserSkills);
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = new ProfileController();

@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import InformationForm from './InformationForm/InformationForm';
 import SkillsForm from './SkillsForm/SkillsForm';
+import styles from './styles.module.css'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,9 +50,8 @@ export default function UserEditForm() {
 
     console.log(page)
     return (
-        <div className='form container'>
+        <div className={styles.formContainer}>
             {page === 0 ? (<InformationForm nextPageButtonHandler={nextPageButtonHandler} previousPageButtonHandler={previousPageButtonHandler} />) : <SkillsForm nextPageButtonHandler={nextPageButtonHandler} previousPageButtonHandler={previousPageButtonHandler}/>}
-
         </div>
     );
 }
