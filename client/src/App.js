@@ -12,7 +12,7 @@ import StartPage from './components/Start-Page/StartPage.jsx'
 function App() {
     return (
         <>
-                    <Navbar />
+          <Navbar />
             <Switch>
                 <Route exact path="/start">
                     <StartQuestionsForm />
