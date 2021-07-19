@@ -61,7 +61,7 @@ export default function ProjectProfile() {
                             />
                             <div className={classes.namebutton}><b><h2>{el.title}</h2></b></div>
                             <div className={classes.urlbutton}>
-                                <a className={styles.urllink} href={el.url}>
+                                <a className={styles.urllink} href={el.website}>
                                     VISIT SITE
                                 </a>
                             </div>
@@ -92,9 +92,8 @@ export default function ProjectProfile() {
                                   <>
                                   <div className={styles.usercont}>
                                   <img src={el.image} className={styles.userimage} alt="userimage"/>
-                                  <div>{el.username}</div>
                                   <div>{el.lastName} {el.firstName} {el.middleName}</div>
-                                  <div>Email - {el.email}</div>
+                                  <b><a className={styles.mail} href={`mailto:${el.email}`}>{el.email}</a></b>
                                   </div>
                                   <div className={styles.usercontacts}>{el.gitHub}</div>
                                   </>
