@@ -104,8 +104,6 @@ console.log(modal)
                 </Fade>
             </Modal>
 
-            {/* <IOSSlider aria-label="ios slider" defaultValue={60} marks={marks} valueLabelDisplay="on" /> */}
-
         </div>
     )
 }

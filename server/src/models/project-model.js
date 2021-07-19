@@ -1,18 +1,20 @@
 const mongoose = require("mongoose");
 
 const ProjectSchema = mongoose.Schema({
-  name: { type: String, required: true },
+  title: { type: String},
   // team: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
-  users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  creators: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   likes: { type: Number },
-  about: { type: String },
+  description: { type: String },
   gitHub: { type: String },
-  url: { type: String },
+  website: { type: String },
   twitter: { type: String },
   instagram: { type: String },
   facebook: { type: String },
   image: { type: String },
   date: { type: String },
+  hashtags: [{ type: String }],
+  views: { type: Number }
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

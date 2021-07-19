@@ -1,26 +1,27 @@
 import React, { useState } from "react";
+import styles from './style.module.css'
 import clsx from 'clsx';
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import {makeStyles, Button, MenuItem, Menu, Toolbar, IconButton,
-   CardMedia, SwipeableDrawer, ListItemIcon, ListItemText, ListItem,List} from "@material-ui/core";
+   CardMedia, SwipeableDrawer, ListItemText, ListItem,List} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   media: {
-    height:70,
-    width: 70,
-    borderRadius: "50px",
+    height: 80,
+    width: 80,
   },
   root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #002884 90%)',
+    background: 'linear-gradient(45deg, #f50157 30%, #f50157 90%)',
     border: 0,
-    borderRadius: 3,
+    borderRadius: "7%",
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     height: 48,
     padding: '0 30px',
   },
   row: {
+    height: 80,
     display: "flex",
     justifyContent: "space-between"
   },
@@ -56,10 +57,9 @@ export default function ButtonAppBar() {
     <div className={clsx(classes.list, {[classes.fullList]: anchor === 'top' || anchor === 'bottom',})}
       role="presentation" onClick={toggleDrawer(anchor, false)} onKeyDown={toggleDrawer(anchor, false)}>
       <List>
-        {['tagtag', 'tagtag', 'tagtag', 'Tag', 'Tag', 'Tag'].map((text, index) => (
+        {['tagtag', 'tagtag', 'tagtag'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={`#${text}`} />
-            {/* <ListItemIcon></ListItemIcon> */}
           </ListItem>
         ))}
       </List>
@@ -84,12 +84,10 @@ export default function ButtonAppBar() {
           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleClose}>Tag</MenuItem>
           </Menu>
-          <Link to="/"><CardMedia component="img" className={classes.media} image="images/elbruslogotip.jpg" title="logo"/></Link>
+          <Link className={classes.media} to="/"><CardMedia component="img" className={styles.media} image="images/elbruslogotip.jpg" title="logo"/></Link>
             <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
           </Toolbar>
         </AppBar>
-      <Toolbar />
     </React.Fragment>
   );
 }
-

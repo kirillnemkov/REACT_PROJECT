@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPosts } from '../../redux/actions/posts.ac'
+import { getAllProjects } from '../../redux/actions/projects.ac'
 import Card from '../Card/Card'
 
 const UserProjects = () => {
@@ -9,7 +9,7 @@ const UserProjects = () => {
     const posts = useSelector((state) => state.posts)
 
     useEffect(() => {
-        dispatch(getPosts())
+        dispatch(getAllProjects())
     }, [])
 
     return (

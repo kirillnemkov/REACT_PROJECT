@@ -17,7 +17,6 @@ const UserSchema = mongoose.Schema({
   image: { type: String },
   skillsValue: { type: Number}, //процент
   skillsLabel: { type: String }, //назыание скилла
-  url: { type: String },
   gitHub: { type: String },
   twitter: { type: String },
   instagram: { type: String },
