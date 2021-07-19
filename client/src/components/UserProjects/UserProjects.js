@@ -6,7 +6,7 @@ import Card from '../Card/Card'
 const UserProjects = () => {
 
     const dispatch = useDispatch()
-    const posts = useSelector((state) => state.posts)
+    const projects = useSelector((state) => state.projects)
 
     useEffect(() => {
         dispatch(getAllProjects())
@@ -14,11 +14,7 @@ const UserProjects = () => {
 
     return (
         <>
-            <div className="container" style={{ paddingTop: '80px' }}>
-                <div className="row row-cols-1 row-cols-md-3 g-4">
-                    {posts.map((el) => <Card {...el} />)}
-                </div>
-            </div>
+            {projects.map((el) => <Card {...el} />)}
         </>
     )
 }

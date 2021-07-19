@@ -25,9 +25,9 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-top: 3%;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-top: 7%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .name_and_info_container {
