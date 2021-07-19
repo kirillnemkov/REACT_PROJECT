@@ -7,8 +7,10 @@ const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'space-between',
         alignItems: 'center',
+        // flex: '0 0 33.333333%',
+        flexWrap: 'wrap',
         [theme.breakpoints.down('md')]: {
             flexDirection: 'column',
         },
@@ -26,12 +28,7 @@ export default function () {
             return <ImageCard key={item._id} payload={item} checked={checked} />
             })}
             </div>
-            <div className={classes.root} id="place-to-visit">
-          {  state?.map(item => {
-            return <ImageCard key={item._id} payload={item} checked={checked} />
-            })}
-            </div>
-            
+             
         </>
     )
 }

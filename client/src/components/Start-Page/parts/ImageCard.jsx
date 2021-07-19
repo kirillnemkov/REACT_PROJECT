@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 645,
+    maxWidth: 570,
     background: "rgba(0,0,0,0.5)",
     margin: "20px",
   },
