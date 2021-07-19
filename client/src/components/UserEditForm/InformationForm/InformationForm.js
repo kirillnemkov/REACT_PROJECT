@@ -45,7 +45,7 @@ const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) =
     const classes = useStyles();
     const { register, handleSubmit } = useForm()
 
-    const onSubmit = (data) => console.log(JSON.stringify(data))
+    const onSubmit = (data) => console.log(data)
 
     return (
         <><form onSubmit={handleSubmit(onSubmit)} className={classes.form} noValidate autoComplete="off">
