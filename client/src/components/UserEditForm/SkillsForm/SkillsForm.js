@@ -15,7 +15,7 @@ import UserEditSlider from '../UserEditSlider/UserEditSlider';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { updateSkills } from '../../../redux/actions/skills.ac';
+import { updateSkills } from '../../../redux/actions/user.ac';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -202,7 +202,7 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="Haskel"
                             />
-                            {Haskel ? (<UserEditSlider aria={'Haskel'} id={'Haskel'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Haskel} />) : null}
+                            {Haskel ? (<UserEditSlider aria={'Haskell'} id={'Haskell'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Haskel} />) : null}
                         </FormGroup>
                     </FormControl>
                     <div className={styles.button_group}>

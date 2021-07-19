@@ -1,4 +1,4 @@
-import { DELETE_USER, SET_USER, GET_SKILLS } from "../types/userTypes";
+import { DELETE_USER, SET_USER, GET_SKILLS, SET_INFO } from "../types/userTypes";
 
 const userReducer = (state = null, action) => {
   switch (action.type) {
@@ -12,6 +12,10 @@ const userReducer = (state = null, action) => {
         const { skills } = action.payload;
         return {...state, skills};
       }
+    case SET_INFO: {
+      const { userInfo } = action.payload
+      return {...state, userInfo}
+    }
 
     default:
       return state
