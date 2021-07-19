@@ -31,7 +31,9 @@ export default function ProjectProfile() {
     const classes = useStyles()
     const dispatch = useDispatch()
     const posts = useSelector((state) => state.posts)
+    const {users} = posts;
     console.log(posts);
+    console.log(users);
     const [open, setOpen] = useState(false)
 
     const { id } = useParams()
@@ -76,12 +78,25 @@ export default function ProjectProfile() {
                                 image={el.image}
                             />
                         )}
+
                         <div>
-                            <b>Название - </b>
-                            {el.name}
-                        </div>
-                        <div>
-                            <div>О проекте - {el.about}</div>
+                            <div className={styles.about}>
+                              <b>О ПРОЕКТЕ </b><br/>
+                            <p>{el.about}</p>
+                            <br/>
+                            <hr/>
+                            </div>
+
+                            <div className={styles.about}>
+                              <b>{el.users.length > 1 ? "СОЗДАТЕЛИ" : "СОЗДАТЕЛЬ"}</b>
+                              {el.users.map((el) => {
+                                return (
+                                  <div>{el.name}</div>
+                                )
+                              })}
+                            </div>
+
+
                             <div>Ссылка на гитхаб - {el.gitHub}</div>
                             <div>Сайт проета - {el.url}</div>
                             <div>Твиттер - {el.twitter}</div>

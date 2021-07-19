@@ -32,3 +32,9 @@
   color: white;
 }
 
+.about{
+  position: relative;
+  margin: 8% 11% 7%;
+  width: 700px;
+  height: 100px;
+}

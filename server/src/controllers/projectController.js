@@ -1,4 +1,5 @@
 const Project = require("../models/project-model");
+const User = require("../models/user-model");
 
 class ProjectController {
   async getProject(req, res, next) {
@@ -26,8 +27,8 @@ class ProjectController {
       console.log(req.params);
       //поправить данные на основании формы с фронта
       const { id } = req.params;
-      const { name } = req.body;
-      const editProject = await Project.findByIdAndUpdate(id, { name }, { new: true });
+      const { users } = req.body;
+      const editProject = await Project.findByIdAndUpdate(id, { users }, { new: true });
       return res.json(editProject);
     } catch (err) {
       next(err);
