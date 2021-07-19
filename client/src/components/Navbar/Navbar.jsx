@@ -88,8 +88,6 @@ export default function ButtonAppBar() {
             <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
           </Toolbar>
         </AppBar>
-      <Toolbar />
     </React.Fragment>
   );
 }
-

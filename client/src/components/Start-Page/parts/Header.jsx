@@ -1,32 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, IconButton, Toolbar, Collapse } from '@material-ui/core';
-import SortIcon from '@material-ui/icons/Sort';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { Link as Scroll } from 'react-scroll';
+import React, { useState, useEffect } from "react";
+import {makeStyles, IconButton,
+   Collapse} from "@material-ui/core";
+   import { Link as Scroll } from 'react-scroll';
+   import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+   import Navbar from '../../Navbar/Navbar'
 
 const useStyles = makeStyles((theme) => ({
+  media: {
+    height:70,
+    width: 70,
+    borderRadius: "50px",
+  },
   root: {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #002884 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px',
+  },
+  head: {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
     fontFamily: 'Nunito',
   },
-  appbar: {
-    background: 'none',
+  row: {
+    display: "flex",
+    justifyContent: "space-between"
   },
-  appbarWrapper: {
-    width: '80%',
-    margin: '0 auto',
+  list: {
+    width: 200,
   },
-  appbarTitle: {
-    flexGrow: '1',
-    color:'#66eefb'
-  },
-  icon: {
-    color: '#66eefb',
-    fontSize: '2rem',
+  fullList: {
+    width: 'auto',
   },
   colorText: {
     color: '#4520ab',
@@ -41,27 +50,19 @@ const useStyles = makeStyles((theme) => ({
   goDown: {
     color: '#4520ab',
     fontSize: '4rem',
-  },
+  }
 }));
+
 export default function Header() {
-  const classes = useStyles();
   const [checked, setChecked] = useState(false);
   useEffect(() => {
     setChecked(true);
   }, []);
-  return (
-    <div className={classes.root} id="header">
-      <AppBar className={classes.appbar} elevation={0}>
-        <Toolbar className={classes.appbarWrapper}>
-          <h1 className={classes.appbarTitle}>
-            My<span className={classes.colorText}>Elbrus.</span>
-          </h1>
-          <IconButton>
-            <SortIcon className={classes.icon} />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+  const classes = useStyles();
 
+  return (
+      <div className={classes.head} id="header">
+        <Navbar />
       <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}
@@ -79,6 +80,7 @@ export default function Header() {
           </Scroll>
         </div>
       </Collapse>
-    </div>
+      </div>
   );
 }
+
