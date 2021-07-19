@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UserMainInfo = ({ handleModalChange }) => {
+const UserMainInfo = ({ handleOpen }) => {
     const classes = useStyles();
     return (
         <>
@@ -46,7 +46,7 @@ const UserMainInfo = ({ handleModalChange }) => {
                     <Button
                         variant="contained"
                         color="secondary"
-                        onClick={handleModalChange}
+                        onClick={handleOpen}
                         className={classes.button}
                         endIcon={<EditIcon />}
                     ></Button>
