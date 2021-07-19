@@ -71,18 +71,16 @@ export default function ButtonAppBar() {
       <AppBar
         color={example}>
           <Toolbar className={classes.row}>
-          <div>
             {['left'].map((anchor) => (
               <React.Fragment key={anchor}>
-                <Button onClick={toggleDrawer(anchor, true)}>Категории</Button>
+                <Button onClick={toggleDrawer(anchor, true)}><b>Категории</b></Button>
                 <SwipeableDrawer disableBackdropTransition={!iOS} disableDiscovery={iOS} anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
                   {list(anchor)}
                 </SwipeableDrawer>
               </React.Fragment>
             ))}
-          </div>
           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-            <MenuItem onClick={handleClose}>Tag</MenuItem>
+            <MenuItem onClick={handleClose}></MenuItem>
           </Menu>
           <Link className={classes.media} to="/"><CardMedia component="img" className={styles.media} image="images/elbruslogotip.jpg" title="logo"/></Link>
             <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>

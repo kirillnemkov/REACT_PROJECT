@@ -25,7 +25,7 @@ const Card = ({ _id, image, name, likes, about }) => {
                         <p>#хештег</p>
                     </div>
                     <div>
-                        <img src="https://img.icons8.com/ios-glyphs/24/000000/visible--v1.png" />
+                        <img src="https://img.icons8.com/ios-glyphs/24/000000/visible--v1.png" alt="img"/>
                         <span
                             className={`views ${styles.views}`}
                         >

@@ -45,12 +45,14 @@
 
 .userimage{
   margin-top: 10px;
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
 }
 
 .usercontacts{
+  position: relative;
   
+  left: 800px;
 }
 
 .mail, .mail:hover{
