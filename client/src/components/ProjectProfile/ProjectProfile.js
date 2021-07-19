@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
 import ModalProject from '../ModalProject/ModalProject'
 import { getOneProjects } from '../../redux/actions/projects.ac'
+import CreatorsUser from '../CreatorsUser/CreatorsUser'
+import { Carousel } from '3d-react-carousal'
 
 const useStyles = makeStyles((theme) => ({
     urlbutton: {
         borderRadius: '45px',
         width: '300px',
-        height: '25px',
+        height: '60px',
         position: 'absolute',
-        top: '100px',
+        top: '180px',
         left: '800px',
         backgroundColor: '#f50157',
         textAlign: 'center',
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     namebutton: {
         width: '300px',
         position: 'absolute',
-        top: '10px',
+        top: '20px',
         left: '800px',
         textAlign: 'center',
     },
@@ -33,19 +35,16 @@ export default function ProjectProfile() {
     const projects = useSelector((state) => state.projects)
     const errors = useSelector((state) => state.errors)
 
-    const [open, setOpen] = useState(false)
+    // const [open, setOpen] = useState(false)
     const { id } = useParams()
 
     useEffect(() => {
         dispatch(getOneProjects(id, errors))
     }, [])
 
-    const handleOpen = () => {
-        setOpen(true)
-    }
-    const handleClose = () => {
-        setOpen(false)
-    }
+    let slides = projects[0]?.image?.map((el) => {
+        return <img src={el} className={styles.imageCarousel} alt="logo" />
+    })
 
     return (
         <div>
@@ -53,15 +52,10 @@ export default function ProjectProfile() {
                 return (
                     <div className={styles.projectcont}>
                         <div className={styles.imgcont}>
-                            <img
-                                onClick={handleOpen}
-                                className={styles.projectimg}
-                                src={el.image}
-                                alt="project"
-                            />
+                            <Carousel slides={slides} />
                             <div className={classes.namebutton}>
                                 <b>
-                                    <h2>{el.title}</h2>
+                                    <h1>{el.title}</h1>
                                 </b>
                             </div>
                             <div className={classes.urlbutton}>
@@ -69,18 +63,7 @@ export default function ProjectProfile() {
                                     VISIT SITE
                                 </a>
                             </div>
-                            <div className={styles.projectbottom}>
-                                {el.date}
-                            </div>
                         </div>
-                        {open && (
-                            <ModalProject
-                                handleClose={handleClose}
-                                open={open}
-                                image={el.image}
-                            />
-                        )}
-
                         <div>
                             <div className={styles.about}>
                                 <b>О ПРОЕКТЕ </b>
@@ -96,48 +79,49 @@ export default function ProjectProfile() {
                                         ? 'СОЗДАТЕЛИ'
                                         : 'СОЗДАТЕЛЬ'}
                                 </b>
-                                {el?.creators.map((el) => {
-                                    return (
-                                        <>
-                                            <div className={styles.usercont}>
-                                                <img
-                                                    src={el.image}
-                                                    className={styles.userimage}
-                                                    alt="userimage"
-                                                />
-                                                <div>
-                                                    {el.lastName} {el.firstName}{' '}
-                                                    {el.middleName}
-                                                </div>
-                                                <b>
-                                                    <a
-                                                        className={styles.mail}
-                                                        href={`mailto:${el.email}`}
-                                                    >
-                                                        {el.email}
-                                                    </a>
-                                                </b>
-                                            </div>
-                                            <div className={styles.usercontactscont}>
-                                              <img className={styles.gitimg} src="https://img.icons8.com/metro/452/github.png" alt="github"/>
-                                            <div
-                                                className={styles.usercontacts}
-                                            >
-                                                <a href={el.gitHub}>GITHUB</a>
-                                            </div>
-                                            </div>
-                                        </>
-                                    )
-                                })}
+                                <div className={styles.conteinerUser}>
+                                    {el?.creators.map((el) => {
+                                        return <CreatorsUser el={el} />
+                                    })}
+                                </div>
                                 <hr />
+                                <div className={styles.usercontactscont}>
+                                    <img
+                                        className={styles.gitimg}
+                                        src="https://img.icons8.com/metro/452/github.png"
+                                        alt="github"
+                                    />
+                                    <a
+                                        className={styles.giticon}
+                                        href={el.gitHub}
+                                    >
+                                        GITHUB
+                                    </a>
+                                </div>
+                                <div className={styles.socseti}>
+                                    <a href={el.twitter}>
+                                        <img
+                                            className={styles.imgforicon}
+                                            src="https://img.icons8.com/color/48/000000/twitter--v1.png"
+                                            alt="imglogo"
+                                        />
+                                    </a>
+                                    <a href={el.instagram}>
+                                        <img
+                                            className={styles.imgforicon}
+                                            src="https://img.icons8.com/fluent/48/000000/instagram-new.png"
+                                            alt="imglogo"
+                                        />
+                                    </a>
+                                    <a href={el.facebook}>
+                                        <img
+                                            className={styles.imgforicon}
+                                            src="https://img.icons8.com/color/48/000000/facebook.png"
+                                            alt="imglogo"
+                                        />
+                                    </a>
+                                </div>
                             </div>
-
-                            {/* <div>Ссылка на гитхаб - {el.gitHub}</div>
-                            <div>Сайт проекта - {el.website}</div>
-                            <div>Твиттер - {el.twitter}</div>
-                            <div>Инста - {el.instagram}</div>
-                            <div>Фейс - {el.facebook}</div>
-                            <div>Выпуск - {el.date}</div> */}
                         </div>
                     </div>
                 )

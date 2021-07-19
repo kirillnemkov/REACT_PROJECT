@@ -11,7 +11,7 @@ const ProjectSchema = mongoose.Schema({
   twitter: { type: String },
   instagram: { type: String },
   facebook: { type: String },
-  image: { type: String },
+  image: [{ type: String }],
   date: { type: String },
   hashtags: [{ type: String }],
   views: { type: Number }

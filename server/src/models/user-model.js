@@ -15,12 +15,13 @@ const UserSchema = mongoose.Schema({
   location: { type: String },
   job: { type: String },
   image: { type: String },
-  skillsValue: { type: Number}, //процент
+  skillsValue: { type: Number }, //процент
   skillsLabel: { type: String }, //назыание скилла
   gitHub: { type: String },
   twitter: { type: String },
   instagram: { type: String },
   facebook: { type: String },
+  date: { type: String },
 });
 
 module.exports = mongoose.model("User", UserSchema);

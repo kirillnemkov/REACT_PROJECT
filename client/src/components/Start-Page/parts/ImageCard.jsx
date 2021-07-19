@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,7 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import Grid from "@material-ui/core/Grid";
-import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
@@ -54,11 +54,12 @@ export default function ImageCard({payload, handleClick, checked}) {
   return (
     <Collapse className={classes.head} in={checked} {...(checked ? { timeout: 1000 } : {})}>
       <Card className={classes.root}>
+        <Link to={`/projects/${payload._id}`}>
         <CardMedia
           className={classes.media}
-          image={payload.image}
+          image={payload.image[0]}
           title="Contemplative Reptile"
-        />
+        /></Link>
         <CardContent>
           <Typography
             gutterBottom

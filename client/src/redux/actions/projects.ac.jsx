@@ -50,7 +50,6 @@ export const getOneProjects = (id, errors) => async (dispatch) => {
       const response = await ProjectsService.getOneProjects(id)
       if (errors) dispatch(deleteError())
       dispatch(projectOne(response.data))
-      console.log(response.data);
   } catch (error) {
       const message = error?.response?.data?.message
       message
