@@ -1,6 +1,5 @@
 const initState = {
-  files: [],
-  posts: [],
+  projects: [],
   user: null,
   loader: false,
   error: null,

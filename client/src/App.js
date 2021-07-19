@@ -1,19 +1,19 @@
+import AuthForm from './components/AuthForm-form/AuthForm-form.jsx'
 import { Route, Switch } from 'react-router-dom'
 import ActivationSuccess from './components/ActivationSuccess/ActivationSuccess'
-import Navbar from './components/Navbar/Navbar'
-import CardList from './components/CardList/CardList'
-import SignupSuccessMessage from './components/Signup-success-message/Signup-success-message'
-import AuthForm from './components/AuthForm-form/AuthForm-form'
 import ResetPasswordForm from './components/ResetPasswordForm/ResetPasswordForm'
+import SignupSuccessMessage from './components/Signup-success-message/Signup-success-message'
+import Navbar from './components/Navbar/Navbar'
 import UserProfile from './components/UserProfile/UserProfile'
+import StartQuestionsForm from './components/StartQuestionsForm/StartQuestionsForm'
+import StartPage from './components/Start-Page/StartPage.jsx'
 
 function App() {
     return (
         <>
-            <Navbar />
             <Switch>
-                <Route path="/">
-                    <CardList />
+            <Route exact path="/start">
+                    <StartQuestionsForm />
                 </Route>
                 <Route exact path="/profile">
                     <UserProfile />
@@ -29,6 +29,10 @@ function App() {
                 </Route>
                 <Route exact path="/signUp/success">
                     <SignupSuccessMessage />
+                </Route>
+                <Route path="/">
+                    <Navbar />
+                    <StartPage />
                 </Route>
             </Switch>
         </>

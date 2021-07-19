@@ -8,9 +8,9 @@ import {
     sendResetPasswordLetter,
 } from '../../redux/actions/user.ac'
 import Modal from '../Modal/Modal'
-import ForgotPasswordForm from '../ForgotPasswordForm/ForgotPasswordForm'
-import SignInContainer from '../SignInContainer/SignInContainer'
-import SignUpContainer from '../SignUpContainer/SignUpContainer'
+import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
+import SignInContainer from './SignInContainer/SignInContainer'
+import SignUpContainer from './SignUpContainer/SignUpContainer'
 import { mailSentSuccessMsg } from '../../constants/constants'
 
 const AuthForm = () => {
@@ -84,69 +84,71 @@ const AuthForm = () => {
 
     return (
         <>
-        <div className='wrapper'>
-            <div ref={container} className="auth-container" id="container">
-                <SignUpContainer
-                    setSignUpFormFields={setSignUpFormFields}
-                    submitHandler={submitHandler}
-                    changeHandler={changeHandler}
-                    signUpFormFields={signUpFormFields}
-                />
-                <SignInContainer
-                    setSignInFormFields={setSignInFormFields}
-                    submitHandler={submitHandler}
-                    changeHandler={changeHandler}
-                    signInFormFields={signInFormFields}
-                    setModalActive={setModalActive}
-                />
-                <div className="overlay-container">
-                    <div className="overlay">
-                        <div className="overlay-panel overlay-left">
-                            <h1>Скорее залетай на сайт!</h1>
-                            <p>
-                                Если у тебя уже есть аккаунт, кликни на кнопку
-                                ниже!
-                            </p>
-                            <button
-                                onClick={toggleHandler}
-                                className="ghost"
-                                id="signIn"
-                            >
-                                Войти
-                            </button>
-                        </div>
-                        <div className="overlay-panel overlay-right">
-                            <h1>Привет, прогер!</h1>
-                            <p>
-                                Если ты до сих пор не зарегистрировался, кликни
-                                на кнопку ниже!
-                            </p>
-                            <button
-                                onClick={toggleHandler}
-                                className="ghost"
-                                id="signUp"
-                            >
-                                Зарегистрироваться
-                            </button>
+        <div className="wrapper">
+                <div ref={container} className="auth-container" id="container">
+                    <SignUpContainer
+                        setSignUpFormFields={setSignUpFormFields}
+                        submitHandler={submitHandler}
+                        changeHandler={changeHandler}
+                        signUpFormFields={signUpFormFields}
+                    />
+                    <SignInContainer
+                        setSignInFormFields={setSignInFormFields}
+                        submitHandler={submitHandler}
+                        changeHandler={changeHandler}
+                        signInFormFields={signInFormFields}
+                        setModalActive={setModalActive}
+                    />
+                    <div className="overlay-container">
+                        <div className="overlay">
+                            <div className="overlay-panel overlay-left">
+                                <h1 className='h1-txt' >Скорее залетай на сайт!</h1>
+                                <p className='p-txt'>
+                                    Если у тебя уже есть аккаунт, кликни на
+                                    кнопку ниже!
+                                </p>
+                                <button className='auth-btn'
+                                    onClick={toggleHandler}
+                                    className="auth-btn ghost"
+                                    id="signIn"
+                                >
+                                    Войти
+                                </button>
+                            </div>
+                            <div className="overlay-panel overlay-right">
+                                <h1 className='h1-txt'>Привет, прогер!</h1>
+                                <p className='p-txt'>
+                                    Если ты до сих пор не зарегистрировался,
+                                    кликни на кнопку ниже!
+                                </p>
+                                <button 
+                                    onClick={toggleHandler}
+                                    className="auth-btn ghost"
+                                    id="signUp"
+                                >
+                                    Зарегистрироваться
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <Modal
-                setModalActive={setModalActive}
-                setMessage={setMessage}
-                setForgotPasswordFormFields={setForgotPasswordFormFields}
-                modalActive={modalActive}
-            >
-                <ForgotPasswordForm
+                <Modal
+                    setModalActive={setModalActive}
+                    setMessage={setMessage}
                     setForgotPasswordFormFields={setForgotPasswordFormFields}
-                    submitHandler={submitHandler}
-                    changeHandler={changeHandler}
-                    message={message}
-                    forgotPasswordFormFields={forgotPasswordFormFields}
-                />
-            </Modal>
-            </div>
+                    modalActive={modalActive}
+                >
+                    <ForgotPasswordForm
+                        setForgotPasswordFormFields={
+                            setForgotPasswordFormFields
+                        }
+                        submitHandler={submitHandler}
+                        changeHandler={changeHandler}
+                        message={message}
+                        forgotPasswordFormFields={forgotPasswordFormFields}
+                    />
+                </Modal>
+                </div>
         </>
     )
 }
