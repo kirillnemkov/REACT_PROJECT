@@ -49,10 +49,25 @@
   height: 180px;
 }
 
+.usercontactscont{
+  border-radius: 0 0 20px 20px;
+  position: absolute;
+  outline: 1px solid #888888;
+  left: 800px;
+  bottom: 260px;
+  width: 380px;
+  min-height: 50px;
+}
+
+.gitimg{
+  width: 45px;
+  height: 45px;
+}
+
 .usercontacts{
   position: relative;
-  
-  left: 800px;
+  margin: 12px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .mail, .mail:hover{

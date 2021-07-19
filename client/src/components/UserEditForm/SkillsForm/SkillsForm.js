@@ -60,7 +60,7 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
         Haskel: false,
     });
 
-    const [inputValue, setInputValue] = useState({ JavascriptValue: 0, NodeJSValue: 0, VueValue: 0, ReactValue: 0, AngularValue: 0, HBSValue: 0, PytonValue: 0, HaskelValue: 0})
+    const [inputValue, setInputValue] = useState({ JavascriptValue: 0, NodeJSValue: 0, VueValue: 0, ReactValue: 0, AngularValue: 0, HBSValue: 0, PytonValue: 0, HaskelValue: 0 })
     const { JavaScript, React, NodeJS, Vue, Angular, HBS, Pyton, Haskel } = skills;
 
     const handleSkillChange = (event) => {
@@ -74,9 +74,17 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
 
     console.log(inputValue)
     console.log(skills)
+
+    function onSubmit(e) {
+        e.preventDefault()
+        console.log(e)
+        const obj = { ...inputValue }
+        console.log(obj)
+    }
+
     return (
         <>
-            <form className={classes.form} noValidate autoComplete="off">
+            <form onSubmit={onSubmit} className={classes.form} noValidate autoComplete="off">
                 <div className={styles.formContainer}>
                     <FormControl component="fieldset">
                         <FormLabel component="legend">Выбери</FormLabel>
@@ -177,6 +185,7 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                             variant="contained"
                             color="primary"
                             size="large"
+                            type='submit'
                             className={classes.button}
                             endIcon={<CheckIcon />}
                         >

@@ -82,7 +82,7 @@ export default function ButtonAppBar() {
           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleClose}></MenuItem>
           </Menu>
-          <Link className={classes.media} to="/"><CardMedia component="img" className={styles.media} image="images/elbruslogotip.jpg" title="logo"/></Link>
+          <Link className={classes.media} to="/"><CardMedia component="img" className={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
             <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
           </Toolbar>
         </AppBar>
