@@ -17,7 +17,7 @@ export default function CardList() {
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {posts.map((el) => {
                     return (
-                        <div key={el._id} className={`col ${styles.col}`}>
+                        <div key={el._id}className={`col ${styles.col}`}>
                             <div className={`card ${styles.card}`}>
                                 <div className={`picture ${styles.picture}`}>
                                     <Link to={el._id}>
