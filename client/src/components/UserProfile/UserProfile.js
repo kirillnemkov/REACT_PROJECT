@@ -4,7 +4,7 @@ import SendIcon from '@material-ui/icons/Send';
 import EditIcon from '@material-ui/icons/Edit';
 import { makeStyles } from '@material-ui/core/styles';
 import Diagram from '../Daigram/Diagram'
-// import { useEffect, useState } from 'react';
+
 const useStyles = makeStyles((theme) => ({
     button: {
         marginLeft: '8px',

@@ -7,7 +7,6 @@ const { connect } = require("./src/db/db");
 const app = express();
 const userRouter = require("./src/routes/userRouter");
 const fileRouter = require("./src/routes/fileRouter");
-const indexRouter = require("./src/routes/indexRouter");
 const profileRouter = require("./src/routes/profileRouter");
 const projectRouter = require("./src/routes/projectRouter");
 const errorMiddleware = require("./src/middlewars/error-middleware");
@@ -29,9 +28,8 @@ app.use(
 
 app.use("/api/v1", userRouter);
 app.use("/api/v1/files", fileRouter);
-app.use("/", indexRouter);
 app.use("/profile", profileRouter);
-app.use("/project", projectRouter);
+app.use("/projects", projectRouter);
 
 app.use(errorMiddleware);
 

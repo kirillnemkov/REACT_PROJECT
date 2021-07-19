@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
-import { getPost } from '../../redux/actions/posts.ac'
 import ModalProject from '../ModalProject/ModalProject'
+import {getOneProjects} from "../../redux/actions/projects.ac"
 
 const useStyles = makeStyles((theme) => ({
     urlbutton: {
-        borderRadius: '20% 20% 20% 20%',
+        borderRadius: '45px',
         width: '300px',
         height: "60px",
         position: 'absolute',
@@ -30,16 +30,14 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectProfile() {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const posts = useSelector((state) => state.posts)
-    const {users} = posts;
-    console.log(posts);
-    console.log(users);
-    const [open, setOpen] = useState(false)
+    const projects = useSelector((state) => state.projects)
+    const errors = useSelector((state) => state.errors)
 
+    const [open, setOpen] = useState(false)
     const { id } = useParams()
 
     useEffect(() => {
-        dispatch(getPost(id))
+      dispatch(getOneProjects(id, errors))
     }, [])
 
     const handleOpen = () => {
@@ -51,7 +49,7 @@ export default function ProjectProfile() {
 
     return (
         <div>
-            {posts.map((el) => {
+            {projects?.map((el) => {
                 return (
                     <div className={styles.projectcont}>
                         <div className={styles.imgcont}>
@@ -61,7 +59,7 @@ export default function ProjectProfile() {
                                 src={el.image}
                                 alt="project"
                             />
-                            <div className={classes.namebutton}><b><h2>{el.name}</h2></b></div>
+                            <div className={classes.namebutton}><b><h2>{el.title}</h2></b></div>
                             <div className={classes.urlbutton}>
                                 <a className={styles.urllink} href={el.url}>
                                     VISIT SITE
@@ -82,27 +80,37 @@ export default function ProjectProfile() {
                         <div>
                             <div className={styles.about}>
                               <b>О ПРОЕКТЕ </b><br/>
-                            <p>{el.about}</p>
+                            <p>{el.description}</p>
                             <br/>
                             <hr/>
                             </div>
 
                             <div className={styles.about}>
-                              <b>{el.users.length > 1 ? "СОЗДАТЕЛИ" : "СОЗДАТЕЛЬ"}</b>
-                              {el.users.map((el) => {
+                              <b>{el?.creators.length > 1 ? "СОЗДАТЕЛИ" : "СОЗДАТЕЛЬ"}</b>
+                              {el?.creators.map((el) => {
                                 return (
-                                  <div>{el.name}</div>
+                                  <>
+                                  <div className={styles.usercont}>
+                                  <img src={el.image} className={styles.userimage} alt="userimage"/>
+                                  <div>{el.username}</div>
+                                  <div>{el.lastName} {el.firstName} {el.middleName}</div>
+                                  <div>Email - {el.email}</div>
+                                  </div>
+                                  <div className={styles.usercontacts}>{el.gitHub}</div>
+                                  </>
                                 )
                               })}
+                            <hr/>
                             </div>
 
 
-                            <div>Ссылка на гитхаб - {el.gitHub}</div>
-                            <div>Сайт проета - {el.url}</div>
+
+                            {/* <div>Ссылка на гитхаб - {el.gitHub}</div>
+                            <div>Сайт проекта - {el.website}</div>
                             <div>Твиттер - {el.twitter}</div>
                             <div>Инста - {el.instagram}</div>
                             <div>Фейс - {el.facebook}</div>
-                            <div>Выпуск - {el.date}</div>
+                            <div>Выпуск - {el.date}</div> */}
                         </div>
                     </div>
                 )
