@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 400,
+    maxWidth: 645,
     background: "rgba(0,0,0,0.5)",
     margin: "20px",
   },
@@ -35,15 +35,24 @@ const useStyles = makeStyles({
     fontFamily: "Nunito",
     fontSize: "1.1rem",
     color: "#ddd",
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   },
+  head: {
+    width: '33%',
+    '&:nth-child(-n+3)': {
+      marginTop: '100px'
+    }
+  }
 });
 
 export default function ImageCard({payload, handleClick, checked}) {
   const classes = useStyles();
 
   return (
-    <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
+    <Collapse className={classes.head} in={checked} {...(checked ? { timeout: 1000 } : {})}>
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
