@@ -31,7 +31,6 @@ function App() {
                     <SignupSuccessMessage />
                 </Route>
                 <Route path="/">
-                    <Navbar />
                     <StartPage />
                 </Route>
             </Switch>

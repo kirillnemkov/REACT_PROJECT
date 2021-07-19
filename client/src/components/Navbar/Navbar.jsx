@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import {makeStyles, Button, MenuItem, Menu, Toolbar, IconButton,
-   CardMedia, SwipeableDrawer, ListItemIcon, ListItemText, ListItem,List} from "@material-ui/core";
+   CardMedia, SwipeableDrawer, ListItemText, ListItem,List} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -59,7 +59,6 @@ export default function ButtonAppBar() {
         {['tagtag', 'tagtag', 'tagtag', 'Tag', 'Tag', 'Tag'].map((text, index) => (
           <ListItem button key={text}>
             <ListItemText primary={`#${text}`} />
-            {/* <ListItemIcon></ListItemIcon> */}
           </ListItem>
         ))}
       </List>
@@ -88,8 +87,6 @@ export default function ButtonAppBar() {
             <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
           </Toolbar>
         </AppBar>
-      <Toolbar />
     </React.Fragment>
   );
 }
-
