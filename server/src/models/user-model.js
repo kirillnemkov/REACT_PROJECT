@@ -15,8 +15,16 @@ const UserSchema = mongoose.Schema({
   location: { type: String },
   job: { type: String },
   image: { type: String },
-  skillsValue: { type: Number }, //процент
-  skillsLabel: { type: String }, //назыание скилла
+  skills: {
+    Javascript: Number,
+    NodeJS: Number,
+    Vue: Number, 
+    React: Number,
+    Angular: Number,
+    HBS: Number,
+    Pyton: Number,
+    Haskell: Number,
+  }, 
   gitHub: { type: String },
   twitter: { type: String },
   instagram: { type: String },

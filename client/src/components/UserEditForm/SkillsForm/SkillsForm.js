@@ -13,6 +13,9 @@ import FormControl from "@material-ui/core/FormControl";
 import FormGroup from "@material-ui/core/FormGroup";
 import UserEditSlider from '../UserEditSlider/UserEditSlider';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { updateSkills } from '../../../redux/actions/user.ac';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -39,11 +42,24 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
     },
     form: {
-        width: '70%',
         margin: '0 auto'
     },
     IconButton: {
 
+    },
+    formGrop: {
+        marginLeft: '8%',
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+    },
+    label: {
+        textAlign: 'center'
+    },
+    checkbox: {
+        width: '25%',
+        marginButton: '10%',
+        margin: '0 auto',
     }
 }));
 
@@ -60,7 +76,10 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
         Haskel: false,
     });
 
-    const [inputValue, setInputValue] = useState({ JavascriptValue: 0, NodeJSValue: 0, VueValue: 0, ReactValue: 0, AngularValue: 0, HBSValue: 0, PytonValue: 0, HaskelValue: 0 })
+    const dispatch = useDispatch()
+    const { id } = useParams()
+
+    const [inputValue, setInputValue] = useState({ Javascript: 0, NodeJS: 0, Vue: 0, React: 0, Angular: 0, HBS: 0, Pyton: 0, Haskel: 0 })
     const { JavaScript, React, NodeJS, Vue, Angular, HBS, Pyton, Haskel } = skills;
 
     const handleSkillChange = (event) => {
@@ -68,18 +87,15 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
     };
 
     const handleSliderChange = (e, value) => {
+        console.log(e.currentTarget)
         setInputValue({ ...inputValue, [e.currentTarget.id || e.target.ariaLabel]: value })
     }
 
 
-    console.log(inputValue)
-    console.log(skills)
-
     function onSubmit(e) {
         e.preventDefault()
-        console.log(e)
         const obj = { ...inputValue }
-        console.log(obj)
+        dispatch(updateSkills(id, obj))
     }
 
     return (
@@ -87,11 +103,13 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
             <form onSubmit={onSubmit} className={classes.form} noValidate autoComplete="off">
                 <div className={styles.formContainer}>
                     <FormControl component="fieldset">
-                        <FormLabel component="legend">Выбери</FormLabel>
-                        <FormGroup>
+                        <FormLabel className={classes.label} component="legend">Выбери</FormLabel>
+                        <FormGroup className={classes.formGrop}>
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
+
                                         checked={JavaScript}
                                         onChange={handleSkillChange}
                                         name="JavaScript"
@@ -99,8 +117,9 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="JavaScript"
                             />
-                            {JavaScript ? (<UserEditSlider aria='JavascriptValue' id={'JavascriptValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.JavascriptValue} />) : null}
+                            {JavaScript ? (<UserEditSlider aria='Javascrip' id={'Javascript'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Javascript} />) : null}
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={NodeJS}
@@ -110,8 +129,9 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="NodeJS"
                             />
-                            {NodeJS ? (<UserEditSlider aria='NodeJSValue' id={'NodeJSValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.NodeJSValue} />) : null}
+                            {NodeJS ? (<UserEditSlider aria='NodeJS' id={'NodeJS'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.NodeJS} />) : null}
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={Vue}
@@ -121,8 +141,9 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="Vue"
                             />
-                            {Vue ? (<UserEditSlider aria={'VueValue'} id={'VueValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.VueValue} />) : null}
+                            {Vue ? (<UserEditSlider aria={'Vue'} id={'Vue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Vue} />) : null}
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={React}
@@ -132,8 +153,9 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="React"
                             />
-                            {React ? (<UserEditSlider aria={'ReactValue'} id={'ReactValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.ReactValue} />) : null}
+                            {React ? (<UserEditSlider aria={'React'} id={'React'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.React} />) : null}
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={Angular}
@@ -143,8 +165,9 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="Angular"
                             />
-                            {Angular ? (<UserEditSlider aria={'AngularValue'} id={'AngularValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.AngularValue} />) : null}
+                            {Angular ? (<UserEditSlider aria={'Angular'} id={'Angular'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Angular} />) : null}
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={HBS}
@@ -154,8 +177,9 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="HBS"
                             />
-                            {HBS ? (<UserEditSlider aria={'HBSValue'} id={'HBSValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.HBSValue} />) : null}
+                            {HBS ? (<UserEditSlider aria={'HBS'} id={'HBS'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.HBS} />) : null}
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={Pyton}
@@ -165,9 +189,10 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="Pyton"
                             />
-                            {Pyton ? (<UserEditSlider aria={'PytonValue'} id={'PytonValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.PytonValue} />) : null}
+                            {Pyton ? (<UserEditSlider aria={'Pyton'} id={'Pyton'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Pyton} />) : null}
 
                             <FormControlLabel
+                                className={classes.checkbox}
                                 control={
                                     <Checkbox
                                         checked={Haskel}
@@ -177,7 +202,7 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 }
                                 label="Haskel"
                             />
-                            {Haskel ? (<UserEditSlider aria={'HaskelValue'} id={'HaskelValue'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.HaskelValue} />) : null}
+                            {Haskel ? (<UserEditSlider aria={'Haskell'} id={'Haskell'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Haskel} />) : null}
                         </FormGroup>
                     </FormControl>
                     <div className={styles.button_group}>

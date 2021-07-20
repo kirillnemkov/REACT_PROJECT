@@ -1,7 +1,6 @@
 const { connect, disconnect } = require("./src/db/db");
 const Project = require("./src/models/project-model");
 async function main() {
-  await Project.deleteMany();
   const project = [
     {
       title: "Smart home",

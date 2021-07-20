@@ -6,8 +6,11 @@ import styles from './styles.module.css';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { updateInformation } from '../../../redux/actions/user.ac';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,8 +35,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         backgroundColor: 'white',
     },
-    form: {
-        width: '70%',
+    formContainer: {
         margin: '0 auto'
     },
     IconButton: {
@@ -44,11 +46,13 @@ const useStyles = makeStyles((theme) => ({
 const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
     const classes = useStyles();
     const { register, handleSubmit } = useForm()
+    const dispatch = useDispatch()
+    const { id } = useParams()
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = (data) => dispatch(updateInformation(id, data))
 
     return (
-        <><form onSubmit={handleSubmit(onSubmit)} className={classes.form} noValidate autoComplete="off">
+        <><form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer} noValidate autoComplete="off">
             <div className={styles.formContainer}>
 
 
