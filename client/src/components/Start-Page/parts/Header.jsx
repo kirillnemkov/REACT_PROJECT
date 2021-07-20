@@ -25,6 +25,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
+    overflow: 'hidden',
+    position: 'relative',
     fontFamily: 'Nunito',
   },
   row: {
@@ -46,10 +48,19 @@ const useStyles = makeStyles((theme) => ({
   title: {
     color: '#66eefb',
     fontSize: '4.5rem',
+    position: 'relative'
   },
   goDown: {
     color: '#4520ab',
     fontSize: '4rem',
+  },
+  video: {
+    position: 'absolute',
+    opacity: '0.5',
+    width: '100%',
+    top: '0',
+    height: '100%',
+    objectFit: 'cover'
   }
 }));
 
@@ -63,6 +74,8 @@ export default function Header() {
   return (
       <div className={classes.head} id="header">
         <Navbar />
+        <video className={classes.video} src="video.mp4" muted loop autoPlay>
+          </video>
       <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}

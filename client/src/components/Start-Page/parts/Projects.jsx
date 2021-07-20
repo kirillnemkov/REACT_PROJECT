@@ -3,16 +3,18 @@ import { makeStyles } from '@material-ui/core/styles'
 import ImageCard from './ImageCard'
 import { useSelector } from 'react-redux'
 import useWindowPosition from '../hook/useWindowPosition'
+import Grid from '@material-ui/core/Grid'
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
         flexWrap: 'wrap',
         [theme.breakpoints.down('md')]: {
             flexDirection: 'column',
         },
+        margin: '0 auto',
+        width: '100%',
+        maxWidth: '1400px'
     },
 }))
 export default function Projects () {
@@ -23,9 +25,11 @@ export default function Projects () {
     return (
         <>
             <div className={classes.root} id="place-to-visit">
+            <Grid container spacing={0.5}>
           {  state?.map(item => {
-            return <ImageCard key={item._id} payload={item} checked={checked} />
+            return<Grid item xs={4}> <ImageCard key={item._id} payload={item} checked={checked} /></Grid>
             })}
+            </Grid>
             </div>
              
         </>

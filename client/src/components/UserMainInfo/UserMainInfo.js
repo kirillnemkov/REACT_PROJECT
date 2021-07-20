@@ -29,7 +29,7 @@ const UserMainInfo = ({ handleOpen }) => {
     const user = useSelector(state => state.user)
     const [drag, setDrag] = useState(false)
     const flag = 'user';
-    const id = user.id;
+    const id = user?.id;
 
      function changeHandler(e) {
       const [file] = e.target.files;
