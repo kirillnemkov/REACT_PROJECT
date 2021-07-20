@@ -6,7 +6,6 @@ const multer = require("multer");
 const { connect } = require("./src/db/db");
 const app = express();
 const userRouter = require("./src/routes/userRouter");
-const fileRouter = require("./src/routes/fileRouter");
 const profileRouter = require("./src/routes/profileRouter");
 const projectRouter = require("./src/routes/projectRouter");
 const errorMiddleware = require("./src/middlewars/error-middleware");
@@ -27,7 +26,6 @@ app.use(
 );
 
 app.use("/api/v1", userRouter);
-app.use("/api/v1/files", fileRouter);
 app.use("/profile", profileRouter);
 app.use("/projects", projectRouter);
 
