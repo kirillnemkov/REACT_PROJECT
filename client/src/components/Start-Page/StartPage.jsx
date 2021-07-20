@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import Header from './parts/Header'
 
+
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: '100vh',
@@ -28,7 +29,6 @@ const StartPage = () => {
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Header />
             <Projects />
         </div>
     )
