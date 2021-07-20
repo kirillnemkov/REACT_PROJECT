@@ -1,4 +1,4 @@
-import { DELETE_USER, SET_USER, UPDATE_USER_STATE  } from "../types/userTypes";
+import { DELETE_USER, SET_USER  } from "../types/userTypes";
 
 const userReducer = (state = null, action) => {
   switch (action.type) {
