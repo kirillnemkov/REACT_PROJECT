@@ -1,10 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
 import ModalProject from '../ModalProject/ModalProject'
 import { getOneProjects } from '../../redux/actions/projects.ac'
+import {checkAuth} from '../../redux/actions/user.ac'
 
 const useStyles = makeStyles((theme) => ({
     urlbutton: {
@@ -32,11 +33,13 @@ export default function ProjectProfile() {
     const dispatch = useDispatch()
     const projects = useSelector((state) => state.projects)
     const errors = useSelector((state) => state.errors)
+    const history = useHistory()
 
     const [open, setOpen] = useState(false)
     const { id } = useParams()
 
     useEffect(() => {
+      dispatch(checkAuth(history, errors))
         dispatch(getOneProjects(id, errors))
     }, [])
 

@@ -12,6 +12,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom'
+import {checkAuth} from '../../redux/actions/user.ac'
+import { useDispatch, useSelector } from 'react-redux'
 // import { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,6 +47,13 @@ const UserProfile = () => {
     const classes = useStyles();
     const [tabValue, setTabValue] = useState('');
     const [modal, setModal] = useState(false)
+    const errors = useSelector((state) => state.errors)
+    const history = useHistory()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+      dispatch(checkAuth(history, errors))
+    }, [])
 
     function handleChange(e, value) {
         setTabValue(value)
@@ -56,11 +66,6 @@ const UserProfile = () => {
     const handleClose = () => {
         setModal(false);
     };
-
-
-
-console.log(modal)
-
 
 
     return (

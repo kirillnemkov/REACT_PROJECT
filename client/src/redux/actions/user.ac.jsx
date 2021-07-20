@@ -1,4 +1,4 @@
-import { SET_USER, DELETE_USER } from '../types/userTypes'
+import { SET_USER, DELETE_USER, SET_IMG } from '../types/userTypes'
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
 import axios from 'axios'
@@ -12,6 +12,11 @@ export const setUser = (user) => ({
 
 export const deleteUser = () => ({
     type: DELETE_USER,
+})
+
+export const setUserImg = (url) => ({
+  type: SET_IMG,
+  payload: url
 })
 
 export const signUp = (payload, history, errors) => async (dispatch) => {
@@ -95,12 +100,12 @@ export const checkAuth = (history, errors) => async (dispatch) => {
         dispatch(setUser(user))
         localStorage.setItem('token', accessToken)
         if (errors) dispatch(deleteError())
-        history.replace('/main')
     } catch (error) {
         const message = error?.response?.data?.message
         message
             ? dispatch(setError(message))
             : dispatch(setError('Возникли технические проблемы на сервере'))
+            history.replace('/auth')
     } finally {
         dispatch(disableLoader())
     }
