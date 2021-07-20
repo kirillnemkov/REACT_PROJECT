@@ -68,7 +68,7 @@ export const signIn = (payload, history, errors) => async (dispatch) => {
 export const signOut = (errors) => async (dispatch) => {
     dispatch(enableLoader())
     try {
-        const response = await AuthService.signOut()
+        await AuthService.signOut()
         dispatch(deleteUser())
         if (errors) dispatch(deleteError())
         localStorage.removeItem('token')

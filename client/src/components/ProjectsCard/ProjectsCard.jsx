@@ -22,24 +22,19 @@ const useStyles = makeStyles((theme) => ({
     
 }))
 
-export default function CreatorsUser({ el }) {
-    const classes = useStyles()
-
+export default function ProjectsCard({ el }) {
+  const classes = useStyles()
     return (
-        <Link to={`/profile/${el._id}`}>
+        <Link to={`/projects/${el._id}`}>
             <Card className={classes.root} id={styles.media}>
-                <CardHeader title={`${el?.lastName} ${el?.firstName}`} />
-                <CardMedia className={classes.media} image={el?.image} />
+                <CardHeader title={el?.title}/>
+                <CardMedia className={classes.media} image={el?.image[0]} />
                 <CardContent>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        {el?.about && el.about}
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {el?.date && el.date}
                     </Typography>
                 </CardContent>
             </Card>
         </Link>
-    )
+  )
 }

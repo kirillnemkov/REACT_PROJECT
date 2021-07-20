@@ -65,11 +65,14 @@
   margin-top: 20px;
   height: 45px;
   width: 45px;
+  transform-origin: center;
+  position: relative;
+  transition: .2s;
+  /* transform: scale(1); */
 }
 
 .imgforicon:hover{
-  height: 55px;
-  width: 55px;
+  transform: scale(1.1);
 }
 
 .usercont{
@@ -105,7 +108,7 @@
 }
 
 .conteinerUser{
-  /* width: 700px; */
+  margin: 2% 0% 0%;
   display: flex;
   justify-content:stretch;
   flex-wrap: wrap;
@@ -133,4 +136,18 @@
   -webkit-transform: translate(10px);
   transform: translate(2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.cardprojectall{
+  /* position: relative; */
+  margin: 5% 0% 0%;
+  width: 700px;
+  min-height: 400px;
+}
+
+
+.cardproject{
+  /* position: relative; */
+  margin: 2% 0% 0%;
+  display: flex;
+  justify-content:stretch;
 }

@@ -83,7 +83,7 @@ export default function ButtonAppBar() {
             <MenuItem onClick={handleClose}></MenuItem>
           </Menu>
           <Link className={classes.media} to="/"><CardMedia component="img" id={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
-            <IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
+          <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton></Link>
           </Toolbar>
         </AppBar>
     </React.Fragment>

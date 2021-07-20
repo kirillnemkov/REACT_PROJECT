@@ -5,7 +5,8 @@ class ProjectController {
     try {
       const { id } = req.params;
       const project = await Project.findById(id).populate("creators");
-      return res.json(project);
+      const projects = await Project.find({date: project.date});
+      return res.json({project, projects});
     } catch (err) {
       next(err)
     }
@@ -13,7 +14,6 @@ class ProjectController {
     async getAllProjects(req, res, next) {
     try {
       const projects = await Project.find();
-      // console.log(projects);
       return res.json(projects);
     } catch (err) {
       next(err)

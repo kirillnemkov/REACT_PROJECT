@@ -5,7 +5,7 @@ import ProjectsService from '../../services/ProjectsService'
 
 const projectOne = (project) => ({
   type: PROJECT_ONE,
-  payload: { project: [project] },
+  payload: {project},
 })
 
 const projectsInit = (projects) => ({
@@ -48,8 +48,10 @@ export const getOneProjects = (id, errors) => async (dispatch) => {
   dispatch(enableLoader())
   try {
       const response = await ProjectsService.getOneProjects(id)
+      console.log(response);
+      dispatch(projectOne(response.data.project))
+      dispatch(projectsInit(response.data.projects))
       if (errors) dispatch(deleteError())
-      dispatch(projectOne(response.data))
   } catch (error) {
       const message = error?.response?.data?.message
       message

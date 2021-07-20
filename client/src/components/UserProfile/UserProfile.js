@@ -1,7 +1,6 @@
 import styles from './userProfile.module.css'
 import { Paper, Tabs, Tab } from '@material-ui/core/'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import Slider from '@material-ui/core/Slider'
+import { makeStyles} from '@material-ui/core/styles'
 import Diagram from '../Daigram/Diagram'
 import SocialLinks from '../SocialLinks/SocialLinks'
 import About from '../About/About'
