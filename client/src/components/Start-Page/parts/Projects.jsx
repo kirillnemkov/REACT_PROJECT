@@ -4,18 +4,20 @@ import { makeStyles } from '@material-ui/core/styles'
 import ImageCard from './ImageCard'
 import { useSelector } from 'react-redux'
 import useWindowPosition from '../hook/useWindowPosition'
-import Header from './Header'
+// import Header from './Header'
+import Grid from '@material-ui/core/Grid'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        minHeight: '100vh',
         display: 'flex',
-        justifyContent: 'space-between',
         alignItems: 'center',
         flexWrap: 'wrap',
         [theme.breakpoints.down('md')]: {
             flexDirection: 'column',
         },
+        margin: '0 auto',
+        width: '100%',
+        maxWidth: '1400px'
     },
     formControl: {
         margin: theme.spacing(1),
@@ -109,11 +111,11 @@ export default function Projects () {
 
     return (
         <>
-            <div className={classes.rootHeader} id="header">
+            {/* <div className={classes.rootHeader} id="header">
                 <Header changeHandler={changeHandler} searchText={searchText} />
-            </div>
+            </div> */}
             <div className={classes.root} id="place-to-visit">
-                {content?.map((item) => {
+                {/* {content?.map((item) => {
                     return (
                         <ImageCard
                             key={item._id}
@@ -121,7 +123,12 @@ export default function Projects () {
                             checked={checked}
                         />
                     )
-                })}
+                })} */}
+            <Grid container spacing={0.5}>
+          {  state?.map(item => {
+            return<Grid item xs={4}> <ImageCard key={item._id} payload={item} checked={checked} /></Grid>
+            })}
+            </Grid>
             </div>
         </>
     )

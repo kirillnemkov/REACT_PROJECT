@@ -12,7 +12,7 @@ import Header from './parts/Header'
 const useStyles = makeStyles((theme) => ({
     root: {
         minHeight: '100vh',
-        backgroundImage: `url(https://www.rabstol.net/uploads/gallery/main/211/rabstol_net_italy_22.jpg)`,
+        backgroundImage: `url()`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
     },
@@ -28,7 +28,8 @@ const StartPage = () => {
     
     return (
         <div className={classes.root}>
-            <CssBaseline />
+      <CssBaseline />
+            <Header />
             <Projects />
         </div>
     )

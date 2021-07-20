@@ -13,12 +13,9 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 645,
     background: "rgba(0,0,0,0.5)",
     margin: "20px",
-  },
-  media: {
-    height: 440,
+    borderRadius: '20px'
   },
   title: {
     fontFamily: "Nunito",
@@ -31,6 +28,8 @@ const useStyles = makeStyles({
     fontSize: "1.1rem",
     color: "#ddd",
   },
+  img: {
+  },
   link: {
     fontFamily: "Nunito",
     fontSize: "1.1rem",
@@ -41,7 +40,6 @@ const useStyles = makeStyles({
     }
   },
   head: {
-    width: '33%',
     '&:nth-child(-n+3)': {
       marginTop: '100px'
     }
@@ -52,7 +50,6 @@ export default function ImageCard({payload, handleClick, checked}) {
   const classes = useStyles();
 
   return (
-    <Collapse className={classes.head} in={checked} {...(checked ? { timeout: 1000 } : {})}>
       <Card className={classes.root}>
         <Link to={`/projects/${payload._id}`}>
         <CardMedia
@@ -108,6 +105,5 @@ export default function ImageCard({payload, handleClick, checked}) {
           </Grid>
         </CardContent>
       </Card>
-    </Collapse>
   );
 }
