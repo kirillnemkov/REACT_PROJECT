@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useEffect} from 'react'
+import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
@@ -44,7 +44,7 @@ export default function ProjectProfile() {
     let slides = projects[0]?.image?.map((el) => {
         return <img src={el} className={styles.imageCarousel} alt="logo" />
     })
-    console.log(projects);
+    console.log(projects)
 
     return (
         <div>
@@ -52,14 +52,23 @@ export default function ProjectProfile() {
                 return (
                     <div className={styles.projectcont}>
                         <div className={styles.imgcont}>
-                          {el.image?.length > 1 ? <Carousel slides={slides} /> : <img src={el.image} className={styles.imageNotCarousel} alt="logo" />}
+                            {el.image?.length > 1 ? (
+                                <Carousel slides={slides} />
+                            ) : (
+                                <img
+                                    src={el.image}
+                                    id={styles.media}
+                                    className={styles.imageNotCarousel}
+                                    alt="logo"
+                                />
+                            )}
                             <div className={classes.namebutton}>
                                 <b>
                                     <h1>{el.title}</h1>
                                 </b>
                             </div>
-                            <div className={classes.urlbutton}>
-                                <a className={styles.urllink} href={el.website}>
+                            <div id={styles.media} className={classes.urlbutton}>
+                                <a  className={styles.urllink} href={el.website}>
                                     VISIT SITE
                                 </a>
                             </div>
@@ -99,7 +108,7 @@ export default function ProjectProfile() {
                                     </a>
                                 </div>
                                 <div className={styles.socseti}>
-                                    <a href={el.twitter}>
+                                    <a  href={el.twitter}>
                                         <img
                                             className={styles.imgforicon}
                                             src="https://img.icons8.com/color/48/000000/twitter--v1.png"

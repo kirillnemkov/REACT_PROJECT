@@ -6,23 +6,23 @@ const SocialLinks = () => {
             <div className={styles.links_container}>
                 <div className={styles.links_item}>
                     <p>url</p>
-                    <img src="/sites.png" className={styles.links_img}></img>
+                    <img src="/sites.png" className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
                     <p> gitHub</p>
-                    <img src='/github.png' className={styles.links_img}></img>
+                    <img src='/github.png' className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
                     <p>twitter</p>
-                    <img src='/twitter.png' className={styles.links_img}></img>
+                    <img src='/twitter.png' className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
                     <p>instagram</p>
-                    <img src="/instagram.png" className={styles.links_img}></img>
+                    <img src="/instagram.png" className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
                     <p> facebook</p>
-                    <img src="/facebook.png" className={styles.links_img}></img>
+                    <img src="/facebook.png" className={styles.links_img} alt=""></img>
                 </div>
             </div>
         </>

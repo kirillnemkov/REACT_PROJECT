@@ -1,6 +1,5 @@
 import { ResponsivePie } from '@nivo/pie'
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {  useSelector } from 'react-redux'
 const data = [
     {
         "id": "erlang",

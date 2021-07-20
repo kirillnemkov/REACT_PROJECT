@@ -44,7 +44,7 @@ export default function CreatorsUser({ el }) {
     const classes = useStyles()
 
     return (
-        <Link to={`/profile/${el.id}`}>
+        <Link to={`/profile/${el._id}`}>
             <Card className={classes.root} id={styles.media}>
                 <CardHeader
                     title={`${el.lastName} ${el.firstName}`}
@@ -62,7 +62,7 @@ export default function CreatorsUser({ el }) {
                 </CardContent>
                 <CardActions disableSpacing>
                     <IconButton color="primary">
-                        <TwitterIcon />
+                      <TwitterIcon />
                     </IconButton>
                     <IconButton style={{ color: red[500] }}>
                         <InstagramIcon />

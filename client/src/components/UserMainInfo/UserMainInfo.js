@@ -23,7 +23,7 @@ const UserMainInfo = ({ handleOpen }) => {
         <>
             <div className={styles.main_info}>
                 <div className={styles.img_container}>
-                    <img src="/profile-user.png" className={styles.user_img}></img>
+                    <img src="/profile-user.png" className={styles.user_img} alt=""></img>
                     <Button variant="contained" color="secondary">
                         Добавить фото
                     </Button>
@@ -32,7 +32,7 @@ const UserMainInfo = ({ handleOpen }) => {
                     <h5 className={styles.user_name}>lastName firstName middleName</h5>
                     <div className={styles.location}>
                         <p className={styles.location_name}>location</p>
-                        <img className={styles.location_img} src="/location.png"></img>
+                        <img className={styles.location_img} src="/location.png" alt=""></img>
                     </div>
                     <p>job</p>
                 </div>

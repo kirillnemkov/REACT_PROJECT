@@ -39,7 +39,7 @@
 
 .about{
   position: relative;
-  margin: 1% 11% 7%;
+  margin: 0% 11% 7%;
   width: 700px;
   height: 100px;
 }
@@ -118,7 +118,19 @@
 
 .imageNotCarousel{
   position: relative;
-  margin: 10% 0% 7%;
+  /* margin: 1% 0% 7%; */
   width: 700px;
   height: 500px;
+}
+
+#media {
+  border-radius: 10px;
+  box-shadow: 0px 1px 3px;
+  -webkit-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#media:hover {
+  -webkit-transform: translate(10px);
+  transform: translate(2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }

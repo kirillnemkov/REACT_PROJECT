@@ -3,7 +3,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { confirmAuth } from '../../redux/actions/user.ac'
 import { useDispatch } from 'react-redux'
 import { Alert } from 'react-bootstrap'
-const { Heading } = Alert
+// const { Heading } = Alert
 
 const ActivationSuccess = () => {
     const [timer, setTimer] = useState(10)
