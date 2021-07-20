@@ -1,9 +1,8 @@
 import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
-import ModalProject from '../ModalProject/ModalProject'
 import { getOneProjects } from '../../redux/actions/projects.ac'
 import CreatorsUser from '../CreatorsUser/CreatorsUser'
 import { Carousel } from '3d-react-carousal'
@@ -45,6 +44,7 @@ export default function ProjectProfile() {
     let slides = projects[0]?.image?.map((el) => {
         return <img src={el} className={styles.imageCarousel} alt="logo" />
     })
+    console.log(projects);
 
     return (
         <div>
@@ -52,7 +52,7 @@ export default function ProjectProfile() {
                 return (
                     <div className={styles.projectcont}>
                         <div className={styles.imgcont}>
-                            <Carousel slides={slides} />
+                          {el.image?.length > 1 ? <Carousel slides={slides} /> : <img src={el.image} className={styles.imageNotCarousel} alt="logo" />}
                             <div className={classes.namebutton}>
                                 <b>
                                     <h1>{el.title}</h1>

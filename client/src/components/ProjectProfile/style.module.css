@@ -115,3 +115,10 @@
   min-height: 400px;
   min-width: 600px;
 }
+
+.imageNotCarousel{
+  position: relative;
+  margin: 10% 0% 7%;
+  width: 700px;
+  height: 500px;
+}
