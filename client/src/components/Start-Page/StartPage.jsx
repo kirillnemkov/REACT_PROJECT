@@ -28,7 +28,7 @@ const StartPage = () => {
     
     return (
         <div className={classes.root}>
-      <CssBaseline />
+            <CssBaseline />
             <Header />
             <Projects />
         </div>

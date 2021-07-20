@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import ImageCard from './ImageCard'
 import { useSelector } from 'react-redux'
 import useWindowPosition from '../hook/useWindowPosition'
+import {Link} from 'react-router-dom'
 // import Header from './Header'
 import Grid from '@material-ui/core/Grid'
 
@@ -126,7 +126,7 @@ export default function Projects () {
                 })} */}
             <Grid container spacing={0.5}>
           {  state?.map(item => {
-            return<Grid item xs={4}> <ImageCard key={item._id} payload={item} checked={checked} /></Grid>
+            return<Grid item xs={4}><Link to={`/projects/${item._id}`}><ImageCard key={item._id} payload={item} checked={checked} /></Link></Grid>
             })}
             </Grid>
             </div>
