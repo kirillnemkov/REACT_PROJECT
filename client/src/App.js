@@ -8,11 +8,13 @@ import UserProfile from './components/UserProfile/UserProfile'
 import ProjectProfile from './components/ProjectProfile/ProjectProfile'
 import StartQuestionsForm from './components/StartQuestionsForm/StartQuestionsForm'
 import StartPage from './components/Start-Page/StartPage.jsx'
+import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 
 function App() {
     return (
         <>
-          <Navbar />
+            <ScrollToTop />
+            <Navbar />
             <Switch>
                 <Route exact path="/start">
                     <StartQuestionsForm />

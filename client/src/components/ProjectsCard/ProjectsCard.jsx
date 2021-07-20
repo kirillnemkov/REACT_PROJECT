@@ -27,13 +27,13 @@ export default function ProjectsCard({ el }) {
     return (
         <Link to={`/projects/${el._id}`}>
             <Card className={classes.root} id={styles.media}>
-                <CardHeader title={el?.title}/>
                 <CardMedia className={classes.media} image={el?.image[0]} />
+                <CardHeader title={el?.title}/>
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {el?.date && el.date}
-                    </Typography>
-                </CardContent>
+                 <Typography variant="body2" color="textSecondary" component="p"> 
+                        {el?.date && el.date} 
+                  </Typography> 
+             </CardContent> 
             </Card>
         </Link>
   )
