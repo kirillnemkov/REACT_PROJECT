@@ -1,12 +1,17 @@
 .projectcont{
-  margin-top: 30px;
+  margin-top: 5px;
 }
 
 .imgcont{
   position: relative;
-  margin: 8% 11% 7%;
+  margin: 10% 11% 1%;
   width: 700px;
   height: 500px;
+}
+
+.favouritecont{
+  position: relative;
+  margin: 0% 10% 3%;
 }
 
 .projectimg{
@@ -17,9 +22,14 @@
 
 .projectbottom{
   border-radius: 0 0 20px 20px;
-  background-color: #e4e4e4;
+  background-color: #f50157;
   height: 40px;
-  color: #888888;
+  color: black;
+}
+
+.projectbottom:hover{
+  background-color: #888888;
+  color: #e4e4e4;
 }
 
 .urllink {
@@ -34,13 +44,15 @@
 
 .about{
   position: relative;
-  margin: 8% 11% 7%;
+  margin: 0% 11% 7%;
   width: 700px;
-  height: 100px;
+  min-height: 100px;
 }
-
-.usercont{
-  width: 700px;
+.aboutcreators{
+  position: relative;
+  margin: 0% 11% 7%;
+  min-width: 700px;
+  height: 100px;
 }
 
 .userimage{
@@ -49,14 +61,52 @@
   height: 180px;
 }
 
-.usercontactscont{
-  border-radius: 0 0 20px 20px;
+.socseti{
+  display: flex;
   position: absolute;
-  outline: 1px solid #888888;
   left: 800px;
-  bottom: 260px;
-  width: 380px;
+  bottom: 200px;
+  border-radius: 0 0 20px 20px;
+  width: 300px;
+  height: 100px;
+  justify-content: center;
+}
+
+.imgforicon{
+  margin-top: 20px;
+  height: 45px;
+  width: 45px;
+  transform-origin: center;
+  position: relative;
+  transition: .2s;
+  /* transform: scale(1); */
+}
+
+.imgforicon:hover{
+  transform: scale(1.1);
+}
+
+.usercont{
+  width: 700px;
+}
+
+.usercontactscont{
+  display: flex;
+  border-radius: 20px 20px 0 0;
+  position: absolute;
+  left: 800px;
+  bottom: 300px;
+  padding: 5px;
+  width: 300px;
   min-height: 50px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  align-content: stretch;
+  background-color: #f50157;
+}
+
+.usercontactscont:hover{
+  background-color: #888888;
+  color: #e4e4e4;
 }
 
 .gitimg{
@@ -64,12 +114,50 @@
   height: 45px;
 }
 
-.usercontacts{
-  position: relative;
-  margin: 12px;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+.giticon{
+  margin: 13px;
 }
 
-.mail, .mail:hover{
-color: #f50157;
+.conteinerUser{
+  margin: 2% 0% 0%;
+  display: flex;
+  justify-content:stretch;
+  flex-wrap: wrap;
+}
+
+.imageCarousel{
+  min-height: 400px;
+  min-width: 600px;
+}
+
+.imageNotCarousel{
+  position: relative;
+  /* margin: 1% 0% 7%; */
+  width: 700px;
+  height: 500px;
+}
+
+#media {
+  border-radius: 10px;
+  box-shadow: 0px 1px 3px;
+  -webkit-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#media:hover {
+  -webkit-transform: translate(10px);
+  transform: translate(2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+.cardprojectall{
+  /* position: relative; */
+  margin: 5% 0% 0%;
+  width: 700px;
+  min-height: 400px;
+}
+
+.cardproject{
+  /* position: relative; */
+  margin: 2% 0% 0%;
+  display: flex;
+  justify-content:stretch;
 }

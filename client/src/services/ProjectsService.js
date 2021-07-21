@@ -5,6 +5,10 @@ export default class ProjectService {
     return $api.get(`/projects/${id}`)
   }
 
+  static async getLikeProjects(id, user) {
+    return $api.patch(`/projects/${id}`, user)
+  }
+
   static async getAllProjects() {
     return $api.get('/projects')
   }

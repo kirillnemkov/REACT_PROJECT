@@ -1,4 +1,4 @@
-import { SET_USER, DELETE_USER, GET_SKILLS, SET_INFO, INIT_USERINFO } from '../types/userTypes'
+import { SET_USER, DELETE_USER, GET_SKILLS, SET_INFO, SET_IMG, INIT_USERINFO  } from '../types/userTypes'
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
 import axios from 'axios'
@@ -25,6 +25,10 @@ export const setUserInformation = (info) => ({
     payload: { info: info },
 })
 
+export const setUserImg = (url) => ({
+  type: SET_IMG,
+  payload: url
+})
 
 export const signUp = (payload, history, errors) => async (dispatch) => {
     dispatch(enableLoader())
@@ -64,7 +68,7 @@ export const signIn = (payload, history, errors) => async (dispatch) => {
 export const signOut = (errors) => async (dispatch) => {
     dispatch(enableLoader())
     try {
-        const response = await AuthService.signOut()
+        await AuthService.signOut()
         dispatch(deleteUser())
         if (errors) dispatch(deleteError())
         localStorage.removeItem('token')
@@ -112,6 +116,7 @@ export const checkAuth = (history, errors) => async (dispatch) => {
         message
             ? dispatch(setError(message))
             : dispatch(setError('Возникли технические проблемы на сервере'))
+            history.replace('/auth')
     } finally {
         dispatch(disableLoader())
     }

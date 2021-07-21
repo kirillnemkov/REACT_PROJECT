@@ -1,18 +1,30 @@
-import { useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useParams, useHistory } from 'react-router-dom'
+import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
-import ModalProject from '../ModalProject/ModalProject'
-import { getOneProjects } from '../../redux/actions/projects.ac'
+import { getOneProjects, likeProject } from '../../redux/actions/projects.ac'
+import CreatorsUser from '../CreatorsUser/CreatorsUser'
+import { Carousel } from '3d-react-carousal'
+import { checkAuth } from '../../redux/actions/user.ac'
+import ProjectsCard from '../ProjectsCard/ProjectsCard.jsx'
+import IconButton from '@material-ui/core/IconButton'
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import Box from '@material-ui/core/Box'
+import ScrollToTop from '../ScrollToTop/ScrollToTop'
+import Comment from '../Comment/Comment'
 
 const useStyles = makeStyles((theme) => ({
+    rootproject: {
+        margin: '0 auto',
+    },
     urlbutton: {
         borderRadius: '45px',
         width: '300px',
-        height: '25px',
+        height: '60px',
         position: 'absolute',
-        top: '100px',
+        top: '180px',
         left: '800px',
         backgroundColor: '#f50157',
         textAlign: 'center',
@@ -21,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     namebutton: {
         width: '300px',
         position: 'absolute',
-        top: '10px',
+        top: '20px',
         left: '800px',
         textAlign: 'center',
     },
@@ -30,118 +42,139 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectProfile() {
     const classes = useStyles()
     const dispatch = useDispatch()
+    const project = useSelector((state) => state.project)
     const projects = useSelector((state) => state.projects)
     const errors = useSelector((state) => state.errors)
+    const user = useSelector((state) => state.user)
+    const history = useHistory()
 
-    const [open, setOpen] = useState(false)
     const { id } = useParams()
 
     useEffect(() => {
+        dispatch(checkAuth(history, errors))
         dispatch(getOneProjects(id, errors))
-    }, [])
+    }, [id])
 
-    const handleOpen = () => {
-        setOpen(true)
-    }
-    const handleClose = () => {
-        setOpen(false)
+    let slides = project?.image?.map((el) => {
+        return <img src={el} className={styles.imageCarousel} alt="logo" />
+    })
+
+    const handleLike = (id, user) => {
+        dispatch(likeProject(id, user))
     }
 
     return (
-        <div>
-            {projects?.map((el) => {
-                return (
-                    <div className={styles.projectcont}>
-                        <div className={styles.imgcont}>
+        <Box mx="auto">
+            <ScrollToTop />
+            <div className={styles.projectcont} key={id}>
+                <div className={styles.imgcont}>
+                    {project?.image?.length > 1 ? (
+                        <Carousel slides={slides} />
+                    ) : (
+                        <img
+                            src={project?.image}
+                            id={styles.media}
+                            className={styles.imageNotCarousel}
+                            alt="logo"
+                        />
+                    )}
+
+                    <div className={classes.namebutton}>
+                        <b>
+                            <h1>{project?.title}</h1>
+                        </b>
+                    </div>
+
+                    <div id={styles.media} className={classes.urlbutton}>
+                        <a className={styles.urllink} href={project?.website}>
+                            VISIT SITE
+                        </a>
+                    </div>
+                </div>
+
+                <div className={styles.favouritecont}>
+                    <IconButton
+                        onClick={() => handleLike(id, user)}
+                        id={project?._id}
+                    >
+                        <FavoriteIcon fontSize="large" color="secondary" />
+                    </IconButton>
+                    {project?.likes.length}
+                    <IconButton>
+                        <VisibilityOutlinedIcon fontSize="large" />
+                    </IconButton>
+                    {project?.views}
+                </div>
+
+                <div className={styles.about}>
+                    <b>О ПРОЕКТЕ </b>
+                    <br />
+                    <p>{project?.description}</p>
+                    <br />
+                    <hr />
+                </div>
+
+                <div className={styles.aboutcreators}>
+                    <b>
+                        {project?.creators?.length > 1
+                            ? 'СОЗДАТЕЛИ'
+                            : 'СОЗДАТЕЛЬ'}
+                    </b>
+                    <div className={styles.conteinerUser}>
+                        {project?.creators?.map((el) => {
+                            return <CreatorsUser el={el} />
+                        })}
+                    </div>
+                    <hr />
+
+                    <div className={styles.usercontactscont}>
+                        <img
+                            className={styles.gitimg}
+                            src="https://img.icons8.com/metro/452/github.png"
+                            alt="github"
+                        />
+                        <a className={styles.giticon} href={project?.gitHub}>
+                            GITHUB
+                        </a>
+                    </div>
+
+                    <div className={styles.socseti}>
+                        <a href={project?.twitter}>
                             <img
-                                onClick={handleOpen}
-                                className={styles.projectimg}
-                                src={el.image}
-                                alt="project"
+                                className={styles.imgforicon}
+                                src="https://img.icons8.com/color/48/000000/twitter--v1.png"
+                                alt="imglogo"
                             />
-                            <div className={classes.namebutton}>
-                                <b>
-                                    <h2>{el.title}</h2>
-                                </b>
-                            </div>
-                            <div className={classes.urlbutton}>
-                                <a className={styles.urllink} href={el.website}>
-                                    VISIT SITE
-                                </a>
-                            </div>
-                            <div className={styles.projectbottom}>
-                                {el.date}
-                            </div>
-                        </div>
-                        {open && (
-                            <ModalProject
-                                handleClose={handleClose}
-                                open={open}
-                                image={el.image}
+                        </a>
+                        <a href={project?.instagram}>
+                            <img
+                                className={styles.imgforicon}
+                                src="https://img.icons8.com/fluent/48/000000/instagram-new.png"
+                                alt="imglogo"
                             />
-                        )}
+                        </a>
+                        <a href={project?.facebook}>
+                            <img
+                                className={styles.imgforicon}
+                                src="https://img.icons8.com/color/48/000000/facebook.png"
+                                alt="imglogo"
+                            />
+                        </a>
+                    </div>
+                    <div className={styles.socseti}>
+                        <Comment />
+                    </div>
 
-                        <div>
-                            <div className={styles.about}>
-                                <b>О ПРОЕКТЕ </b>
-                                <br />
-                                <p>{el.description}</p>
-                                <br />
-                                <hr />
-                            </div>
-
-                            <div className={styles.about}>
-                                <b>
-                                    {el?.creators.length > 1
-                                        ? 'СОЗДАТЕЛИ'
-                                        : 'СОЗДАТЕЛЬ'}
-                                </b>
-                                {el?.creators.map((el) => {
-                                    return (
-                                        <>
-                                            <div className={styles.usercont}>
-                                                <img
-                                                    src={el.image}
-                                                    className={styles.userimage}
-                                                    alt="userimage"
-                                                />
-                                                <div>
-                                                    {el.lastName} {el.firstName}{' '}
-                                                    {el.middleName}
-                                                </div>
-                                                <b>
-                                                    <a
-                                                        className={styles.mail}
-                                                        href={`mailto:${el.email}`}
-                                                    >
-                                                        {el.email}
-                                                    </a>
-                                                </b>
-                                            </div>
-                                            <div className={styles.usercontactscont}>
-                                              <img className={styles.gitimg} src="https://img.icons8.com/metro/452/github.png" alt="github"/>
-                                            <div
-                                                className={styles.usercontacts}
-                                            >
-                                                <a href={el.gitHub}>GITHUB</a>
-                                            </div>
-                                            </div>
-                                        </>
-                                    )
-                                })}
-                                <hr />
-                            </div>
-
-                            {/* <div>Ссылка на гитхаб - {el.gitHub}</div>
-                            <div>Сайт проекта - {el.website}</div>
-                            <div>Твиттер - {el.twitter}</div>
-                            <div>Инста - {el.instagram}</div>
-                            <div>Фейс - {el.facebook}</div>
-                            <div>Выпуск - {el.date}</div> */}
+                    <div className={styles.cardprojectall}>
+                        <b>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
+                        <div className={styles.cardproject}>
+                            {projects.map((el) => {
+                                return <ProjectsCard el={el} />
+                            })}
                         </div>
                     </div>
-                )
-            })}
-        </div>
+                </div>
+            </div>
+        </Box>
     )
 }

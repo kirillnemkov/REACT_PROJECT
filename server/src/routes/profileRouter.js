@@ -4,6 +4,6 @@ const ProfileController = require("../controllers/profileController");
 
 profileRouter.get("/:id", ProfileController.getProfile);
 profileRouter.patch("/:id", ProfileController.editProfile);
-// profileRouter.patch("/:id", ProfileController.editProfileSkills)
+profileRouter.post("/newPicture", ProfileController.uploadProfileImg);
 
 module.exports = profileRouter;

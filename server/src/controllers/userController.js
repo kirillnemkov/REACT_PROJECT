@@ -76,7 +76,7 @@ class UserController {
         user: userData.user,
         accessToken: userData.accessToken,
       };
-      console.log(response)
+      // console.log(response)
       return res.status(200).json(response);
     } catch (err) {
       next(err);

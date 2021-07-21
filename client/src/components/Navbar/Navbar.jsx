@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from './style.module.css'
 import clsx from 'clsx';
+import { useSelector } from 'react-redux'
 import { Link } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import {makeStyles, Button, MenuItem, Menu, Toolbar, IconButton,
@@ -38,6 +39,8 @@ export default function ButtonAppBar() {
   const [example, setExample] = useState("default");
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState(false);
+  const user = useSelector((state) => state.user)
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -82,8 +85,9 @@ export default function ButtonAppBar() {
           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleClose}></MenuItem>
           </Menu>
-          <Link className={classes.media} to="/"><CardMedia component="img" className={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
-            <IconButton onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton>
+          <Link className={classes.media} to="/"><CardMedia component="img" id={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
+          {user ? <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton></Link> 
+          :<Link to="/auth/signout"><IconButton id={styles.media} className={classes.root} color="inherit" >Выйти</IconButton></Link>}
           </Toolbar>
         </AppBar>
     </React.Fragment>

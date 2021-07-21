@@ -1,5 +1,6 @@
 const initState = {
   projects: [],
+  project: null,
   user: null,
   loader: false,
   error: null,

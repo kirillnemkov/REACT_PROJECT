@@ -1,15 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import CheckIcon from '@material-ui/icons/Check';
 import Button from '@material-ui/core/Button';
 import styles from './styles.module.css';
 import { useForm } from "react-hook-form";
-import IconButton from '@material-ui/core/IconButton';
 import { DropzoneArea } from 'material-ui-dropzone';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { createProject } from '../../redux/actions/projects.ac';
-import { Route } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { createProject, setProjectImg } from '../../redux/actions/projects.ac';
+import { setError } from '../../redux/actions/errors.ac';
+import Helpers from '../../helpers/UploadsHelper';
 
 
 
@@ -62,8 +61,9 @@ const useStyles = makeStyles((theme) => ({
 const CreacteProject = () => {
     const classes = useStyles();
     const dispatch = useDispatch()
+    const user = useSelector(state => state.user)
     const { register, handleSubmit } = useForm()
-
+    const flag = null
     const [file, setFile] = useState({ files: [] })
     const onSave = (files) => {
         setFile({
@@ -71,10 +71,13 @@ const CreacteProject = () => {
         });
     }
 
+
+
     const onSubmit = (data) => {
-        const dataToSend = { ...data, hashtags: data.hashtags.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' ') }
-        dispatch(createProject(dataToSend))
-        console.log(file)
+        const dataToSend = { ...data, hashtags: data.hashtags.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id], file }
+        console.log(dataToSend, file)
+        // dispatch(createProject(dataToSend))
+        // Helpers.uploadFile(flag, file, dispatch, setError, setProjectImg, )
     }
     return (
         <>

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -9,16 +10,12 @@ import IconButton from "@material-ui/core/IconButton";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import Grid from "@material-ui/core/Grid";
-import {Link} from 'react-router-dom'
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 400,
     background: "rgba(0,0,0,0.5)",
     margin: "20px",
-  },
-  media: {
-    height: 440,
+    borderRadius: '20px'
   },
   title: {
     fontFamily: "Nunito",
@@ -31,25 +28,35 @@ const useStyles = makeStyles({
     fontSize: "1.1rem",
     color: "#ddd",
   },
+  img: {
+  },
   link: {
     fontFamily: "Nunito",
     fontSize: "1.1rem",
     color: "#ddd",
-    textDecoration: 'none'
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   },
+  head: {
+    '&:nth-child(-n+3)': {
+      marginTop: '100px'
+    }
+  }
 });
 
 export default function ImageCard({payload, handleClick, checked}) {
   const classes = useStyles();
 
   return (
-    <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
       <Card className={classes.root}>
+        <Link to={`/projects/${payload._id}`}>
         <CardMedia
           className={classes.media}
-          image={payload.image}
+          image={payload.image[0]}
           title="Contemplative Reptile"
-        />
+        /></Link>
         <CardContent>
           <Typography
             gutterBottom
@@ -79,7 +86,7 @@ export default function ImageCard({payload, handleClick, checked}) {
               component="p"
               className={classes.desc}
             >
-              <Link to='' className={classes.link}>{payload.hashtags}</Link>
+              {payload?.hashtags.map((el)=> <Link to='' className={classes.link}>{`#${el} \t`}</Link>)}
             </Typography>
             <Typography
               variant="body2"
@@ -87,10 +94,10 @@ export default function ImageCard({payload, handleClick, checked}) {
               component="p"
               className={classes.desc}
             >
-              <IconButton aria-label="add to favorites">
+              {/* <IconButton aria-label="add to favorites">
                 <FavoriteIcon fontSize="large" color="secondary" />
               </IconButton>
-              {payload.likes}
+              {payload.likes.length} */}
               <IconButton aria-label="add to favorites">
                 <VisibilityOutlinedIcon fontSize="large" />
               </IconButton>{payload.views}
@@ -98,6 +105,5 @@ export default function ImageCard({payload, handleClick, checked}) {
           </Grid>
         </CardContent>
       </Card>
-    </Collapse>
   );
 }

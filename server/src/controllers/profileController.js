@@ -53,6 +53,16 @@ class ProfileController {
     }
   }
 
+  async uploadProfileImg(req, res, next) {
+    try {
+      const { id } = req.params;
+      console.log(id)
+      await User.findByIdAndUpdate(id, { image: req.body.url });
+      return res.json({ url: req.body.url });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = new ProfileController();

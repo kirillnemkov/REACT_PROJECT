@@ -29,6 +29,7 @@ const UserSchema = mongoose.Schema({
   twitter: { type: String },
   instagram: { type: String },
   facebook: { type: String },
+  date: { type: String },
 });
 
 module.exports = mongoose.model("User", UserSchema);
