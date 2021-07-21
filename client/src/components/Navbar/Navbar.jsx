@@ -18,10 +18,8 @@ const useStyles = makeStyles((theme) => ({
     width: 80,
   },
   root: {
-    background: 'linear-gradient(45deg, #f50157 30%, #f50157 90%)',
-    border: 0,
+    background: 'linear-gradient(45deg, #b1b1b1 30%, #D8D8D8 90%)',
     borderRadius: "7%",
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     height: 48,
     padding: '0 30px',
@@ -80,9 +78,9 @@ export default function Navbar({searchText, changeHandler}) {
   );
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       <AppBar
-        color={example}>
+        color={example} style={{ backgroundColor: "whitesmoke"}}>
           <Grid container spacing={1} direction='column'>
           <Grid item direction='row'>
           <Toolbar className={classes.row}>
@@ -98,8 +96,8 @@ export default function Navbar({searchText, changeHandler}) {
             <MenuItem onClick={handleClose}></MenuItem>
           </Menu>
           <Link className={classes.media} to="/"><CardMedia component="img" id={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
-          {user ? <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton></Link> 
-          :<Link to="/auth/signout"><IconButton id={styles.media} className={classes.root} color="inherit" >Выйти</IconButton></Link>}
+          {user ? <Link to="/auth/signout"><IconButton id={styles.media} className={classes.root} >Выйти</IconButton></Link>
+           : <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} >Войти</IconButton></Link>}
           </Toolbar>
           </Grid>
           {history.location.pathname === '/' &&

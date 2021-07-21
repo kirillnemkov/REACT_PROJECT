@@ -1,6 +1,6 @@
 import { useParams, useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/'
+// import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
 import {
@@ -19,32 +19,8 @@ import Box from '@material-ui/core/Box'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import Comment from '../Comment/Comment'
 
-const useStyles = makeStyles((theme) => ({
-    rootproject: {
-        margin: '0 auto',
-    },
-    urlbutton: {
-        borderRadius: '45px',
-        width: '300px',
-        height: '60px',
-        position: 'absolute',
-        top: '180px',
-        left: '800px',
-        backgroundColor: '#f50157',
-        textAlign: 'center',
-        padding: '20px',
-    },
-    namebutton: {
-        width: '300px',
-        position: 'absolute',
-        top: '20px',
-        left: '800px',
-        textAlign: 'center',
-    },
-}))
-
 export default function ProjectProfile() {
-    const classes = useStyles()
+    // const classes = useStyles()
     const dispatch = useDispatch()
     const project = useSelector((state) => state.project)
     const projects = useSelector((state) => state.projects)
@@ -69,117 +45,101 @@ export default function ProjectProfile() {
     }
 
     return (
-        <Box mx="auto">
-            <ScrollToTop />
-            <div className={styles.projectcont} key={id}>
-                <div className={styles.imgcont}>
-                    {project?.image?.length > 1 ? (
-                        <Carousel slides={slides} />
-                    ) : (
-                        <img
-                            src={project?.image}
-                            id={styles.media}
-                            className={styles.imageNotCarousel}
-                            alt="logo"
-                        />
-                    )}
+        <div style={{ backgroundColor: '#D8D8D8' }}>
+            <div className={styles.container}>
+                {project?.image?.length > 0 && <Carousel slides={slides} />}
+            </div>
 
-                    <div className={classes.namebutton}>
-                        <b>
-                            <h1>{project?.title}</h1>
-                        </b>
-                    </div>
-
-                    <div id={styles.media} className={classes.urlbutton}>
-                        <a className={styles.urllink} href={project?.website}>
-                            VISIT SITE
-                        </a>
-                    </div>
-                </div>
-
-                <div className={styles.favouritecont}>
-                    <IconButton
-                        onClick={() => handleLike(id, user)}
-                        id={project?._id}
-                    >
-                        <FavoriteIcon fontSize="large" color="secondary" />
-                    </IconButton>
-                    {project?.likes.length}
-                    <IconButton>
-                        <VisibilityOutlinedIcon fontSize="large" />
-                    </IconButton>
-                    {project?.views.length}
-                </div>
-
-                <div className={styles.about}>
-                    <b>О ПРОЕКТЕ </b>
-                    <br />
-                    <p>{project?.description}</p>
-                    <br />
-                    <hr />
-                </div>
-
-                <div className={styles.aboutcreators}>
+            <div style={{ marginLeft: '100px'}}>
+                <b>
+                    <h1>This is {project?.title}</h1>
+                </b>
+                <div className={styles.website}>
                     <b>
-                        {project?.creators?.length > 1
-                            ? 'СОЗДАТЕЛИ'
-                            : 'СОЗДАТЕЛЬ'}
+                        <a href={project?.website}>You can VISIT SITE</a>
                     </b>
-                    <div className={styles.conteinerUser}>
-                        {project?.creators?.map((el) => {
-                            return <CreatorsUser el={el} />
-                        })}
-                    </div>
-                    <hr />
+                </div>
+            </div>
+            <div className={styles.likesandviews}>
+                <IconButton
+                    onClick={() => handleLike(id, user)}
+                    id={project?._id}
+                >
+                    <FavoriteIcon fontSize="large" color="secondary" />
+                    <ScrollToTop />
+                </IconButton>
+                {project?.likes.length}
+                <IconButton>
+                    <VisibilityOutlinedIcon fontSize="large" />
+                </IconButton>
+                {project?.views.length}
+            </div>
 
-                    <div className={styles.usercontactscont}>
+            <div className={styles.about}>
+                <b>О ПРОЕКТЕ </b>
+                <br />
+                <p>{project?.description}</p>
+                <hr />
+            </div>
+
+            <div className={styles.creators}>
+                <b>
+                    {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
+                </b>
+                <div className={styles.conteinerUser}>
+                    {project?.creators?.map((el) => {
+                        return <CreatorsUser el={el} />
+                    })}
+                </div>
+                </div>
+                <hr />
+
+                <div className={styles.usercontactscont}>
+                    <img
+                        className={styles.gitimg}
+                        src="https://img.icons8.com/metro/452/github.png"
+                        alt="github"
+                    />
+                    <a className={styles.giticon} href={project?.gitHub}>
+                        GITHUB
+                    </a>
+                </div>
+
+                <div className={styles.socseti}>
+                    <a href={project?.twitter}>
                         <img
-                            className={styles.gitimg}
-                            src="https://img.icons8.com/metro/452/github.png"
-                            alt="github"
+                            className={styles.imgforicon}
+                            src="https://img.icons8.com/color/48/000000/twitter--v1.png"
+                            alt="imglogo"
                         />
-                        <a className={styles.giticon} href={project?.gitHub}>
-                            GITHUB
-                        </a>
-                    </div>
+                    </a>
+                    <a href={project?.instagram}>
+                        <img
+                            className={styles.imgforicon}
+                            src="https://img.icons8.com/fluent/48/000000/instagram-new.png"
+                            alt="imglogo"
+                        />
+                    </a>
+                    <a href={project?.facebook}>
+                        <img
+                            className={styles.imgforicon}
+                            src="https://img.icons8.com/color/48/000000/facebook.png"
+                            alt="imglogo"
+                        />
+                    </a>
+                </div>
+                <div className={styles.socseti}>
+                    <Comment />
+                </div>
 
-                    <div className={styles.socseti}>
-                        <a href={project?.twitter}>
-                            <img
-                                className={styles.imgforicon}
-                                src="https://img.icons8.com/color/48/000000/twitter--v1.png"
-                                alt="imglogo"
-                            />
-                        </a>
-                        <a href={project?.instagram}>
-                            <img
-                                className={styles.imgforicon}
-                                src="https://img.icons8.com/fluent/48/000000/instagram-new.png"
-                                alt="imglogo"
-                            />
-                        </a>
-                        <a href={project?.facebook}>
-                            <img
-                                className={styles.imgforicon}
-                                src="https://img.icons8.com/color/48/000000/facebook.png"
-                                alt="imglogo"
-                            />
-                        </a>
-                    </div>
-                    <div className={styles.socseti}>
-                        <Comment />
-                    </div>
-
-                    <div className={styles.cardprojectall}>
-                        <b>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
-                        <div className={styles.cardproject}>
-                            {projects.map((el) => {
-                                return <ProjectsCard el={el} />
-                            })}
-                        </div>
+                <div className={styles.cardprojectall}>
+                    <b>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
+                    <div className={styles.cardproject}>
+                        {projects.map((el) => {
+                            return <ProjectsCard el={el} />
+                        })}
                     </div>
                 </div>
             </div>
-        </Box>
     )
 }
