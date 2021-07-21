@@ -86,7 +86,7 @@ export default function ImageCard({payload, handleClick, checked}) {
               component="p"
               className={classes.desc}
             >
-              <Link to='' className={classes.link}>{payload.hashtags}</Link>
+              {payload?.hashtags.map((el)=> <Link to='' className={classes.link}>{`#${el} \t`}</Link>)}
             </Typography>
             <Typography
               variant="body2"
@@ -94,10 +94,10 @@ export default function ImageCard({payload, handleClick, checked}) {
               component="p"
               className={classes.desc}
             >
-              <IconButton aria-label="add to favorites">
+              {/* <IconButton aria-label="add to favorites">
                 <FavoriteIcon fontSize="large" color="secondary" />
               </IconButton>
-              {payload.likes.length}
+              {payload.likes.length} */}
               <IconButton aria-label="add to favorites">
                 <VisibilityOutlinedIcon fontSize="large" />
               </IconButton>{payload.views}

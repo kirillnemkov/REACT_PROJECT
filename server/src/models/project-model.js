@@ -14,7 +14,8 @@ const ProjectSchema = mongoose.Schema({
   image: [{ type: String }],
   date: { type: String },
   hashtags: [{ type: String }],
-  views: { type: Number }
+  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

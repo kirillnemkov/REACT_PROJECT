@@ -22,13 +22,13 @@ class ProjectController {
 
   async getLikeForProjects(req, res, next) {
     try {
-      const project = await Project.findById(req.params.id);
+      const project = await Project.findById(req.params.id).populate("creators");
       const result = project.likes.includes(req.body.id);
       let newProject = "";
       if (!result) {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true });
+        newProject = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true }).populate("creators");;
       } else {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true });
+        newProject = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate("creators");;
       }
       return res.json(newProject);
     } catch (err) {
@@ -40,6 +40,16 @@ class ProjectController {
     try {
       const newProject = await Project.create(req.body);
       return res.json(newProject);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async createComment(req, res, next) {
+    try {
+      const newComment = await Project.create({tittle: req.body, author: req.body.id, project: req.params.id});
+      // return res.json(newComment);
+      return res.sendStatus(200)
     } catch (err) {
       next(err);
     }
