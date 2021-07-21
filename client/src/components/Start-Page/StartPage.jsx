@@ -7,6 +7,7 @@ import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import Header from './parts/Header'
+import { useState } from 'react'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,18 +20,65 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const StartPage = () => {
-    const error = useSelector((state) => state.errors)
     const dispatch = useDispatch()
     const classes = useStyles()
+    const error = useSelector((state) => state.errors)
+    const state = useSelector((state) => state.projects)
     useEffect(() => {
         dispatch(getAllProjects(error))
     }, [])
+
+    const [searchText, setSearchText] = useState('')
+    const [content, setContent] = useState()
+    const [flag, setFlag] = useState('')
+
+
+    useEffect(() => {
+        setContent(state)
+    }, [state])
+
+    useEffect(() => {
+        if (searchText.length > 0) {
+            const sortedContent = state.reduce((acc, item) => {
+               const sortedItems = item.hashtags.filter(el => el.toLowerCase().includes(searchText.toLocaleLowerCase()))
+               if(sortedItems.length > 0) {
+                   acc.push(item)
+                   return acc
+               } return acc
+            }, []) 
+            setContent(sortedContent)
+        } else {
+            setContent(state)
+        } 
+    }, [searchText])
+
+    useEffect(() => {
+        if (flag === 'views') {
+            const sortItems = [...content].sort((a, b) => b.views.length - a.views.length)
+            setContent(sortItems)
+        } else if (flag === 'date') {
+            const sortItems1 = [...content].sort((a, b) => b.data - a.data)
+            setContent(sortItems1)
+        }
+    }, [flag])
+
+    function changeHandler(e) {
+        if (e.currentTarget.id === 'searchText') {
+            setSearchText(e.currentTarget.value)
+        } else {
+            if (e.target.value === 'views') {
+                setFlag('views')
+            } else if (e.target.value === 'date') {
+                setFlag('date')
+            }
+        }
+    }
     
     return (
         <div className={classes.root}>
             <CssBaseline />
-            <Header />
-            <Projects />
+            <Header changeHandler={changeHandler} searchText={searchText}  />
+            <Projects content={content}/>
         </div>
     )
 }
