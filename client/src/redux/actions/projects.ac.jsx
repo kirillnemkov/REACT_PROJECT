@@ -27,7 +27,7 @@ const projectLike = (project) => ({
 })
 
 const projectViews = (project) => ({
-    type: PROJECT_LIKE,
+    type: PROJECT_VIEWS,
     payload: { project },
 })
 
