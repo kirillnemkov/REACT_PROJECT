@@ -52,7 +52,8 @@ class ProjectController {
     try {
       const newComment = await Comment.create({ title: req.body.input, author: req.body.user.id, project: req.params.id });
       const project = await Project.findByIdAndUpdate(req.params.id, { $push: { comments: { $each: [newComment._id] } } }, { new: true }).populate("creators").populate("comments")
-      return res.json(project);
+      const allComment = await Comment.find({author: req.body.user.id}).populate("author")
+      return res.json(allComment);
     } catch (err) {
       next(err);
     }
