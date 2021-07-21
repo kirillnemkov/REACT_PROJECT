@@ -9,7 +9,7 @@ projectRouter.get('/:id', ProjectController.getOneProjects)
 projectRouter.patch('/:id', ProjectController.getLikeForProjects)
 projectRouter.put('/:id', ProjectController.editProject)
 projectRouter.delete('/:id', ProjectController.deleteProject)
-profileRouter.post("/", ProfileController.uploadProjectImg);
+
 
 
 
