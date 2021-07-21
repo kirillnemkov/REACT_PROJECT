@@ -2,10 +2,15 @@ import React, { useState } from "react";
 import styles from './style.module.css'
 import clsx from 'clsx';
 import { useSelector } from 'react-redux'
-import { Link } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
+import { Link, useHistory } from "react-router-dom";
 import {makeStyles, Button, MenuItem, Menu, Toolbar, IconButton,
    CardMedia, SwipeableDrawer, ListItemText, ListItem,List} from "@material-ui/core";
+import { AppBar } from '@material-ui/core'
+import Grid from '@material-ui/core/Grid';
+import TextField from '@material-ui/core/TextField'
+import InputLabel from '@material-ui/core/InputLabel'
+import FormControl from '@material-ui/core/FormControl'
+import Select from '@material-ui/core/Select'
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -32,15 +37,20 @@ const useStyles = makeStyles((theme) => ({
   fullList: {
     width: 'auto',
   },
+  sort: {
+    '& .MuiFormControl-root' : {
+      width: '100%'
+    }
+  }
 }));
 
-export default function ButtonAppBar() {
+export default function Navbar({searchText, changeHandler}) {
   const classes = useStyles();
   const [example, setExample] = useState("default");
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState(false);
   const user = useSelector((state) => state.user)
-
+  const history = useHistory()
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -73,6 +83,8 @@ export default function ButtonAppBar() {
     <React.Fragment>
       <AppBar
         color={example}>
+          <Grid container spacing={1} direction='column'>
+          <Grid item direction='row'>
           <Toolbar className={classes.row}>
             {['left'].map((anchor) => (
               <React.Fragment key={anchor}>
@@ -89,6 +101,53 @@ export default function ButtonAppBar() {
           {user ? <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton></Link> 
           :<Link to="/auth/signout"><IconButton id={styles.media} className={classes.root} color="inherit" >Выйти</IconButton></Link>}
           </Toolbar>
+          </Grid>
+          {history.location.pathname === '/' &&
+          <Grid container spacing={4} direction='row' alignItems='center' justifyContent='center'>
+          <Grid item xs={8} >
+          <TextField
+                        id="searchText"
+                        style={{ margin: 8 }}
+                        placeholder="Поиск"
+                        fullWidth
+                        onChange={changeHandler}
+                        margin="normal"
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                        value={searchText}
+                        className={classes.textField}
+                    />
+                    </Grid>
+                    <Grid item xs={3} className={classes.sort}>
+                    <FormControl
+                        variant="outlined"
+                        className={classes.formControl}
+                    >
+                        <InputLabel id="demo-simple-select-outlined-label">
+                            Сортировка
+                        </InputLabel>
+                        <Select
+                            onChange={changeHandler}
+                            className={classes.select}
+                            labelId="demo-simple-select-outlined-label"
+                            id="demo-simple-select-outlined"
+                            label="Сортировка"
+                        >
+                            <MenuItem value="">
+                                <em>Без сортировки</em>
+                            </MenuItem>
+                            <MenuItem value={'date'}>Сначала новое</MenuItem>
+                            <MenuItem value={'views'}>
+                                По количеству просмотров
+                            </MenuItem>
+                        </Select>
+                    </FormControl>
+                    </Grid>
+                    </Grid>
+}
+                    </Grid>
         </AppBar>
     </React.Fragment>
   );

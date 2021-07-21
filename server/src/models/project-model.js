@@ -14,7 +14,7 @@ const ProjectSchema = mongoose.Schema({
   image: [{ type: String }],
   date: { type: String },
   hashtags: [{ type: String }],
-  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  views: [String],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
