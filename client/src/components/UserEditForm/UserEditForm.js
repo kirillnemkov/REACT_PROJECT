@@ -1,7 +1,8 @@
-import { useState } from 'react'
-import InformationForm from './InformationForm/InformationForm'
-import SkillsForm from './SkillsForm/SkillsForm'
+import { useState } from 'react';
+import InformationForm from './InformationForm/InformationForm';
+import SkillsForm from './SkillsForm/SkillsForm';
 import styles from './styles.module.css'
+
 
 export default function UserEditForm() {
     const [page, setPage] = useState(0)

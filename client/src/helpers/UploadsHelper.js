@@ -3,7 +3,7 @@ import axios from 'axios'
 const {REACT_APP_CLOUDINARY_URL: host, REACT_APP_CLOUDINARY_NAME: cloudName, REACT_APP_CLOUDINARY_UPLOAD_PRESET: upload_preset} = process.env;
 
 export default class Helpers {
-  static async uploadFile(flag, file, dispatch, setError, uploadFile, id) {
+  static async uploadFile(flag, file, dispatch, setError, uploadFile, id = null) {
   const formData = new FormData;
   formData.append('file', file);
   formData.append('upload_preset', `${upload_preset}`);

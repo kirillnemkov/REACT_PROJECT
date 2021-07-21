@@ -78,6 +78,16 @@ class ProjectController {
       next(err);
     }
   }
+
+  async uploadProjectImg(req, res, next) {
+    try {
+      const { fileInfo } = req.body;
+      await User.findByIdAndUpdate(id, { image: req.body.url });
+      return res.json({ url: req.body.url });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = new ProjectController();

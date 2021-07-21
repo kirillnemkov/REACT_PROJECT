@@ -1,4 +1,4 @@
-import { PROJECT_EDIT, PROJECT_DELETE, PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, PROJECT_COMMENT } from "../types/projectsTypes";
+import { PROJECT_EDIT, PROJECT_DELETE, PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, SET_PROJECT_IMG, PROJECT_COMMENT } from "../types/projectsTypes";
 
 const projectReducer = (state = [], action) => {
   const { type, payload } = action;
@@ -29,6 +29,8 @@ const projectReducer = (state = [], action) => {
       const newState = state.filter(item => item._id !== id)
       return newState;
     }
+    case SET_PROJECT_IMG:
+      return {...state, image: action.payload.url}
     default: {
       return state;
     }

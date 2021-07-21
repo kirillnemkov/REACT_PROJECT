@@ -1,27 +1,30 @@
+import { useSelector } from 'react-redux'
 import styles from './SocialLinks.module.css'
 
 const SocialLinks = () => {
+    const user = useSelector(state => state.user?.info)
+
     return (
         <>
             <div className={styles.links_container}>
                 <div className={styles.links_item}>
-                    <p>url</p>
+                    <p>{user?.url}</p>
                     <img src="/sites.png" className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
-                    <p> gitHub</p>
+                    <p>{user?.gitHub}</p>
                     <img src='/github.png' className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
-                    <p>twitter</p>
+                    <p>{user?.twitte}r</p>
                     <img src='/twitter.png' className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
-                    <p>instagram</p>
+                    <p>{user?.instagram}</p>
                     <img src="/instagram.png" className={styles.links_img} alt=""></img>
                 </div>
                 <div className={styles.links_item}>
-                    <p> facebook</p>
+                    <p>{user?.facebook}</p>
                     <img src="/facebook.png" className={styles.links_img} alt=""></img>
                 </div>
             </div>

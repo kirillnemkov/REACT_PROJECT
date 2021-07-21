@@ -1,38 +1,5 @@
 import { ResponsivePie } from '@nivo/pie'
-import {  useSelector } from 'react-redux'
-const data = [
-    {
-        "id": "erlang",
-        "label": "erlang",
-        "value": 20,
-
-    },
-    {
-        "id": "c",
-        "label": "c",
-        "value": 70,
-
-    },
-    {
-        "id": "php",
-        "label": "php",
-        "value": 20,
-
-    },
-    {
-        "id": "scala",
-        "label": "scala",
-        "value": 20,
-
-    },
-    {
-        "id": "haskell",
-        "label": "haskell",
-        "value": 20,
-
-    }
-]
-
+import { useSelector } from 'react-redux'
 
 const MyResponsivePie = () => {
     const skills = useSelector((state) => state.user.skills)
@@ -44,7 +11,6 @@ const MyResponsivePie = () => {
         acc.push({ id: item[0], lable: item[0], value: item[1],   })
         return acc
     }, [])
-    console.log(newObj)
 
     return (<div style={{ height: 500, width: '100%' }}>
         <ResponsivePie
@@ -98,7 +64,7 @@ const MyResponsivePie = () => {
                 },
                 {
                     match: {
-                        id: 'go'
+                        id: 'Haskell'
                     },
                     id: 'dots'
                 },
@@ -122,7 +88,7 @@ const MyResponsivePie = () => {
                 },
                 {
                     match: {
-                        id: 'elixir'
+                        id: 'NodeJS'
                     },
                     id: 'lines'
                 },

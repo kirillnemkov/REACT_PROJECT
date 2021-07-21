@@ -4,7 +4,7 @@ export default class UploadsService {
     static async uploadUserImg(payload, id) {
         return $api.post(`/profile/${id}`, payload)
     }
-    static async uploadProjectImg(payload, id) {
-        return $api.post(`/projects/newPicture/${id}`, payload)
+    static async uploadProjectImg(payload) {
+        return $api.post(`/projects/newPicture`, payload)
     }
 }

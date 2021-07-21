@@ -3,8 +3,7 @@ const profileRouter = express.Router();
 const ProfileController = require("../controllers/profileController");
 
 profileRouter.get("/:id", ProfileController.getProfile);
-profileRouter.put("/:id", ProfileController.editProfile);
-profileRouter.patch("/:id", ProfileController.editProfileSkills)
-profileRouter.post("/:id", ProfileController.uploadProfileImg);
+profileRouter.patch("/:id", ProfileController.editProfile);
+profileRouter.post("/newPicture", ProfileController.uploadProfileImg);
 
 module.exports = profileRouter;
