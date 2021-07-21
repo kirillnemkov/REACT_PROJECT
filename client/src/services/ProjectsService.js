@@ -10,7 +10,10 @@ export default class ProjectService {
     }
 
     static async getCommentForProject(id, user, input) {
-        return $api.put(`/projects/${id}/comment`, {user, input})
+        return $api.put(`/projects/${id}/comment`, { user, input })
+    }
+    static async getViewsProjects(id, user) {
+        return $api.patch(`/projects/views/${id}`, user)
     }
 
     static async getAllProjects() {

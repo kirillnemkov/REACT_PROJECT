@@ -1,11 +1,11 @@
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
-import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, SET_PROJECT_IMG} from '../types/projectsTypes'
+import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, SET_PROJECT_IMG, PROJECT_VIEWS,} from '../types/projectsTypes'
 import ProjectsService from '../../services/ProjectsService'
 
 const projectOne = (project) => ({
-  type: PROJECT_ONE,
-  payload: {project},
+    type: PROJECT_ONE,
+    payload: { project },
 })
 
 const projectsInit = (projects) => ({
@@ -14,8 +14,13 @@ const projectsInit = (projects) => ({
 })
 
 const projectLike = (project) => ({
-  type: PROJECT_LIKE,
-  payload: { project },
+    type: PROJECT_LIKE,
+    payload: { project },
+})
+
+const projectViews = (project) => ({
+    type: PROJECT_VIEWS,
+    payload: { project },
 })
 
 const projectEdit = (project) => ({
@@ -39,10 +44,26 @@ export const setProjectImg = (url) => ({
 })
 
 export const likeProject = (id, user, errors) => async (dispatch) => {
+    dispatch(enableLoader())
+    try {
+        const response = await ProjectsService.getLikeProjects(id, user)
+        dispatch(projectLike(response.data))
+        if (errors) dispatch(deleteError())
+    } catch (error) {
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
+    } finally {
+        dispatch(disableLoader())
+    }
+}
+
+export const viewsProject = (id, user, errors) => async (dispatch) => {
   dispatch(enableLoader())
   try {
-      const response = await ProjectsService.getLikeProjects(id, user)
-      dispatch(projectLike(response.data))
+      const response = await ProjectsService.getViewsProjects(id, user)
+      dispatch(projectViews(response.data))
       if (errors) dispatch(deleteError())
   } catch (error) {
       const message = error?.response?.data?.message
@@ -73,20 +94,20 @@ export const createProject = (payload, errors) => async (dispatch) => {
 }
 
 export const getOneProjects = (id, errors) => async (dispatch) => {
-  dispatch(enableLoader())
-  try {
-      const response = await ProjectsService.getOneProjects(id)
-      dispatch(projectOne(response.data.project))
-      dispatch(projectsInit(response.data.projects))
-      if (errors) dispatch(deleteError())
-  } catch (error) {
-      const message = error?.response?.data?.message
-      message
-          ? dispatch(setError(message))
-          : dispatch(setError('Возникли технические проблемы на сервере'))
-  } finally {
-      dispatch(disableLoader())
-  }
+    dispatch(enableLoader())
+    try {
+        const response = await ProjectsService.getOneProjects(id)
+        dispatch(projectOne(response.data.project))
+        dispatch(projectsInit(response.data.projects))
+        if (errors) dispatch(deleteError())
+    } catch (error) {
+        const message = error?.response?.data?.message
+        message
+            ? dispatch(setError(message))
+            : dispatch(setError('Возникли технические проблемы на сервере'))
+    } finally {
+        dispatch(disableLoader())
+    }
 }
 
 export const getAllProjects = (errors) => async (dispatch) => {

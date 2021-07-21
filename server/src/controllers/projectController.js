@@ -39,6 +39,26 @@ class ProjectController {
     }
   }
 
+  async getViewsForProjects(req, res, next) {
+    try {
+      const project = await Project.findById(req.params.id);
+      const result = project.views.includes(req.body.id);
+      let newProject = "";
+      if (!result) {
+        newProject = await Project.findByIdAndUpdate(
+          req.params.id,
+          { $push: { views: req.body.id } },
+          { new: true }
+        ).populate("creators");;
+      } else {
+        newProject = await Project.findById(req.params.id).populate("creators");;
+      }
+      return res.json(newProject);
+    } catch (err) {
+      next(err);
+    }
+  }
+
   async createProject(req, res, next) {
     try {
       const newProject = await Project.create(req.body);
@@ -62,7 +82,11 @@ class ProjectController {
   async editProject(req, res, next) {
     try {
       const { id } = req.params;
-      const updatedProject = await Project.findOneAndReplace({ _id: id }, req.body, { new: true });
+      const updatedProject = await Project.findOneAndReplace(
+        { _id: id },
+        req.body,
+        { new: true }
+      );
       return res.json(updatedProject);
     } catch (err) {
       next(err);
