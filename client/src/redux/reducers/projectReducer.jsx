@@ -1,4 +1,4 @@
-import { PROJECT_EDIT, PROJECT_DELETE, PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE } from "../types/projectsTypes";
+import { PROJECT_EDIT, PROJECT_DELETE, PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, PROJECT_VIEWS } from "../types/projectsTypes";
 
 const projectReducer = (state = [], action) => {
   const { type, payload } = action;
@@ -8,6 +8,10 @@ const projectReducer = (state = [], action) => {
       return project;
     }
     case PROJECT_LIKE: {
+      const { project } = payload;
+      return project;
+    }
+    case PROJECT_VIEWS: {
       const { project } = payload;
       return project;
     }

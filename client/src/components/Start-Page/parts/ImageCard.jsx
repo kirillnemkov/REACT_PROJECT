@@ -100,7 +100,7 @@ export default function ImageCard({payload, handleClick, checked}) {
               {payload.likes.length}
               <IconButton aria-label="add to favorites">
                 <VisibilityOutlinedIcon fontSize="large" />
-              </IconButton>{payload.views}
+              </IconButton>{payload.views.length}
             </Typography>
           </Grid>
         </CardContent>

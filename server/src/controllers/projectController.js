@@ -26,9 +26,37 @@ class ProjectController {
       const result = project.likes.includes(req.body.id);
       let newProject = "";
       if (!result) {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true });
+        newProject = await Project.findByIdAndUpdate(
+          req.params.id,
+          { $push: { likes: { $each: [req.body.id] } } },
+          { new: true }
+        );
       } else {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true });
+        newProject = await Project.findByIdAndUpdate(
+          req.params.id,
+          { $pull: { likes: req.body.id } },
+          { new: true }
+        );
+      }
+      return res.json(newProject);
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  async getViewsForProjects(req, res, next) {
+    try {
+      const project = await Project.findById(req.params.id);
+      const result = project.views.includes(req.body.id);
+      let newProject = "";
+      if (!result) {
+        newProject = await Project.findByIdAndUpdate(
+          req.params.id,
+          { $push: { views: req.body.id } },
+          { new: true }
+        );
+      } else {
+        newProject = await Project.findById(req.params.id);
       }
       return res.json(newProject);
     } catch (err) {
@@ -48,7 +76,11 @@ class ProjectController {
   async editProject(req, res, next) {
     try {
       const { id } = req.params;
-      const updatedProject = await Project.findOneAndReplace({ _id: id }, req.body, { new: true });
+      const updatedProject = await Project.findOneAndReplace(
+        { _id: id },
+        req.body,
+        { new: true }
+      );
       return res.json(updatedProject);
     } catch (err) {
       next(err);

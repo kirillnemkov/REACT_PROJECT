@@ -9,6 +9,10 @@ export default class ProjectService {
     return $api.patch(`/projects/${id}`, user)
   }
 
+  static async getViewsProjects(id, user) {
+    return $api.patch(`/projects/views/${id}`, user)
+  }
+
   static async getAllProjects() {
     return $api.get('/projects')
   }

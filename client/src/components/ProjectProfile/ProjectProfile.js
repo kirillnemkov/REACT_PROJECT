@@ -3,7 +3,11 @@ import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
-import { getOneProjects, likeProject } from '../../redux/actions/projects.ac'
+import {
+    getOneProjects,
+    likeProject,
+    viewsProject,
+} from '../../redux/actions/projects.ac'
 import CreatorsUser from '../CreatorsUser/CreatorsUser'
 import { Carousel } from '3d-react-carousal'
 import { checkAuth } from '../../redux/actions/user.ac'
@@ -47,12 +51,11 @@ export default function ProjectProfile() {
     const history = useHistory()
 
     const { id } = useParams()
-   
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
         dispatch(getOneProjects(id, errors))
-      
+        dispatch(viewsProject(id, user))
     }, [id])
 
     let slides = project?.image?.map((el) => {
@@ -60,7 +63,7 @@ export default function ProjectProfile() {
     })
 
     const handleLike = (id, user) => {
-      dispatch(likeProject(id, user))
+        dispatch(likeProject(id, user))
     }
 
     return (
@@ -68,7 +71,7 @@ export default function ProjectProfile() {
             <div className={styles.projectcont} key={id}>
                 <div className={styles.imgcont}>
                     {project?.image?.length > 1 ? (
-                        <Carousel slides={slides}/>
+                        <Carousel slides={slides} />
                     ) : (
                         <img
                             src={project?.image}
@@ -89,14 +92,17 @@ export default function ProjectProfile() {
                     </div>
                 </div>
                 <div className={styles.favouritecont}>
-                    <IconButton onClick={()=> handleLike(id, user)} id={project?._id}>
-                        <FavoriteIcon  fontSize="large" color="secondary"/>
+                    <IconButton
+                        onClick={() => handleLike(id, user)}
+                        id={project?._id}
+                    >
+                        <FavoriteIcon fontSize="large" color="secondary" />
                     </IconButton>
                     {project?.likes.length}
                     <IconButton>
                         <VisibilityOutlinedIcon fontSize="large" />
                     </IconButton>
-                    {project?.views}
+                    {project?.views.length}
                 </div>
                 <div>
                     <div className={styles.about}>
