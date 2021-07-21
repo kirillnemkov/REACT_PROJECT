@@ -27,7 +27,7 @@ export default function CreatorsUser({ el }) {
 
     return (
         <Link to={`/profile/${el._id}`}>
-            <Card className={classes.root} id={styles.media}>
+            <Card className={classes.root} id={styles.media} key={el.id}>
                 <CardHeader title={`${el?.lastName} ${el?.firstName}`} />
                 <CardMedia className={classes.media} image={el?.image} />
                 <CardContent>

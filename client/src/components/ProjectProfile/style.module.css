@@ -4,9 +4,14 @@
 
 .imgcont{
   position: relative;
-  margin: 10% 11% 7%;
+  margin: 10% 11% 1%;
   width: 700px;
   height: 500px;
+}
+
+.favouritecont{
+  position: relative;
+  margin: 0% 10% 3%;
 }
 
 .projectimg{
@@ -54,7 +59,7 @@
   display: flex;
   position: absolute;
   left: 800px;
-  bottom: 155px;
+  bottom: 200px;
   border-radius: 0 0 20px 20px;
   width: 300px;
   height: 100px;
@@ -84,7 +89,7 @@
   border-radius: 20px 20px 0 0;
   position: absolute;
   left: 800px;
-  bottom: 260px;
+  bottom: 300px;
   padding: 5px;
   width: 300px;
   min-height: 50px;
@@ -143,7 +148,6 @@
   width: 700px;
   min-height: 400px;
 }
-
 
 .cardproject{
   /* position: relative; */

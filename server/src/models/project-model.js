@@ -4,7 +4,7 @@ const ProjectSchema = mongoose.Schema({
   title: { type: String},
   // team: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
   creators: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  likes: { type: Number },
+  likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   description: { type: String },
   gitHub: { type: String },
   website: { type: String },

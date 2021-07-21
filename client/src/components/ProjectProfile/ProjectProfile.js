@@ -3,13 +3,20 @@ import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
-import { getOneProjects } from '../../redux/actions/projects.ac'
+import { getOneProjects, likeProject } from '../../redux/actions/projects.ac'
 import CreatorsUser from '../CreatorsUser/CreatorsUser'
 import { Carousel } from '3d-react-carousal'
 import { checkAuth } from '../../redux/actions/user.ac'
 import ProjectsCard from '../ProjectsCard/ProjectsCard.jsx'
+import IconButton from '@material-ui/core/IconButton'
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import Box from '@material-ui/core/Box'
 
 const useStyles = makeStyles((theme) => ({
+    rootproject: {
+        margin: '0 auto',
+    },
     urlbutton: {
         borderRadius: '45px',
         width: '300px',
@@ -35,8 +42,8 @@ export default function ProjectProfile() {
     const dispatch = useDispatch()
     const project = useSelector((state) => state.project)
     const projects = useSelector((state) => state.projects)
-    console.log(projects)
     const errors = useSelector((state) => state.errors)
+    const user = useSelector((state) => state.user)
     const history = useHistory()
 
     const { id } = useParams()
@@ -50,12 +57,16 @@ export default function ProjectProfile() {
         return <img src={el} className={styles.imageCarousel} alt="logo" />
     })
 
+    const handleLike = (id, user) => {
+      dispatch(likeProject(id, user))
+    }
+
     return (
-        <div>
+        <Box mx="auto">
             <div className={styles.projectcont} key={id}>
                 <div className={styles.imgcont}>
                     {project?.image?.length > 1 ? (
-                        <Carousel slides={slides} />
+                        <Carousel slides={slides}/>
                     ) : (
                         <img
                             src={project?.image}
@@ -74,6 +85,16 @@ export default function ProjectProfile() {
                             VISIT SITE
                         </a>
                     </div>
+                </div>
+                <div className={styles.favouritecont}>
+                    <IconButton onClick={()=> handleLike(id, user)} id={project?._id}>
+                        <FavoriteIcon  fontSize="large" color="secondary"/>
+                    </IconButton>
+                    {project?.likes.length}
+                    <IconButton>
+                        <VisibilityOutlinedIcon fontSize="large" />
+                    </IconButton>
+                    {project?.views}
                 </div>
                 <div>
                     <div className={styles.about}>
@@ -143,6 +164,6 @@ export default function ProjectProfile() {
                     </div>
                 </div>
             </div>
-        </div>
+        </Box>
     )
 }

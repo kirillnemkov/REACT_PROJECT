@@ -26,7 +26,7 @@ export default function ProjectsCard({ el }) {
   const classes = useStyles()
     return (
         <Link to={`/projects/${el._id}`}>
-            <Card className={classes.root} id={styles.media}>
+            <Card className={classes.root} id={styles.media} key={el._id}>
                 <CardHeader title={el?.title}/>
                 <CardMedia className={classes.media} image={el?.image[0]} />
                 <CardContent>
