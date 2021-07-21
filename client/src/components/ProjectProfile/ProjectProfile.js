@@ -47,11 +47,13 @@ export default function ProjectProfile() {
     const history = useHistory()
 
     const { id } = useParams()
+   
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
         dispatch(getOneProjects(id, errors))
-    }, [])
+      
+    }, [id])
 
     let slides = project?.image?.map((el) => {
         return <img src={el} className={styles.imageCarousel} alt="logo" />

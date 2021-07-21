@@ -26,14 +26,14 @@ export default function ProjectsCard({ el }) {
   const classes = useStyles()
     return (
         <Link to={`/projects/${el._id}`}>
-            <Card className={classes.root} id={styles.media} key={el._id}>
-                <CardHeader title={el?.title}/>
+            <Card className={classes.root} id={styles.media}>
                 <CardMedia className={classes.media} image={el?.image[0]} />
+                <CardHeader title={el?.title}/>
                 <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {el?.date && el.date}
-                    </Typography>
-                </CardContent>
+                 <Typography variant="body2" color="textSecondary" component="p"> 
+                        {el?.date && el.date} 
+                  </Typography> 
+             </CardContent> 
             </Card>
         </Link>
   )
