@@ -46,32 +46,32 @@ const useStyles = makeStyles((theme) => ({
 export default function ProjectProfile() {
     const classes = useStyles()
     const dispatch = useDispatch()
-    const project = useSelector((state) => state.project)
-    const projects = useSelector((state) => state.projects)
-    const errors = useSelector((state) => state.errors)
-    const user = useSelector((state) => state.user)
+    const project = useSelector((state) => state?.project)
+    const projects = useSelector((state) => state?.projects)
+    const errors = useSelector((state) => state?.errors)
+    const user = useSelector((state) => state?.user)
     const history = useHistory()
 
-    const { id } = useParams()
+    const { projectId } = useParams()
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
-        dispatch(getOneProjects(id, errors))
-        dispatch(viewsProject(id, user))
-    }, [id])
+        dispatch(getOneProjects(projectId, errors))
+        dispatch(viewsProject(projectId, user))
+    }, [projectId])
 
     let slides = project?.image?.map((el) => {
         return <img src={el} className={styles.imageCarousel} alt="logo" />
     })
 
-    const handleLike = (id, user) => {
-        dispatch(likeProject(id, user))
+    const handleLike = (projectId, user) => {
+        dispatch(likeProject(projectId, user))
     }
 
     return (
         <Box mx="auto">
             <ScrollToTop />
-            <div className={styles.projectcont} key={id}>
+            <div className={styles.projectcont} key={projectId}>
                 <div className={styles.imgcont}>
                     {project?.image?.length > 1 ? (
                         <Carousel slides={slides} />
@@ -99,7 +99,7 @@ export default function ProjectProfile() {
 
                 <div className={styles.favouritecont}>
                     <IconButton
-                        onClick={() => handleLike(id, user)}
+                        onClick={() => handleLike(projectId, user)}
                         id={project?._id}
                     >
                         <FavoriteIcon fontSize="large" color="secondary" />

@@ -2,6 +2,7 @@ import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
 import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, SET_PROJECT_IMG, PROJECT_VIEWS,} from '../types/projectsTypes'
 import ProjectsService from '../../services/ProjectsService'
+import axios from 'axios'
 
 const projectOne = (project) => ({
     type: PROJECT_ONE,
@@ -40,7 +41,7 @@ export const projectCreate = (project) => ({
 
 export const setProjectImg = (url) => ({
     type: SET_PROJECT_IMG,
-    payload: url,
+    payload: {url},
 })
 
 export const likeProject = (id, user, errors) => async (dispatch) => {
@@ -59,12 +60,20 @@ export const likeProject = (id, user, errors) => async (dispatch) => {
     }
 }
 
-export const viewsProject = (id, user, errors) => async (dispatch) => {
+export const viewsProject = (projectId, user, errors) => async (dispatch) => {
   dispatch(enableLoader())
   try {
-      const response = await ProjectsService.getViewsProjects(id, user)
+      if(user) {
+        const userId = user.id
+      const response = await ProjectsService.updateViewsProject({projectId, userId})
       dispatch(projectViews(response.data))
       if (errors) dispatch(deleteError())
+      } else {
+        const responseIp = await axios.get('https://api.ipify.org/?format=json')
+        const response = await ProjectsService.updateViewsProject({projectId, userId: responseIp.data.ip})
+        dispatch(projectViews(response.data))
+        if (errors) dispatch(deleteError())
+      }
   } catch (error) {
       const message = error?.response?.data?.message
       message
@@ -78,9 +87,7 @@ export const viewsProject = (id, user, errors) => async (dispatch) => {
 export const createProject = (payload, errors) => async (dispatch) => {
     dispatch(enableLoader())
     try {
-
         const response = await ProjectsService.createProject(payload)
-        console.log(response)
         dispatch(projectCreate({ project: response.data }))
         if (errors) dispatch(deleteError())
     } catch (error) {
