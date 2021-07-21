@@ -32,6 +32,7 @@ export const createProject = (payload, errors) => async (dispatch) => {
     dispatch(enableLoader())
     try {
         const response = await ProjectsService.createProject(payload)
+        console.log(response)
         dispatch(projectCreate({ project: response.data }))
         if (errors) dispatch(deleteError())
     } catch (error) {

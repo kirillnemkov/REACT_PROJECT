@@ -8,8 +8,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { updateInformation } from '../../../redux/actions/user.ac';
 import { useForm } from "react-hook-form";
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +49,7 @@ const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) =
     const { id } = useParams()
 
     const onSubmit = (data) => dispatch(updateInformation(id, data))
+    const data = useSelector(state => state.user?.info)
 
     return (
         <><form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer} noValidate autoComplete="off">
@@ -62,66 +62,70 @@ const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) =
                     data-id='firstName'
                     id="standard-basic"
                     label="Имя"
+                    defaultValue={data?.firstName}
                     className={classes.TextField}
                     {...register('firstName')}
                 />
                 <TextField
                     id="standard-basic"
                     label="Отчесто"
+                    defaultValue={data?.middleName}
                     className={classes.TextField}
                     {...register('middleName')}
                 />
                 <TextField
                     id="standard-basic"
                     label="Фамилия"
+                    defaultValue={data?.lastName}
                     className={classes.TextField}
                     {...register('lastName')}
                 />
                 <TextField
                     id="standard-basic"
                     label="О себе"
+                    defaultValue={data?.about}
                     {...register('about')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Город"
+                    defaultValue={data?.location}
                     className={classes.TextField}
                     {...register('location')}
                 />
                 <TextField
                     {...register('job')}
                     id="standard-basic"
+                    defaultValue={data?.job}
                     label="Работа"
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
-                    label="Сайт"
-                    {...register('url')}
-                    className={classes.TextField}
-                />
-                <TextField
-                    id="standard-basic"
                     label="GitHub"
+                    defaultValue={data?.gitHub}
                     {...register('gitHub')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Twitter"
+                    defaultValue={data?.twitter}
                     {...register('twitter')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Instagram"
+                    defaultValue={data?.instagram}
                     {...register('instagram')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Facebook"
+                    defaultValue={data?.facebook}
                     {...register('facebook')}
                     className={classes.TextField}
                 />

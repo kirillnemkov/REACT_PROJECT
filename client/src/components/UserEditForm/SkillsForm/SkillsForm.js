@@ -5,7 +5,6 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { makeStyles } from '@material-ui/core';
-import { withStyles } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -87,7 +86,6 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
     };
 
     const handleSliderChange = (e, value) => {
-        console.log(e.currentTarget)
         setInputValue({ ...inputValue, [e.currentTarget.id || e.target.ariaLabel]: value })
     }
 

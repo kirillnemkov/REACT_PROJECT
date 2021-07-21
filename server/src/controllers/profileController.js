@@ -10,27 +10,49 @@ class ProfileController {
       next(err);
     }
   }
-  
+
   async editProfile(req, res, next) {
     try {
       const { id } = req.params;
-      const editUser = await User.findOneAndReplace({ _id : id }, req.body , { new: true });
-      return res.json(editUser);
+      const { firstName,
+        middleName,
+        lastName,
+        about,
+        location,
+        job,
+        url,
+        gitHub,
+        twitter,
+        instagram,
+        facebook } = req.body
+      if (firstName || middleName || about || location || job || url || gitHub || twitter || instagram || facebook) {
+        const editUser = await User.findOneAndUpdate(id, {
+          firstName,
+          middleName,
+          lastName,
+          about,
+          location,
+          job,
+          url,
+          gitHub,
+          twitter,
+          instagram,
+          facebook,
+        }, { new: true });
+        return res.json(editUser);
+      }
+      else {
+        const editUserSkills = await User.findByIdAndUpdate(id, { skills: req.body }, { new: true });
+        console.log(editUserSkills)
+        return res.json(editUserSkills);
+      }
+
+
     } catch (err) {
       next(err);
     }
   }
 
-  async editProfileSkills(req, res, next) {
-    try {
-      const { id } = req.params;
-      const editUserSkills = await User.findByIdAndUpdate(id , {skills: req.body} , { new: true });
-      console.log(editUserSkills)
-      return res.json(editUserSkills);
-    } catch (err) {
-      next(err);
-    }
-  }
 }
 
 module.exports = new ProfileController();

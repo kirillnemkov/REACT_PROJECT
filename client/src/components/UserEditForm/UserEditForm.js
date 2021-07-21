@@ -1,41 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import InformationForm from './InformationForm/InformationForm';
 import SkillsForm from './SkillsForm/SkillsForm';
 import styles from './styles.module.css'
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > *': {
-            margin: theme.spacing(1),
-            width: '25ch',
-        },
-    },
-    button: {
-        marginTop: '15px',
-        width: '140px'
-    },
-    TextField: {
-        marginTop: '15px',
-        width: '80%',
-        margin: '0 auto',
-        display: 'flex',
-        backgroundColor: 'white',
-    },
-    TextField_first: {
-        marginTop: '15px',
-        width: '100%',
-        backgroundColor: 'white',
-    },
-    form: {
-        width: '70%',
-        margin: '0 auto'
-    },
-    IconButton: {
-
-    }
-}));
 
 export default function UserEditForm() {
     const [page, setPage] = useState(0)

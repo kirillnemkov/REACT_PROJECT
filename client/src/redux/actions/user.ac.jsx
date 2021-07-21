@@ -1,4 +1,4 @@
-import { SET_USER, DELETE_USER, GET_SKILLS, SET_INFO } from '../types/userTypes'
+import { SET_USER, DELETE_USER, GET_SKILLS, SET_INFO, INIT_USERINFO } from '../types/userTypes'
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
 import axios from 'axios'
@@ -20,10 +20,11 @@ export const getSkills = (data) => ({
     payload: data,
 })
 
-export const setUserInformation = (data) => ({
-    type: SET_INFO,
-    payload: data,
+export const setUserInformation = (info) => ({
+    type: INIT_USERINFO,
+    payload: { info: info },
 })
+
 
 export const signUp = (payload, history, errors) => async (dispatch) => {
     dispatch(enableLoader())
@@ -155,7 +156,7 @@ export const sendResetPasswordLetter =
         export const updateSkills = (id, payload, errors) => async (dispatch) => {
             dispatch(enableLoader())
             try {
-                const response = await UserService.updateSkills(id, payload)
+                const response = await UserService.updateInformation(id, payload)
                 dispatch(getSkills(response.data))
                 if (errors) dispatch(deleteError())
             } catch (error) {
@@ -171,9 +172,11 @@ export const sendResetPasswordLetter =
         export const updateInformation = (id, payload, errors) => async (dispatch) => {
             dispatch(enableLoader())
             try {
+                console.log(payload)
                 const response = await UserService.updateInformation(id, payload)
-                console.log(response.data)
-                dispatch(setUserInformation(response.data))
+                const {about, firstName, middleName, lastName, location, gitHub, instagram, job, twitter, facebook} = response.data
+                const newObj = {about, firstName, middleName, lastName, location, gitHub, instagram, job, twitter, facebook}
+                dispatch(setUserInformation(newObj))
                 if (errors) dispatch(deleteError())
             } catch (error) {
                 const message = error?.response?.data?.message
@@ -184,3 +187,24 @@ export const sendResetPasswordLetter =
                 dispatch(disableLoader())
             }
         }
+
+
+        export const initUserInfo = (id, errors) => async (dispatch) => {
+            dispatch(enableLoader())
+            try {
+                
+                const response = await UserService.getUserInfo(id)
+                console.log(response.data, 'user dataaaaaaa----------')
+                dispatch(setUser(response.data))
+                if (errors) dispatch(deleteError())
+            } catch (error) {
+                const message = error?.response?.data?.message
+                message
+                    ? dispatch(setError(message))
+                    : dispatch(setError('Возникли технические проблемы на сервере'))
+            } finally {
+                dispatch(disableLoader())
+            }
+        }
+
+        

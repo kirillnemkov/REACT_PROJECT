@@ -22,6 +22,7 @@ class ProjectController {
 
   async createProject(req, res, next) {
     try {
+      console.log(req.body)
       const newProject = await Project.create(req.body)
       return res.json(newProject);
     } catch (err) {

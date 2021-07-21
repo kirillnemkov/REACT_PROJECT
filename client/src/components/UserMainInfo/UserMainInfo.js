@@ -2,12 +2,24 @@ import styles from './UserMainInfo.module.css'
 import { Button, makeStyles } from '@material-ui/core/';
 import EditIcon from '@material-ui/icons/Edit';
 import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
+import { useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
     button: {
         marginLeft: '8px',
         '& .MuiButton-label': {
             justifyContent: 'end'
+        },
+        '& .makeStyles-button-10:nth-child(1)': {
+            margin: 0
+        }
+    },
+    addButton: {
+        width: '100%',
+        height: '36px',
+        '& .MuiButton-endIcon': {
+            marginLeft: 0
         },
     },
     root: {
@@ -17,7 +29,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const UserMainInfo = ({ handleOpen }) => {
+const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
+    const user = useSelector(state => state.user?.info)
     const classes = useStyles();
     return (
         <>
@@ -29,27 +42,39 @@ const UserMainInfo = ({ handleOpen }) => {
                     </Button>
                 </div>
                 <div className={styles.name_and_info_container}>
-                    <h5 className={styles.user_name}>lastName firstName middleName</h5>
+                    <h5 className={styles.user_name}>{user?.firstName, user?.middleName, user?.lastName}</h5>
                     <div className={styles.location}>
-                        <p className={styles.location_name}>location</p>
+                        <p className={styles.location_name}>{user?.location}</p>
                         <img className={styles.location_img} src="/location.png"></img>
                     </div>
-                    <p>job</p>
+                    <p>{user?.job}</p>
                 </div>
                 <div className={styles.button_group__userProfile}>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        className={classes.button}
-                        endIcon={<SendIcon />}
-                    ></Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        onClick={handleOpen}
-                        className={classes.button}
-                        endIcon={<EditIcon />}
-                    ></Button>
+
+                    <div className={styles.upButtons}>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            className={classes.button}
+                            endIcon={<SendIcon />}
+                        ></Button>
+                        <Button
+                            variant="contained"
+                            color="secondary"
+                            onClick={handleOpen}
+                            className={classes.button}
+                            endIcon={<EditIcon />}
+                        ></Button>
+                    </div>
+                    <div>
+                        <Button variant="contained"
+                            color="secondary"
+                            onClick={handleProjectModalOpen}
+                            className={classes.addButton}
+                            endIcon={<AddIcon />}>
+                        </Button>
+                    </div>
+
                 </div>
             </div>
         </>

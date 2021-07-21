@@ -14,7 +14,8 @@ import Fade from '@material-ui/core/Fade';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import {checkAuth} from '../../redux/actions/user.ac'
+import { checkAuth } from '../../redux/actions/user.ac'
+import CreacteProject from '../CreacteProject/CreacteProject';
 // import { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -47,11 +48,12 @@ const UserProfile = () => {
     const classes = useStyles();
     const [tabValue, setTabValue] = useState('about');
     const [modal, setModal] = useState(false)
+    const [projectModal, setProjectModal] = useState(false)
     const errors = useSelector((state) => state.errors)
     const history = useHistory()
     const dispatch = useDispatch()
     useEffect(() => {
-      dispatch(checkAuth(history, errors))
+        dispatch(checkAuth(history, errors))
     }, [])
 
     function handleChange(e, value) {
@@ -66,16 +68,20 @@ const UserProfile = () => {
         setModal(false);
     };
 
+    const handleProjectModalOpen = () => {
+        setProjectModal(true);
+    };
 
-
-console.log(modal)
+    const handleProjectModalClose = () => {
+        setProjectModal(false);
+    };
 
 
 
     return (
         <div className={styles.userProfile_container}>
 
-            <UserMainInfo handleOpen={handleOpen} modal={modal} />
+            <UserMainInfo handleProjectModalOpen={handleProjectModalOpen} handleOpen={handleOpen} modal={modal} />
             <Paper className={classes.root}>
                 <Tabs
                     indicatorColor="primary"
@@ -112,6 +118,23 @@ console.log(modal)
                     <UserEditForm />
                 </Fade>
             </Modal>
+            <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                className={classes.modal}
+                open={projectModal}
+                onClose={handleProjectModalClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={projectModal}>
+                    <CreacteProject />
+                </Fade>
+            </Modal>
+
 
         </div>
     )
