@@ -9,5 +9,6 @@ module.exports = class UserDto {
     this.id = model._id;
     this.isActivated = model.isActivated;
     this.skills = model.skills
+    this.image = model.image
   }
 };

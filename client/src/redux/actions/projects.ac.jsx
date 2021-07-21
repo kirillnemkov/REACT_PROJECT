@@ -1,6 +1,6 @@
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
-import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE} from '../types/projectsTypes'
+import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, PROJECT_COMMENT} from '../types/projectsTypes'
 import ProjectsService from '../../services/ProjectsService'
 
 const projectOne = (project) => ({
@@ -11,6 +11,11 @@ const projectOne = (project) => ({
 const projectsInit = (projects) => ({
     type: PROJECTS_INIT,
     payload: { projects },
+})
+
+const projectComment = (project) => ({
+  type: PROJECT_COMMENT,
+  payload: {project},
 })
 
 const projectLike = (project) => ({
@@ -38,6 +43,22 @@ export const likeProject = (id, user, errors) => async (dispatch) => {
   try {
       const response = await ProjectsService.getLikeProjects(id, user)
       dispatch(projectLike(response.data))
+      if (errors) dispatch(deleteError())
+  } catch (error) {
+      const message = error?.response?.data?.message
+      message
+          ? dispatch(setError(message))
+          : dispatch(setError('Возникли технические проблемы на сервере'))
+  } finally {
+      dispatch(disableLoader())
+  }
+}
+
+export const getComment = (id, user, input, errors) => async (dispatch) => {
+  dispatch(enableLoader())
+  try {
+      const response = await ProjectsService.getCommentForProject(id, user, input)
+      dispatch(projectComment(response.data))
       if (errors) dispatch(deleteError())
   } catch (error) {
       const message = error?.response?.data?.message

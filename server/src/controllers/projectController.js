@@ -1,4 +1,5 @@
 const Project = require("../models/project-model");
+const Comment = require("../models/comment-model");
 
 class ProjectController {
   async getOneProjects(req, res, next) {
@@ -26,9 +27,11 @@ class ProjectController {
       const result = project.likes.includes(req.body.id);
       let newProject = "";
       if (!result) {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true }).populate("creators");;
+        newProject = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true }).populate(
+          "creators"
+        );
       } else {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate("creators");;
+        newProject = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate("creators");
       }
       return res.json(newProject);
     } catch (err) {
@@ -47,9 +50,9 @@ class ProjectController {
 
   async createComment(req, res, next) {
     try {
-      const newComment = await Project.create({tittle: req.body, author: req.body.id, project: req.params.id});
-      // return res.json(newComment);
-      return res.sendStatus(200)
+      const newComment = await Comment.create({ title: req.body.input, author: req.body.user.id, project: req.params.id });
+      const project = await Project.findByIdAndUpdate(req.params.id, { $push: { comments: { $each: [newComment._id] } } }, { new: true }).populate("creators").populate("comments")
+      return res.json(project);
     } catch (err) {
       next(err);
     }
