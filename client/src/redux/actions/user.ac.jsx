@@ -54,7 +54,7 @@ export const signIn = (payload, history, errors) => async (dispatch) => {
         dispatch(setUser(user))
         localStorage.setItem('token', accessToken)
         if (errors) dispatch(deleteError())
-        history.replace('/main')
+        history.replace('/')
     } catch (error) {
         const message = error?.response?.data?.message
         message
@@ -116,7 +116,7 @@ export const checkAuth = (history, errors) => async (dispatch) => {
         message
             ? dispatch(setError(message))
             : dispatch(setError('Возникли технические проблемы на сервере'))
-            history.replace('/auth')
+            // history.replace('/auth')
     } finally {
         dispatch(disableLoader())
     }
@@ -146,7 +146,7 @@ export const sendResetPasswordLetter =
               dispatch(setUser(user))
               localStorage.setItem('token', accessToken)
               if (errors) dispatch(deleteError())
-              history.push('/main')
+              history.push('/')
           } catch (error) {
               const message = error?.response?.data?.message
               message

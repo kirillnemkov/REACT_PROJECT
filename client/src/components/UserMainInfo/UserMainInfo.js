@@ -1,10 +1,9 @@
 import styles from './UserMainInfo.module.css'
-import { Button, makeStyles } from '@material-ui/core/'
-import EditIcon from '@material-ui/icons/Edit'
-import SendIcon from '@material-ui/icons/Send'
-import AddIcon from '@material-ui/icons/Add'
-import Modal from '../Modal/Modal'
-import { useDispatch, useSelector } from 'react-redux'
+import { Button, makeStyles } from '@material-ui/core/';
+import EditIcon from '@material-ui/icons/Edit';
+import SendIcon from '@material-ui/icons/Send';
+import AddIcon from '@material-ui/icons/Add';
+import {useDispatch, useSelector} from 'react-redux'
 import Helpers from '../../helpers/UploadsHelper'
 import { setError } from '../../redux/actions/errors.ac'
 import { setUserImg } from '../../redux/actions/user.ac'
@@ -48,7 +47,6 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
     const [drag, setDrag] = useState(false)
     const flag = 'user'
     const id = user?.id
-    console.log(user)
 
     function changeHandler(e) {
         const [file] = e.target.files
@@ -91,7 +89,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                     >
                         <img
                             src={userPhoto?.image || '/profile-user.png'}
-                            className={styles.user_img}
+                            className={styles.user_img} alt=""
                         ></img>
                     </div>
                     <input

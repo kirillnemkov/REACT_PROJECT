@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import Header from './parts/Header'
 import { useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { checkAuth } from '../../redux/actions/user.ac'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,10 +23,14 @@ const useStyles = makeStyles((theme) => ({
 
 const StartPage = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     const classes = useStyles()
     const error = useSelector((state) => state.errors)
     const state = useSelector((state) => state.projects)
+    const errors = useSelector((state) => state.errors)
+  
     useEffect(() => {
+      dispatch(checkAuth(history, errors))
         dispatch(getAllProjects(error))
     }, [])
 

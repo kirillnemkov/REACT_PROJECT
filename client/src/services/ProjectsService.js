@@ -9,11 +9,15 @@ export default class ProjectService {
         return $api.patch(`/projects/${id}`, user)
     }
 
-    static async getCommentForProject(id, user, input) {
-        return $api.put(`/projects/${id}/comment`, { user, input })
+    static async postCommentForProject(id, user, input) {
+        return $api.post(`/projects/${id}/comment`, { user, input })
     }
-    static async getViewsProjects(id, user) {
-        return $api.patch(`/projects/views/${id}`, user)
+
+    static async getCommentForProject(id, user, input) {
+        return $api.get(`/projects/comment/${id}`, { user, input })
+    }
+    static async updateViewsProject({projectId, userId}) {
+        return $api.patch(`/projects/views/${projectId}`, {userId})
     }
 
     static async getAllProjects() {
@@ -29,6 +33,6 @@ export default class ProjectService {
     }
 
     static async createProject(payload) {
-        return $api.post(`/newProject`, payload)
+        return $api.post(`/projects/newProject`, payload)
     }
 }

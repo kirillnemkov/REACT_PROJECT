@@ -55,70 +55,67 @@ const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) =
                     data-id='firstName'
                     id="standard-basic"
                     label="Имя"
-                    defaultValue={data?.firstName}
+
                     className={classes.TextField}
                     {...register('firstName')}
                 />
                 <TextField
                     id="standard-basic"
                     label="Отчесто"
-                    defaultValue={data?.middleName}
+
                     className={classes.TextField}
                     {...register('middleName')}
                 />
                 <TextField
                     id="standard-basic"
                     label="Фамилия"
-                    defaultValue={data?.lastName}
+
                     className={classes.TextField}
                     {...register('lastName')}
                 />
                 <TextField
                     id="standard-basic"
                     label="О себе"
-                    defaultValue={data?.about}
+
                     {...register('about')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Город"
-                    defaultValue={data?.location}
+
                     className={classes.TextField}
                     {...register('location')}
                 />
                 <TextField
                     {...register('job')}
                     id="standard-basic"
-                    defaultValue={data?.job}
+                 
                     label="Работа"
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="GitHub"
-                    defaultValue={data?.gitHub}
+
                     {...register('gitHub')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Twitter"
-                    defaultValue={data?.twitter}
                     {...register('twitter')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Instagram"
-                    defaultValue={data?.instagram}
                     {...register('instagram')}
                     className={classes.TextField}
                 />
                 <TextField
                     id="standard-basic"
                     label="Facebook"
-                    defaultValue={data?.facebook}
                     {...register('facebook')}
                     className={classes.TextField}
                 />

@@ -8,12 +8,13 @@ import UserProfile from './components/UserProfile/UserProfile'
 import ProjectProfile from './components/ProjectProfile/ProjectProfile'
 import StartQuestionsForm from './components/StartQuestionsForm/StartQuestionsForm'
 import StartPage from './components/Start-Page/StartPage.jsx'
-// import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import Footer from "./components/Footer/Footer.jsx"
+
 
 function App() {
+  
     return (
-        <>
-            {/* <ScrollToTop /> */}
+        <div style={{ backgroundColor: "#D8D8D8"}}>
             <Navbar />
             <Switch>
                 <Route exact path="/start">
@@ -36,16 +37,16 @@ function App() {
                 </Route>
                 <Route exact path="/signUp/success">
                     <SignupSuccessMessage />
-                    
                 </Route>
-                <Route exact path="/projects/:id">
+                <Route exact path="/projects/:projectId">
                     <ProjectProfile />
                 </Route>
                 <Route path="/">
                     <StartPage />
                 </Route>
             </Switch>
-        </>
+            <Footer/>
+        </div>
     )
 }
 

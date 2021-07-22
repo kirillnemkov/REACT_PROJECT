@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './style.module.css'
 import clsx from 'clsx';
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from "react-router-dom";
 import {makeStyles, Button, MenuItem, Menu, Toolbar, IconButton,
    CardMedia, SwipeableDrawer, ListItemText, ListItem,List} from "@material-ui/core";
@@ -11,17 +11,22 @@ import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
+import Box from '@material-ui/core/Box';
+import { checkAuth, signOut } from "../../redux/actions/user.ac";
 
 const useStyles = makeStyles((theme) => ({
   media: {
     height: 80,
     width: 80,
   },
+  mediaSignIn: {
+    height: 80,
+    width: 80,
+    marginLeft: '10%',
+  },
   root: {
-    background: 'linear-gradient(45deg, #f50157 30%, #f50157 90%)',
-    border: 0,
+    background: 'linear-gradient(45deg, #b1b1b1 30%, #D8D8D8 90%)',
     borderRadius: "7%",
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     height: 48,
     padding: '0 30px',
@@ -49,12 +54,18 @@ export default function Navbar({searchText, changeHandler}) {
   const [example, setExample] = useState("default");
   const [anchorEl, setAnchorEl] = useState(null);
   const [state, setState] = useState(false);
+  const errors = useSelector((state) => state.errors)
   const user = useSelector((state) => state.user)
   const history = useHistory()
+  const dispatch = useDispatch()
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  useEffect(() => {
+    checkAuth(history, errors)
+  }, [])
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -63,6 +74,11 @@ export default function Navbar({searchText, changeHandler}) {
 
     setState({ ...state, [anchor]: open });
   };
+
+  const signOutHandler = (e) => {
+    console.log(e.target)
+    dispatch(signOut())
+  }
 
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 
@@ -78,11 +94,11 @@ export default function Navbar({searchText, changeHandler}) {
       </List>
     </div>
   );
-
+        console.log(user)
   return (
-    <React.Fragment>
+    <React.Fragment >
       <AppBar
-        color={example}>
+        color={example} style={{ backgroundColor: "whitesmoke"}}>
           <Grid container spacing={1} direction='column'>
           <Grid item direction='row'>
           <Toolbar className={classes.row}>
@@ -97,9 +113,14 @@ export default function Navbar({searchText, changeHandler}) {
           <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
             <MenuItem onClick={handleClose}></MenuItem>
           </Menu>
-          <Link className={classes.media} to="/"><CardMedia component="img" id={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
-          {user ? <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton></Link> 
-          :<Link to="/auth/signout"><IconButton id={styles.media} className={classes.root} color="inherit" >Выйти</IconButton></Link>}
+         
+          {!user ? 
+          <><Link className={classes.media} to="/"><CardMedia component="img" id={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
+          <Link to="/auth"><IconButton id={styles.media} onClick={() => setExample("transparent")} className={classes.root} color="inherit" >Войти</IconButton></Link> </>
+          :<>
+          <Link className={classes.mediaSignIn} to="/"><CardMedia component="img" id={styles.media} image="https://elbrus-bootcamp.github.io/Elbrus-Bootcamp/sharing_logo.jpg" title="logo"/></Link>
+          <Box>
+            <Link to={`/profile/${user?.id}`}><IconButton id={styles.media} className={classes.root} color="inherit">Профиль</IconButton></Link> <Link to="/auth"><IconButton id={styles.media} onClick={signOutHandler} className={classes.root} color="inherit" >Выйти</IconButton></Link></Box></>}
           </Toolbar>
           </Grid>
           {history.location.pathname === '/' &&

@@ -1,12 +1,57 @@
-.projectcont{
-  margin-top: 5px;
+.projectContainer{
+  background-color: #D8D8D8;
+}
+.imageContainer{
+  padding: 8% 11% 1%;
+  min-height: 600px;
+  margin-bottom: 50px;
+}
+.imageCarousel{
+  max-height: 400px;
+  max-width: 500px;
+}
+.title{
+  padding: 0 300px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.about{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 0 300px;
+  margin-bottom: 20px;
+}
+.text{
+  padding: 0 300px;
+}
+.creators{
+  
+}
+.conteinerUser{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 20px;
 }
 
-.imgcont{
-  position: relative;
+/* .imgcontcar {
   margin: 10% 11% 1%;
-  width: 700px;
-  height: 500px;
+  min-width: 600px;
+  min-height: 600px;
+}
+/* #media {
+  border-radius: 10px;
+  box-shadow: 0px 1px 3px;
+  -webkit-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+#media:hover {
+  -webkit-transform: translate(10px);
+  transform: translate(2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 .favouritecont{
@@ -32,27 +77,10 @@
   color: #e4e4e4;
 }
 
-.urllink {
-  color: white;
-  text-decoration: none;
-  padding: 20px !important; 
-}
+
 
 .urllink:hover{
   color: white;
-}
-
-.about{
-  position: relative;
-  margin: 0% 11% 7%;
-  width: 700px;
-  min-height: 100px;
-}
-.aboutcreators{
-  position: relative;
-  margin: 0% 11% 7%;
-  min-width: 700px;
-  height: 100px;
 }
 
 .userimage{
@@ -79,9 +107,9 @@
   transform-origin: center;
   position: relative;
   transition: .2s;
-  /* transform: scale(1); */
-}
+  /* transform: scale(1); }*/
 
+/* 
 .imgforicon:hover{
   transform: scale(1.1);
 }
@@ -125,39 +153,26 @@
   flex-wrap: wrap;
 }
 
-.imageCarousel{
-  min-height: 400px;
-  min-width: 600px;
-}
+
 
 .imageNotCarousel{
   position: relative;
   /* margin: 1% 0% 7%; */
-  width: 700px;
+  /* width: 700px;
   height: 500px;
 }
+/* 
 
-#media {
-  border-radius: 10px;
-  box-shadow: 0px 1px 3px;
-  -webkit-transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-#media:hover {
-  -webkit-transform: translate(10px);
-  transform: translate(2px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
 .cardprojectall{
   /* position: relative; */
-  margin: 5% 0% 0%;
+  /* margin: 5% 0% 0%;
   width: 700px;
   min-height: 400px;
-}
+} */
 
-.cardproject{
-  /* position: relative; */
+/* .cardproject{
+  position: relative;
   margin: 2% 0% 0%;
   display: flex;
   justify-content:stretch;
-}
+} */

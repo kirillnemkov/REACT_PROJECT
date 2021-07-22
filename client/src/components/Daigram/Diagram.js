@@ -2,8 +2,8 @@ import { ResponsivePie } from '@nivo/pie'
 import { useSelector } from 'react-redux'
 
 const MyResponsivePie = () => {
-    const skills = useSelector((state) => state.user.skills)
-
+    const skills = useSelector((state) => state?.user?.skills)
+    console.log(skills)
     const arr = Object.entries(skills).map((el) => el.filter((el, i, arr) => el))
     const data = arr.filter((el) => el.length > 1 ? el : null)
 

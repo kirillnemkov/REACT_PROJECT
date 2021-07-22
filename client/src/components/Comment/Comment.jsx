@@ -1,11 +1,12 @@
 import { useParams} from 'react-router-dom'
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid';
 import {Avatar, IconButton, TextField} from '@material-ui/core';
 import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
-import {getComment} from "../../redux/actions/comment.ac"
+import {postComment} from "../../redux/actions/comment.ac"
+import { getComment } from '../../redux/actions/comment.ac'; 
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -21,16 +22,20 @@ export default function Comment() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const project = useSelector((state) => state.project)
-  const comment = useSelector((state) => state.comment)
   const user = useSelector((state) => state.user)
+  const [commnets, setComments] = ([])
   const [input, setInput] = useState('')
   const { id } = useParams()
 
 
+  useEffect(() => {
+    dispatch(getComment(id))
+  }, [])
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(input);
-    dispatch(getComment(id, user, input))
+    dispatch(postComment(id, user, input))
   }
 
   const hadleChange = (e) => {
@@ -52,7 +57,7 @@ export default function Comment() {
         </IconButton>
         </Grid>
       </form>
-      <div className={classes.root}>{comment.map((el) => <p>{el.title}</p>)}</div>
+      {/* <div className={classes.root}>{comment.map((el) => <p>{el.title}</p>)}</div> */}
       </>
   );
 }

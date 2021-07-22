@@ -33,7 +33,7 @@ const ActivationSuccess = () => {
             setTimeout(() => setTimer(timer - 1), 1000)
         } else {
             dispatch(confirmAuth(link))
-            history.replace('/main')
+            history.replace('/')
         }
     }, [timer])
 
