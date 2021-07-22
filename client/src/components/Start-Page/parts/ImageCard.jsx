@@ -52,7 +52,7 @@ const useStyles = makeStyles({
 
 export default function ImageCard({payload, handleClick, checked}) {
   const classes = useStyles();
-  console.log([payload])
+  // console.log([payload])
 
   return (
       <Card className={classes.root}>

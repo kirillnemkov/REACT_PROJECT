@@ -16,9 +16,8 @@ export default class ProjectService {
     static async getCommentForProject(id, user, input) {
         return $api.get(`/projects/comment/${id}`, { user, input })
     }
-
-    static async getViewsProjects(id, user) {
-        return $api.patch(`/projects/views/${id}`, user)
+    static async updateViewsProject({projectId, userId}) {
+        return $api.patch(`/projects/views/${projectId}`, {userId})
     }
 
     static async getAllProjects() {
@@ -34,6 +33,6 @@ export default class ProjectService {
     }
 
     static async createProject(payload) {
-        return $api.post(`/newProject`, payload)
+        return $api.post(`/projects/newProject`, payload)
     }
 }

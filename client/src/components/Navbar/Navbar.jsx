@@ -25,10 +25,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10%',
   },
   root: {
-    background: 'linear-gradient(45deg, #f50157 30%, #f50157 90%)',
-    border: 0,
+    background: 'linear-gradient(45deg, #b1b1b1 30%, #D8D8D8 90%)',
     borderRadius: "7%",
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
     height: 48,
     padding: '0 30px',
@@ -98,9 +96,9 @@ export default function Navbar({searchText, changeHandler}) {
   );
         console.log(user)
   return (
-    <React.Fragment>
+    <React.Fragment >
       <AppBar
-        color={example}>
+        color={example} style={{ backgroundColor: "whitesmoke"}}>
           <Grid container spacing={1} direction='column'>
           <Grid item direction='row'>
           <Toolbar className={classes.row}>

@@ -116,7 +116,7 @@ export const checkAuth = (history, errors) => async (dispatch) => {
         message
             ? dispatch(setError(message))
             : dispatch(setError('Возникли технические проблемы на сервере'))
-            history.replace('/auth')
+            // history.replace('/auth')
     } finally {
         dispatch(disableLoader())
     }

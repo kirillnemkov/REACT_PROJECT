@@ -63,7 +63,7 @@ const CreacteProject = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
     const { register, handleSubmit } = useForm()
-    const flag = null
+    const flag = 'project'
     const [file, setFile] = useState({ files: [] })
     const onSave = (files) => {
         setFile({
@@ -73,11 +73,10 @@ const CreacteProject = () => {
 
 
 
-    const onSubmit = (data) => {
-        const dataToSend = { ...data, hashtags: data.hashtags.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id] }
-        console.log(dataToSend)
+    const onSubmit = async (data) => {
+        const urls = await Helpers.uploadFile(flag, file, dispatch, setError, setProjectImg)
+        const dataToSend = { ...data, hashtags: data?.hashtags?.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id], image: urls }
         dispatch(createProject(dataToSend))
-        // Helpers.uploadFile(flag, file, dispatch, setError, setProjectImg, )
     }
     return (
         <>

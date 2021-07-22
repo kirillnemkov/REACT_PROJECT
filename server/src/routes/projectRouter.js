@@ -10,7 +10,8 @@ projectRouter.get('/:id', ProjectController.getOneProjects)
 projectRouter.patch('/:id', ProjectController.getLikeForProjects)
 projectRouter.put('/:id', ProjectController.editProject)
 projectRouter.delete('/:id', ProjectController.deleteProject)
-
+projectRouter.patch('/views/:projectId', ProjectController.updateViewsProject)
+// profileRouter.post("/", ProfileController.uploadProjectImg);
 
 
 module.exports = projectRouter;

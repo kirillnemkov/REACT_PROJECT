@@ -1,6 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
-import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
 import {
@@ -15,171 +14,125 @@ import ProjectsCard from '../ProjectsCard/ProjectsCard.jsx'
 import IconButton from '@material-ui/core/IconButton'
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import Box from '@material-ui/core/Box'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import Comment from '../Comment/Comment'
-
-const useStyles = makeStyles((theme) => ({
-    rootproject: {
-        margin: '0 auto',
-    },
-    urlbutton: {
-        borderRadius: '45px',
-        width: '300px',
-        height: '60px',
-        position: 'absolute',
-        top: '180px',
-        left: '800px',
-        backgroundColor: '#f50157',
-        textAlign: 'center',
-        padding: '20px',
-    },
-    namebutton: {
-        width: '300px',
-        position: 'absolute',
-        top: '20px',
-        left: '800px',
-        textAlign: 'center',
-    },
-}))
+import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
+import { grey } from '@material-ui/core/colors'
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 export default function ProjectProfile() {
-    const classes = useStyles()
+    // const classes = useStyles()
     const dispatch = useDispatch()
-    const project = useSelector((state) => state.project)
-    const projects = useSelector((state) => state.projects)
-    const errors = useSelector((state) => state.errors)
-    const user = useSelector((state) => state.user)
+    const project = useSelector((state) => state?.project)
+    const projects = useSelector((state) => state?.projects)
+    const errors = useSelector((state) => state?.errors)
+    const user = useSelector((state) => state?.user)
     const history = useHistory()
-    console.log(project)
-    const { id } = useParams()
+
+    const { projectId } = useParams()
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
-        dispatch(getOneProjects(id, errors))
-        dispatch(viewsProject(id, user))
-    }, [id])
+        dispatch(getOneProjects(projectId, errors))
+        dispatch(viewsProject(projectId))
+    }, [projectId])
 
     let slides = project?.image?.map((el) => {
         return <img src={el} className={styles.imageCarousel} alt="logo" />
     })
 
-    const handleLike = (id, user) => {
-        dispatch(likeProject(id, user))
+    const handleLike = (projectId, user) => {
+        dispatch(likeProject(projectId, user))
     }
 
     return (
-        <Box mx="auto">
-            <ScrollToTop />
-            <div className={styles.projectcont} key={id}>
-                <div className={styles.imgcont}>
-                    {project?.image?.length > 1 ? (
-                        <Carousel slides={slides} />
-                    ) : (
-                        <img
-                            src={project?.image}
-                            id={styles.media}
-                            className={styles.imageNotCarousel}
-                            alt="logo"
-                        />
-                    )}
+        <>
+            <div className={styles.projectContainer}>
+                <div className={styles.imageContainer}>
+                    {project?.image?.length > 0 && <Carousel slides={slides} />}
+                </div>
 
-                    <div className={classes.namebutton}>
-                        <b>
-                            <h1>{project?.title}</h1>
-                        </b>
-                    </div>
-
-                    <div id={styles.media} className={classes.urlbutton}>
-                        <a className={styles.urllink} href={project?.website}>
-                            VISIT SITE
+                <div className={styles.title}>
+                    <h1 style={{ margin: 0 }}>{project?.title}</h1>
+                    <div>
+                        <a href={project?.website}>
+                            <IconButton>
+                                <AddToHomeScreenIcon
+                                    fontSize="large"
+                                    style={{ color: grey[900] }}
+                                />
+                            </IconButton>
                         </a>
+                        <IconButton
+                            onClick={() => handleLike(projectId, user)}
+                            id={project?._id}
+                        >
+                            <FavoriteIcon fontSize="large" color="secondary" />
+                            <ScrollToTop />
+                        </IconButton>
+                        {project?.likes.length}
+                        <IconButton>
+                            <VisibilityOutlinedIcon fontSize="large" />
+                        </IconButton>
+                        {project?.views?.length}
                     </div>
                 </div>
 
-                <div className={styles.favouritecont}>
-                    <IconButton
-                        onClick={() => handleLike(id, user)}
-                        id={project?._id}
-                    >
-                        <FavoriteIcon fontSize="large" color="secondary" />
-                    </IconButton>
-                    {project?.likes.length}
-                    <IconButton>
-                        <VisibilityOutlinedIcon fontSize="large" />
-                    </IconButton>
-                    {project?.views.length}
-                </div>
-
+                <b className={styles.text}>О ПРОЕКТЕ </b>
+                <br />
                 <div className={styles.about}>
-                    <b>О ПРОЕКТЕ </b>
-                    <br />
                     <p>{project?.description}</p>
-                    <br />
-                    <hr />
                 </div>
-
-                <div className={styles.aboutcreators}>
-                    <b>
-                        {project?.creators?.length > 1
-                            ? 'СОЗДАТЕЛИ'
-                            : 'СОЗДАТЕЛЬ'}
-                    </b>
+                <hr style={{ width: '900px' }} />
+                <b className={styles.text}>
+                    {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
+                </b>
+                <div>
                     <div className={styles.conteinerUser}>
                         {project?.creators?.map((el) => {
                             return <CreatorsUser el={el} />
                         })}
                     </div>
-                    <hr />
+                </div>
+                <hr style={{ width: '900px' }} />
+                <div className={styles.usercontactscont}>
+                <IconButton>
+                            <VisibilityOutlinedIcon fontSize="large" />
+                        </IconButton>
+                </div>
 
-                    <div className={styles.usercontactscont}>
-                        <img
-                            className={styles.gitimg}
-                            src="https://img.icons8.com/metro/452/github.png"
-                            alt="github"
-                        />
-                        <a className={styles.giticon} href={project?.gitHub}>
-                            GITHUB
-                        </a>
-                    </div>
+                <div className={styles.socseti}>
+                    <a href={project?.twitter}>
+                        <IconButton>
+                            <TwitterIcon fontSize="large" />
+                        </IconButton>
+                    </a>
+                    <a href={project?.instagram}>
+                        <IconButton>
+                            <InstagramIcon fontSize="large" />
+                        </IconButton>
+                    </a>
+                    <a href={project?.facebook}>
+                        <IconButton>
+                            <FacebookIcon fontSize="large" />
+                        </IconButton>
+                    </a>
+                </div>
+                <div className={styles.socseti}>
+                    <Comment />
+                </div>
 
-                    <div className={styles.socseti}>
-                        <a href={project?.twitter}>
-                            <img
-                                className={styles.imgforicon}
-                                src="https://img.icons8.com/color/48/000000/twitter--v1.png"
-                                alt="imglogo"
-                            />
-                        </a>
-                        <a href={project?.instagram}>
-                            <img
-                                className={styles.imgforicon}
-                                src="https://img.icons8.com/fluent/48/000000/instagram-new.png"
-                                alt="imglogo"
-                            />
-                        </a>
-                        <a href={project?.facebook}>
-                            <img
-                                className={styles.imgforicon}
-                                src="https://img.icons8.com/color/48/000000/facebook.png"
-                                alt="imglogo"
-                            />
-                        </a>
-                    </div>
-                    <div className={styles.socseti}>
-                        <Comment />
-                    </div>
-
-                    <div className={styles.cardprojectall}>
-                        <b>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
-                        <div className={styles.cardproject}>
-                            {projects.map((el) => {
-                                return <ProjectsCard el={el} />
-                            })}
-                        </div>
+                <div className={styles.cardprojectall}>
+                    <b>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
+                    <div className={styles.cardproject}>
+                        {projects.map((el) => {
+                            return <ProjectsCard el={el} />
+                        })}
                     </div>
                 </div>
             </div>
-        </Box>
+        </>
     )
 }

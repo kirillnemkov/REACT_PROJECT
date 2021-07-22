@@ -80,7 +80,6 @@ const UserProfile = () => {
 
     return (
         <div className={styles.userProfile_container}>
-
             <UserMainInfo handleProjectModalOpen={handleProjectModalOpen} handleOpen={handleOpen} modal={modal} />
             <Paper className={classes.root}>
                 <Tabs

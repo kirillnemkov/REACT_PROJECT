@@ -1,7 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllProjects } from '../../redux/actions/projects.ac'
-import Card from '../Card/Card'
+// import Card from '../Card/Card'
+import ProjectsCard from "../ProjectsCard/ProjectsCard.jsx"
+import styles from "./style.module.css"
 
 const UserProjects = () => {
 
@@ -13,9 +15,9 @@ const UserProjects = () => {
     }, [])
 
     return (
-        <>
-            {projects.map((el) => <Card {...el} />)}
-        </>
+        <div className={styles.rootcard}>
+            {projects.map((el) => <ProjectsCard el={el} />)}
+        </div>
     )
 }
 
