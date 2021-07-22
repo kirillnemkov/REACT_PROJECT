@@ -1,16 +1,18 @@
 import styles from './UserMainInfo.module.css'
-import { Button, makeStyles } from '@material-ui/core/';
-import EditIcon from '@material-ui/icons/Edit';
-import SendIcon from '@material-ui/icons/Send';
-import AddIcon from '@material-ui/icons/Add';
-import {useDispatch, useSelector} from 'react-redux'
+import { Button, makeStyles } from '@material-ui/core/'
+import EditIcon from '@material-ui/icons/Edit'
+import SendIcon from '@material-ui/icons/Send'
+import AddIcon from '@material-ui/icons/Add'
+import { useDispatch, useSelector } from 'react-redux'
 import Helpers from '../../helpers/UploadsHelper'
 import { setError } from '../../redux/actions/errors.ac'
 import { setUserImg } from '../../redux/actions/user.ac'
 import { useState } from 'react'
+import grey from '@material-ui/core/colors/grey'
 
 const useStyles = makeStyles((theme) => ({
     button: {
+        backgroundColor: grey[500],
         marginLeft: '8px',
         '& .MuiButton-label': {
             justifyContent: 'end',
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     addButton: {
+        backgroundColor: grey[500],
         width: '100%',
         height: '36px',
         '& .MuiButton-endIcon': {
@@ -83,7 +86,8 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                     >
                         <img
                             src={userPhoto?.image || '/profile-user.png'}
-                            className={styles.user_img} alt=""
+                            className={styles.user_img}
+                            alt=""
                         ></img>
                     </div>
                     <input
@@ -92,7 +96,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                         onChange={changeHandler}
                         className={styles.file}
                     />
-                    <Button variant="contained" color="light">
+                    <Button variant="contained" className={classes.button}>
                         <label htmlFor="file">Добавить фото</label>
                     </Button>
                 </div>
@@ -116,13 +120,11 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                     <div className={styles.upButtons}>
                         <Button
                             variant="contained"
-                            color="secondary"
                             className={classes.button}
                             endIcon={<SendIcon />}
                         ></Button>
                         <Button
                             variant="contained"
-                            color="secondary"
                             onClick={handleOpen}
                             className={classes.button}
                             endIcon={<EditIcon />}
@@ -131,7 +133,6 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                     <div>
                         <Button
                             variant="contained"
-                            color="secondary"
                             onClick={handleProjectModalOpen}
                             className={classes.addButton}
                             endIcon={<AddIcon />}

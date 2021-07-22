@@ -21,7 +21,8 @@
 }
 
 .about_subtitle {
-    width: 80%;
+    width: 100%;
+    min-height: 100px;
     margin: 0 auto;
     padding-bottom: 4%;
 }
