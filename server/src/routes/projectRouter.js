@@ -3,7 +3,7 @@ const projectRouter = express.Router();
 const ProjectController = require("../controllers/projectController");
 
 projectRouter.post('/newProject', ProjectController.createProject)
-projectRouter.put('/:id/comment', ProjectController.createComment)
+projectRouter.put('/:projectId/comment', ProjectController.createComment)
 projectRouter.get('/', ProjectController.getAllProjects)
 projectRouter.get('/:id', ProjectController.getOneProjects)
 projectRouter.patch('/:id', ProjectController.getLikeForProjects)

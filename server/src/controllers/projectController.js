@@ -1,5 +1,6 @@
 const Project = require("../models/project-model");
 const Comment = require("../models/comment-model");
+const treelize = require('../service/helper-service')
 
 class ProjectController {
   async getOneProjects(req, res, next) {
@@ -69,10 +70,17 @@ try {
 
   async createComment(req, res, next) {
     try {
-      const newComment = await Comment.create({ title: req.body.input, author: req.body.user.id, project: req.params.id });
-      const project = await Project.findByIdAndUpdate(req.params.id, { $push: { comments: { $each: [newComment._id] } } }, { new: true }).populate("creators").populate("comments")
-      const allComment = await Comment.find({author: req.body.user.id}).populate("author")
-      return res.json(allComment);
+      const {projectId} = req.params;
+      const {authorId, text, parentId} = req.body
+      if (parentId.length === 0) {
+        await Comment.create({authorId, text, projectId});
+      } else if (parentId.length !== 0) {
+        await Comment.create({authorId, text, projectId, parentId});
+      }
+      const allCurrentProjectComments = await Comment.find({projectId}).populate('parentId').populate('authorId')
+      const a = allCurrentProjectComments.map(item => item.toJSON())
+      const structuredComments = await treelize(a);
+      return res.json(structuredComments)
     } catch (err) {
       next(err);
     }

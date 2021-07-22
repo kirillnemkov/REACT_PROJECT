@@ -8,10 +8,10 @@ const projectComment = (comment) => ({
   payload: {comment},
 })
 
-export const getComment = (id, user, input, errors) => async (dispatch) => {
+export const setComment = (projectId, authorId, text, parentId = null, errors) => async (dispatch) => {
   dispatch(enableLoader())
   try {
-      const response = await ProjectsService.getCommentForProject(id, user, input)
+      const response = await ProjectsService.setCommenttForProject({projectId, authorId, text, parentId})
       dispatch(projectComment(response.data))
       console.log(response.data);
       if (errors) dispatch(deleteError())
