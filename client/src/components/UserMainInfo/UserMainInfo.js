@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
         '& .makeStyles-button-10:nth-child(1)': {
             margin: 0,
         },
+        backgroundColor: '#4521ab',
     },
     addButton: {
         width: '100%',
@@ -26,11 +27,16 @@ const useStyles = makeStyles((theme) => ({
         '& .MuiButton-endIcon': {
             marginLeft: 0,
         },
+        backgroundColor: '#4521ab',
     },
     root: {
         marginTop: '5%',
         boxShadow:
             '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 3px 0px -2px rgb(0 0 0 / 12%)',
+    },
+    photobutton: {
+        backgroundColor: '#4521ab',
+        color: 'white',
     },
 }))
 
@@ -94,25 +100,25 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                         onChange={changeHandler}
                         className={styles.file}
                     />
-                    <Button variant="contained" color="secondary">
+                    <Button variant="contained" className={classes.photobutton} color="secondary">
                         <label htmlFor="file">Добавить фото</label>
                     </Button>
                 </div>
                 <div className={styles.name_and_info_container}>
                     <h2 className={styles.user_name}>
-                        {user?.firstName} {user?.middleName} {user?.lastName}
+                    {user?.middleName} {user?.firstName} {user?.lastName}
                     </h2>
                     <div className={styles.location}>
-                        <p className={styles.location_name}>
+                        <div className={styles.location_name}>
                             {user?.location}{' '}
-                        </p>
+                        </div>
                         <img
                             className={styles.location_img}
                             src="/location.png"
                             alt=""
                         ></img>
                     </div>
-                    <p>Место работы: {user?.job}</p>
+                    <p className={styles.job}>Место работы: {user?.job}</p>
                 </div>
                 <div className={styles.button_group__userProfile}>
                     <div className={styles.upButtons}>

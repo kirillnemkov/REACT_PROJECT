@@ -10,9 +10,9 @@ const About = () => {
     return (
         <>
             <div className={styles.about_container}>
-                <img src="/profile-user.png" className={styles.about_photo} alt=""></img>
+                {/* <img src="/profile-user.png" className={styles.about_photo} alt=""></img> */}
                 <div className={styles.about_item}>
-                    <h3 className={styles.about_title}>О себе</h3>
+                    <h2 className={styles.about_title}>О себе</h2>
                     <p className={styles.about_subtitle}>{user}</p>
                 </div>
             </div>
