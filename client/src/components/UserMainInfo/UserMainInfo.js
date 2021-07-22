@@ -97,18 +97,20 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                     </Button>
                 </div>
                 <div className={styles.name_and_info_container}>
-                    <h5 className={styles.user_name}>
-                        {(user?.firstName, user?.middleName, user?.lastName)}
-                    </h5>
+                    <h2 className={styles.user_name}>
+                        {user?.firstName} {user?.middleName} {user?.lastName}
+                    </h2>
                     <div className={styles.location}>
-                        <p className={styles.location_name}>location</p>
+                        <p className={styles.location_name}>
+                            {user?.location}{' '}
+                        </p>
                         <img
                             className={styles.location_img}
                             src="/location.png"
                             alt=""
                         ></img>
                     </div>
-                    <p>{user?.job}</p>
+                    <p>Место работы: {user?.job}</p>
                 </div>
                 <div className={styles.button_group__userProfile}>
                     <div className={styles.upButtons}>

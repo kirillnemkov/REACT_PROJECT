@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        // flexDirection: 'row',
+        flexDirection: 'row',
     },
     textField: {
         width: '300px',
@@ -25,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     button: {
         // height: '50px',
         margin: '8',
+    },
+    divv: {
+        paddingBottom: '16px',
     },
 }))
 
@@ -37,9 +40,9 @@ const ResetPasswordForm = () => {
     const classes = useStyles()
 
     function changeHandler(e) {
-        const field = e.target.dataset.id
-        const newValue = e.target.value
-        setPassword((prev) => ({ ...prev, [field]: newValue }))
+        // const field = e.currentTarget.dataset.id
+        const newValue = e.currentTarget.value
+        setPassword((prev) => ({ ...prev, ['password']: newValue }))
     }
 
     function submitHandler(e) {
@@ -48,53 +51,35 @@ const ResetPasswordForm = () => {
     }
 
     return (
-        // <div className="modalka_wrapper">
-        //           <h2>Введите новый пароль</h2>
-        //           <form onSubmit={submitHandler}>
-        //               <div className="modalka_form_wrapper">
-        //                   <input
-        //                       className="modalka_input"
-        //                       placeholder="Password"
-        //                       value={password.password}
-        //                       onChange={changeHandler}
-        //                       type="password"
-        //                       data-id="password"
-        //                   />
-        //                   <button className="modalka_btn">
-        //                       Подтвердить
-        //                   </button>
-        //               </div>
-        //           </form>
-        //       </div>
-        <div className={classes.root}>
-            <form onSubmit={submitHandler} className={classes.root}>
-                <div>
-                    <TextField
-                        id="searchText"
-                        style={{ margin: 8 }}
-                        placeholder="Введите новый пароль"
-                        fullWidth
-                        onChange={changeHandler}
-                        margin="normal"
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                        // value={searchText}
-                        className={classes.textField}
-                    />
-                </div>
-                <div>
-                    <Button
-                        className={classes.button}
-                        variant="contained"
-                        color="secondary"
-                    >
-                        <strong>Подтвердить</strong>
-                    </Button>
-                </div>
-            </form>
-        </div>
+        <form onSubmit={submitHandler} className={classes.root}>
+            <div>
+                <TextField
+                    id="searchText"
+                    style={{ margin: 8 }}
+                    placeholder="Введите новый пароль"
+                    fullWidth
+                    onChange={changeHandler}
+                    data-id="password"
+                    margin="normal"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="outlined"
+                    type="password"
+                    className={classes.textField}
+                />
+            </div>
+            <div className={classes.divv}>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    color="secondary"
+                    type="submit"
+                >
+                    <strong>Подтвердить</strong>
+                </Button>
+            </div>
+        </form>
     )
 }
 
