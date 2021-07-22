@@ -62,13 +62,16 @@ export const likeProject = (id, user, errors) => async (dispatch) => {
 
 export const viewsProject = (projectId, user, errors) => async (dispatch) => {
   dispatch(enableLoader())
+  
   try {
       if(user) {
+        console.log("d1=====>",user)
         const userId = user.id
       const response = await ProjectsService.updateViewsProject({projectId, userId})
       dispatch(projectViews(response.data))
       if (errors) dispatch(deleteError())
       } else {
+        console.log("d2=====>",user)
         const responseIp = await axios.get('https://api.ipify.org/?format=json')
         const response = await ProjectsService.updateViewsProject({projectId, userId: responseIp.data.ip})
         dispatch(projectViews(response.data))

@@ -1,6 +1,5 @@
 import { useParams, useHistory } from 'react-router-dom'
 import { useEffect } from 'react'
-// import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
 import {
@@ -15,9 +14,13 @@ import ProjectsCard from '../ProjectsCard/ProjectsCard.jsx'
 import IconButton from '@material-ui/core/IconButton'
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined'
 import FavoriteIcon from '@material-ui/icons/Favorite'
-import Box from '@material-ui/core/Box'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import Comment from '../Comment/Comment'
+import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
+import { grey } from '@material-ui/core/colors'
+import InstagramIcon from '@material-ui/icons/Instagram';
+import TwitterIcon from '@material-ui/icons/Twitter';
+import FacebookIcon from '@material-ui/icons/Facebook';
 
 export default function ProjectProfile() {
     // const classes = useStyles()
@@ -45,87 +48,76 @@ export default function ProjectProfile() {
     }
 
     return (
-        <div style={{ backgroundColor: '#D8D8D8' }}>
-            <div className={styles.container}>
-                {project?.image?.length > 0 && <Carousel slides={slides} />}
-            </div>
-
-            <div style={{ marginLeft: '100px'}}>
-                <b>
-                    <h1>This is {project?.title}</h1>
-                </b>
-                <div className={styles.website}>
-                    <b>
-                        <a href={project?.website}>You can VISIT SITE</a>
-                    </b>
+        <>
+            <div className={styles.projectContainer}>
+                <div className={styles.imageContainer}>
+                    {project?.image?.length > 0 && <Carousel slides={slides} />}
                 </div>
-            </div>
-            <div className={styles.likesandviews}>
-                <IconButton
-                    onClick={() => handleLike(projectId, user)}
-                    id={project?._id}
-                >
-                    <FavoriteIcon fontSize="large" color="secondary" />
-                    <ScrollToTop />
-                </IconButton>
-                {project?.likes.length}
-                <IconButton>
-                    <VisibilityOutlinedIcon fontSize="large" />
-                </IconButton>
-                {project?.views.length}
-            </div>
 
-            <div className={styles.about}>
-                <b>О ПРОЕКТЕ </b>
+                <div className={styles.title}>
+                    <h1 style={{ margin: 0 }}>{project?.title}</h1>
+                    <div>
+                        <a href={project?.website}>
+                            <IconButton>
+                                <AddToHomeScreenIcon
+                                    fontSize="large"
+                                    style={{ color: grey[900] }}
+                                />
+                            </IconButton>
+                        </a>
+                        <IconButton
+                            onClick={() => handleLike(projectId, user)}
+                            id={project?._id}
+                        >
+                            <FavoriteIcon fontSize="large" color="secondary" />
+                            <ScrollToTop />
+                        </IconButton>
+                        {project?.likes.length}
+                        <IconButton>
+                            <VisibilityOutlinedIcon fontSize="large" />
+                        </IconButton>
+                        {project?.views?.length}
+                    </div>
+                </div>
+
+                <b className={styles.text}>О ПРОЕКТЕ </b>
                 <br />
-                <p>{project?.description}</p>
-                <hr />
-            </div>
-
-            <div className={styles.creators}>
-                <b>
+                <div className={styles.about}>
+                    <p>{project?.description}</p>
+                </div>
+                <hr style={{ width: '900px' }} />
+                <b className={styles.text}>
                     {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
                 </b>
-                <div className={styles.conteinerUser}>
-                    {project?.creators?.map((el) => {
-                        return <CreatorsUser el={el} />
-                    })}
+                <div>
+                    <div className={styles.conteinerUser}>
+                        {project?.creators?.map((el) => {
+                            return <CreatorsUser el={el} />
+                        })}
+                    </div>
                 </div>
-                </div>
-                <hr />
-
+                <hr style={{ width: '900px' }} />
                 <div className={styles.usercontactscont}>
-                    <img
-                        className={styles.gitimg}
-                        src="https://img.icons8.com/metro/452/github.png"
-                        alt="github"
-                    />
-                    <a className={styles.giticon} href={project?.gitHub}>
-                        GITHUB
-                    </a>
+                <IconButton>
+                            <VisibilityOutlinedIcon fontSize="large" />
+                        </IconButton>
                 </div>
 
                 <div className={styles.socseti}>
                     <a href={project?.twitter}>
-                        <img
-                            className={styles.imgforicon}
-                            src="https://img.icons8.com/color/48/000000/twitter--v1.png"
-                            alt="imglogo"
-                        />
+                        <IconButton>
+                            <TwitterIcon fontSize="large" />
+                        </IconButton>
                     </a>
                     <a href={project?.instagram}>
-                        <img
-                            className={styles.imgforicon}
-                            src="https://img.icons8.com/fluent/48/000000/instagram-new.png"
-                            alt="imglogo"
-                        />
+                        <IconButton>
+                            <InstagramIcon fontSize="large" />
+                        </IconButton>
                     </a>
                     <a href={project?.facebook}>
-                        <img
-                            className={styles.imgforicon}
-                            src="https://img.icons8.com/color/48/000000/facebook.png"
-                            alt="imglogo"
-                        />
+                        <IconButton>
+                            <FacebookIcon fontSize="large" />
+                        </IconButton>
                     </a>
                 </div>
                 <div className={styles.socseti}>
@@ -141,5 +133,6 @@ export default function ProjectProfile() {
                     </div>
                 </div>
             </div>
+        </>
     )
 }

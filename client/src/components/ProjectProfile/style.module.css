@@ -1,38 +1,40 @@
-.container, .imgcont{
-  margin: 4.5% 11% 1%;
-  min-height: 450px;
+.projectContainer{
+  background-color: #D8D8D8;
+}
+.imageContainer{
+  padding: 8% 11% 1%;
+  min-height: 600px;
+  margin-bottom: 50px;
 }
 .imageCarousel{
   max-height: 400px;
   max-width: 500px;
 }
-.website {
-  color: white;
-  text-decoration: none;
-  width: 200px;
-  height: 25px;
-  background-color:#666666; 
-  text-align: center;
-  border-radius: 15px;
-}
-.likesandviews{
-  position: absolute;
-  bottom: 180px;
-  left: 1100px;
+.title{
+  padding: 0 300px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 .about{
-  position: absolute;
-  left: 370px;
-  top: 600px;
-  max-width: 700px;
-  min-height: 100px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: 0 300px;
+  margin-bottom: 20px;
+}
+.text{
+  padding: 0 300px;
 }
 .creators{
+  
 }
 .conteinerUser{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
+  margin-bottom: 20px;
 }
 
 /* .imgcontcar {
