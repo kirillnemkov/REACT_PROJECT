@@ -38,7 +38,7 @@ function App() {
                 <Route exact path="/signUp/success">
                     <SignupSuccessMessage />
                 </Route>
-                <Route exact path="/projects/:id">
+                <Route exact path="/projects/:projectId">
                     <ProjectProfile />
                 </Route>
                 <Route path="/">

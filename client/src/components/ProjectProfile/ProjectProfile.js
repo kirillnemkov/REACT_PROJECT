@@ -22,26 +22,26 @@ import Comment from '../Comment/Comment'
 export default function ProjectProfile() {
     // const classes = useStyles()
     const dispatch = useDispatch()
-    const project = useSelector((state) => state.project)
-    const projects = useSelector((state) => state.projects)
-    const errors = useSelector((state) => state.errors)
-    const user = useSelector((state) => state.user)
+    const project = useSelector((state) => state?.project)
+    const projects = useSelector((state) => state?.projects)
+    const errors = useSelector((state) => state?.errors)
+    const user = useSelector((state) => state?.user)
     const history = useHistory()
 
-    const { id } = useParams()
+    const { projectId } = useParams()
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
-        dispatch(getOneProjects(id, errors))
-        dispatch(viewsProject(id, user))
-    }, [id])
+        dispatch(getOneProjects(projectId, errors))
+        dispatch(viewsProject(projectId, user))
+    }, [projectId])
 
     let slides = project?.image?.map((el) => {
         return <img src={el} className={styles.imageCarousel} alt="logo" />
     })
 
-    const handleLike = (id, user) => {
-        dispatch(likeProject(id, user))
+    const handleLike = (projectId, user) => {
+        dispatch(likeProject(projectId, user))
     }
 
     return (
@@ -62,7 +62,7 @@ export default function ProjectProfile() {
             </div>
             <div className={styles.likesandviews}>
                 <IconButton
-                    onClick={() => handleLike(id, user)}
+                    onClick={() => handleLike(projectId, user)}
                     id={project?._id}
                 >
                     <FavoriteIcon fontSize="large" color="secondary" />

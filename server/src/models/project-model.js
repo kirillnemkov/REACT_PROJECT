@@ -15,7 +15,7 @@ const ProjectSchema = mongoose.Schema({
   date: { type: String },
   hashtags: [{ type: String }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
-  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  views: [String],
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);
