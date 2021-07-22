@@ -8,7 +8,7 @@ import {
     CardContent,
     Typography,
 } from '@material-ui/core'
-import { grey, pink} from '@material-ui/core/colors'
+import { grey, indigo} from '@material-ui/core/colors'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: 50,
         marginTop: 10,
         marginLeft: 15,
-        backgroundColor: pink[400],
+        backgroundColor: indigo[400],
         color: grey[100],
     },
     media: {

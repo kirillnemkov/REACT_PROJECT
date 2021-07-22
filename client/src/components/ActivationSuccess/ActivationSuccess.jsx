@@ -41,7 +41,7 @@ const ActivationSuccess = () => {
       
         <div className={classes.root}>
             <Alert className={classes.alertik} severity="success">
-                <AlertTitle>Hey Guys, всё найс!</AlertTitle>
+                <AlertTitle>Hey Guys, у нас всё найс!</AlertTitle>
                 <strong>
                     Вы будете автоматически перенаправлены на главную страницу
                     через {timer}{' '}

@@ -9,7 +9,6 @@ import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import Box from '@material-ui/core/Box';
 import { checkAuth, signOut } from "../../redux/actions/user.ac";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10%',
   },
   root: {
-    background: 'linear-gradient(45deg, #ff4553 30%, #ff4268 60%)',
+    background: 'linear-gradient(45deg, #ff4553 30%, #5c6bc0 60%)',
     borderRadius: "7%",
     color: 'white',
     height: 46,

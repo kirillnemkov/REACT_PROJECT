@@ -20,7 +20,7 @@ const About = ({user}) => {
         <>
             <div className={styles.about_container}>
                 <div className={styles.about_item}>
-                    <h3 className={styles.about_title}>О себе</h3>
+                    <h3 className={styles.about_title}>Немного текста себе</h3>
                     <p className={styles.about_subtitle}>{id == currentUser?.id ? currentUser?.info?.about : anotherUser}</p>
                 </div>
             </div>

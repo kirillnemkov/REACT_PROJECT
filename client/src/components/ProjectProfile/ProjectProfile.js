@@ -94,7 +94,7 @@ export default function ProjectProfile() {
                         <IconButton>
                             <GitHubIcon
                                 fontSize="large"
-                                style={{ color: grey[50] }}
+                                style={{ color: grey[500] }}
                             />
                         </IconButton>
                     </a>
