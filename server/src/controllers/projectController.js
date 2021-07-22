@@ -24,39 +24,38 @@ class ProjectController {
   async getLikeForProjects(req, res, next) {
     try {
       const project = await Project.findById(req.params.id).populate("creators");
-      const result = project.likes.includes(req.body.id);
-      let newProject = "";
-      if (!result) {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true }).populate(
+      if (!project.likes.includes(req.body.id) && req.body.id) {
+        const projectWithUpdatedLikes = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true }).populate(
           "creators"
         );
+        return res.json(projectWithUpdatedLikes)
       } else {
-        newProject = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate("creators");
+        const projectWithUpdatedLikes = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate("creators");
+        return res.json(projectWithUpdatedLikes)
       }
-      return res.json(newProject);
     } catch (err) {
       next(err);
     }
   }
 
-  async getViewsForProjects(req, res, next) {
-    try {
-      const project = await Project.findById(req.params.id);
-      const result = project.views.includes(req.body.id);
-      let newProject = "";
-      if (!result) {
-        newProject = await Project.findByIdAndUpdate(
-          req.params.id,
-          { $push: { views: req.body.id } },
-          { new: true }
-        ).populate("creators");;
-      } else {
-        newProject = await Project.findById(req.params.id).populate("creators");;
-      }
-      return res.json(newProject);
-    } catch (err) {
-      next(err);
-    }
+  async updateViewsProject(req, res, next) {
+try {
+  const {projectId} = req.params
+  const {userId} = req.body
+  const project = await Project.findById(projectId).populate("creators");
+  if(!project.views.includes(userId)) {
+    const projectWithUpdatedViews = await Project.findByIdAndUpdate(
+      projectId,
+      { $push: { views: userId } },
+      { new: true }
+      ).populate("creators");
+      return res.json(projectWithUpdatedViews)
+    } else {
+    return res.json(project)
+  }
+ } catch (err) {
+  next(err);
+}
   }
 
   async createProject(req, res, next) {
