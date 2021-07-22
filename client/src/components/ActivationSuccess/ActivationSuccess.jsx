@@ -38,6 +38,7 @@ const ActivationSuccess = () => {
     }, [timer])
 
     return (
+      
         <div className={classes.root}>
             <Alert className={classes.alertik} severity="success">
                 <AlertTitle>Hey Guys, всё найс!</AlertTitle>

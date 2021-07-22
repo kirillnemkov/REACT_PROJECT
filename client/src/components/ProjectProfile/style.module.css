@@ -46,6 +46,12 @@
   position: relative;
   margin: 0% 11% 7%;
   width: 700px;
+  min-height: 100px;
+}
+.aboutcreators{
+  position: relative;
+  margin: 0% 11% 7%;
+  min-width: 700px;
   height: 100px;
 }
 
