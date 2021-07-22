@@ -10,12 +10,8 @@ import { getComment } from '../../redux/actions/comment.ac';
 
 const useStyles = makeStyles(theme => ({
   margin: {
-    marginTop: 100,
+    marginTop: 50,
   },
-  root: {
-    position: "absolute",
-    top: 200,
-  }
 }));
 
 export default function Comment() {
@@ -23,7 +19,7 @@ export default function Comment() {
   const dispatch = useDispatch()
   const project = useSelector((state) => state.project)
   const user = useSelector((state) => state.user)
-  const [commnets, setComments] = ([])
+  const [comments, setComments] = ([])
   const [input, setInput] = useState('')
   const { id } = useParams()
 
@@ -57,7 +53,6 @@ export default function Comment() {
         </IconButton>
         </Grid>
       </form>
-      {/* <div className={classes.root}>{comment.map((el) => <p>{el.title}</p>)}</div> */}
       </>
   );
 }

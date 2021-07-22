@@ -24,12 +24,12 @@ import FacebookIcon from '@material-ui/icons/Facebook'
 import GitHubIcon from '@material-ui/icons/GitHub'
 
 export default function ProjectProfile() {
-    // const classes = useStyles()
     const dispatch = useDispatch()
     const project = useSelector((state) => state?.project)
     const projects = useSelector((state) => state?.projects)
     const errors = useSelector((state) => state?.errors)
     const user = useSelector((state) => state?.user)
+    const comment = useSelector((state) => state?.comment)
     const history = useHistory()
 
     const { projectId } = useParams()
@@ -67,7 +67,10 @@ export default function ProjectProfile() {
                         </IconButton>
                         {project?.likes.length}
                         <IconButton>
-                            <VisibilityOutlinedIcon fontSize="large" style={{ color: grey[900] }}/>
+                            <VisibilityOutlinedIcon
+                                fontSize="large"
+                                style={{ color: grey[900] }}
+                            />
                         </IconButton>
                         {project?.views?.length}
                     </div>
@@ -78,19 +81,7 @@ export default function ProjectProfile() {
                 <div className={styles.about}>
                     <p>{project?.description}</p>
                 </div>
-                <hr style={{ width: '900px' }} />
-                <b className={styles.text}>
-                    {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
-                </b>
-                <div>
-                    <div className={styles.conteinerUser}>
-                        {project?.creators?.map((el) => {
-                            return <CreatorsUser el={el} />
-                        })}
-                    </div>
-                </div>
-                <hr style={{ width: '900px' }} />
-                <div className={styles.socseti}>
+                <div className={styles.web}>
                     <a href={project?.website}>
                         <IconButton>
                             <AddToHomeScreenIcon
@@ -132,17 +123,37 @@ export default function ProjectProfile() {
                         </IconButton>
                     </a>
                 </div>
-                <div className={styles.socseti}>
-                    <Comment />
-                </div>
-
-                <div className={styles.cardprojectall}>
-                    <b>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
-                    <div className={styles.cardproject}>
-                        {projects.map((el) => {
-                            return <ProjectsCard el={el} />
+                <hr style={{ width: '900px' }} />
+                <b className={styles.text}>
+                    {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
+                </b>
+                <div>
+                    <div className={styles.conteinerUser}>
+                        {project?.creators?.map((el) => {
+                            return <CreatorsUser el={el} />
                         })}
                     </div>
+                </div>
+                <hr style={{ width: '900px' }} />
+                <b className={styles.text}>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
+                <div className={styles.conteinerUser}>
+                    {projects.map((el) => {
+                        return <ProjectsCard el={el} />
+                    })}
+                </div>
+                <hr style={{ width: '900px' }} />
+                <b className={styles.text}>КОММЕНТАРИИ К ПРОЕКТУ</b>
+
+                <div>
+                    <div className={styles.commentContainer}>
+                        {comment.map((el) => (
+                            <p>{el}</p>
+                        ))}
+                        <p className={styles.textForComment}>here comment</p>
+                    </div>
+                </div>
+                <div className={styles.comment}>
+                    <Comment />
                 </div>
             </div>
         </>
