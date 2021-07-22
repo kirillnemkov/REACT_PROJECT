@@ -12,9 +12,10 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { checkAuth } from '../../redux/actions/user.ac'
 import CreacteProject from '../CreacteProject/CreacteProject';
+import { AnotherUserInfo } from '../../redux/actions/AnotherProfileReducer.ac';
 // import { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +51,11 @@ const UserProfile = () => {
     const [projectModal, setProjectModal] = useState(false)
     const errors = useSelector((state) => state.errors)
     const history = useHistory()
+    const anotherUser = useSelector(state => state?.AnotherUser)
+    const currentUser = useSelector(state => state?.user)
+    const [skills, setSkills] = useState()
     const dispatch = useDispatch()
+
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
@@ -76,11 +81,17 @@ const UserProfile = () => {
         setProjectModal(false);
     };
 
+    const {id} = useParams() 
 
+    
+    useEffect(() => {
+        const skill = (currentUser, anotherUser, id) => currentUser?.id == id ? currentUser?.skills : anotherUser?.skills
+        setSkills(skill(currentUser, anotherUser, id))
+    })  
 
     return (
         <div className={styles.userProfile_container}>
-            <UserMainInfo handleProjectModalOpen={handleProjectModalOpen} handleOpen={handleOpen} modal={modal} />
+            <UserMainInfo handleProjectModalOpen={handleProjectModalOpen} handleOpen={handleOpen} id={id} modal={modal} />
             <Paper className={classes.root}>
                 <Tabs
                     indicatorColor="primary"
@@ -96,10 +107,10 @@ const UserProfile = () => {
                 </Tabs>
             </Paper>
 
-            {tabValue === 'about' ? <About /> : null}
-            {tabValue === 'projects' ? <UserProjects /> : null}
-            {tabValue === 'skills' ? <Diagram /> : null}
-            {tabValue === 'contacts' ? <SocialLinks /> : null}
+            {tabValue === 'about' ? <About  id={id}/> : null}
+            {tabValue === 'projects' ? <UserProjects  id={id}/> : null}
+            {tabValue === 'skills' ? <Diagram skills={skills} id={id}/> : null}
+            {tabValue === 'contacts' ? <SocialLinks  id={id}/> : null}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

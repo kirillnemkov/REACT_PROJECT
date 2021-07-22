@@ -1,19 +1,27 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { initUserInfo } from '../../redux/actions/user.ac'
+import { AnotherUserInfo } from '../../redux/actions/AnotherProfileReducer.ac'
 import styles from './About.module.css'
 
-const About = () => {
-    const user = useSelector(state => state.user?.info?.about)
+const About = ({user}) => {
+    const currentUser = useSelector(state => state.user)
+    const anotherUser = useSelector(state => state?.AnotherUser?.about)
+
+    const dispatch = useDispatch()
+    const {id} = useParams()
+
+    useEffect(() => {
+        dispatch(AnotherUserInfo(id))
+    }, [id])
+
 
     return (
         <>
             <div className={styles.about_container}>
-                <img src="/profile-user.png" className={styles.about_photo} alt=""></img>
                 <div className={styles.about_item}>
-                    <h2 className={styles.about_title}>О себе</h2>
-                    <p className={styles.about_subtitle}>{user}</p>
+                    <h3 className={styles.about_title}>О себе</h3>
+                    <p className={styles.about_subtitle}>{id == currentUser?.id ? currentUser?.info?.about : anotherUser}</p>
                 </div>
             </div>
         </>

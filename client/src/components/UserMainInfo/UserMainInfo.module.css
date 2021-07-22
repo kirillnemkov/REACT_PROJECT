@@ -1,5 +1,4 @@
 .user_img {
-    /* padding-bottom: 20px; */
     max-width: 150px;
     align-items: center;
     border-radius: 50%;
@@ -32,8 +31,6 @@
     padding-top: 10%;
     margin-left: 15%;
     margin-right: 15%;
-    /* background-color: #e6e6e6; */
-    /* background-color: black */
 }
 
 .name_and_info_container {
@@ -61,12 +58,13 @@
     margin: 0;
     margin-bottom: 20px;
     text-align: center;
-    /* font-size: 50px; */
+    font-family: Helvetica, sans-serif;
+    font-size: 19px;
 }
 
 .upButtons {
     display: flex;
-    justify-content: inherit;
+    justify-content: space-between;
 }
 
 .file {
@@ -77,5 +75,11 @@
 }
 
 .job {
-  
+    font-family: Helvetica, sans-serif;
+    font-size: 19px;
+    padding-top: 10px;
+}
+.falsh{
+  margin-right: 1px;
+  margin-left: 1px;
 }
