@@ -12,6 +12,7 @@ export const AnotherUserInfo = (id, errors) => async (dispatch) => {
     dispatch(enableLoader())
     try {
         const response = await UserService.getUserInfo(id)
+        console.log(response.data)
         dispatch(setAnotherUser(response.data))
         if (errors) dispatch(deleteError())
     } catch (error) {

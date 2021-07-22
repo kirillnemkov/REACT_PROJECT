@@ -75,7 +75,7 @@ const CreacteProject = () => {
 
     const onSubmit = async (data) => {
         const urls = await Helpers.uploadFile(flag, file, dispatch, setError, setProjectImg)
-        const dataToSend = { ...data, hashtags: data?.hashtags?.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id], image: urls }
+        const dataToSend = { ...data, hashtags: data?.hashtags?.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id], image: urls, id: user?.id }
         dispatch(createProject(dataToSend))
     }
     return (

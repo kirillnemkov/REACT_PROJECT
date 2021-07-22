@@ -4,7 +4,9 @@ class ProfileController {
   async getProfile(req, res, next) {
     try {
       const { id } = req.params;
-      const oneUser = await User.findById(id);
+      console.log(id)
+      const oneUser = await User.findById(id).populate('userProjects')
+      const a = oneUser
       console.log(oneUser)
       return res.json(oneUser);
     } catch (err) {

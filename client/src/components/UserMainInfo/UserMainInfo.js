@@ -38,7 +38,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
     const anotherUser = useSelector(state => state?.AnotherUser)
     const classes = useStyles()
     const dispatch = useDispatch()
-    const userPhoto = useSelector((state) => state.user)
+    const userPhoto = useSelector((state) => state?.user)
     const [drag, setDrag] = useState(false)
     const flag = 'user'
 
@@ -54,6 +54,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
             userPhoto?.id
         )
     }
+
 
     function dragStartHandler(e) {
         e.preventDefault()
@@ -82,7 +83,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                         onDrop={onDropHandler}
                     >
                         <img
-                            src={userPhoto?.image || '/profile-user.png'}
+                            src={id == currentUser?.id ? userPhoto?.image || '/profile-user.png' : anotherUser?.image || '/profile-user.png'}
                             className={styles.user_img} alt=""
                         ></img>
                     </div>
@@ -98,7 +99,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                 </div>
                 <div className={styles.name_and_info_container}>
                     <h5 className={styles.user_name}>
-                        {id == currentUser?.id ? (currentUser?.info?.firstName, currentUser?.info?.middleName, currentUser?.info?.lastName) : (anotherUser.firstName, anotherUser.middleName, anotherUser.lastName)}
+                        {id == currentUser?.id ? (`${currentUser?.info?.firstName} ${currentUser?.info?.middleName} ${currentUser?.info?.lastName}`) : (`${anotherUser?.firstName} ${anotherUser?.middleName} ${anotherUser?.lastName}`)}
                     </h5>
                     <div className={styles.location}>
                         <p className={styles.location_name}>{id == currentUser?.id ? currentUser?.info?.location : anotherUser?.location}</p>
