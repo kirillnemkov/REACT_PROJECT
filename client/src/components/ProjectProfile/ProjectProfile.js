@@ -18,9 +18,10 @@ import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import Comment from '../Comment/Comment'
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
 import { grey } from '@material-ui/core/colors'
-import InstagramIcon from '@material-ui/icons/Instagram';
-import TwitterIcon from '@material-ui/icons/Twitter';
-import FacebookIcon from '@material-ui/icons/Facebook';
+import InstagramIcon from '@material-ui/icons/Instagram'
+import TwitterIcon from '@material-ui/icons/Twitter'
+import FacebookIcon from '@material-ui/icons/Facebook'
+import GitHubIcon from '@material-ui/icons/GitHub'
 
 export default function ProjectProfile() {
     // const classes = useStyles()
@@ -57,14 +58,6 @@ export default function ProjectProfile() {
                 <div className={styles.title}>
                     <h1 style={{ margin: 0 }}>{project?.title}</h1>
                     <div>
-                        <a href={project?.website}>
-                            <IconButton>
-                                <AddToHomeScreenIcon
-                                    fontSize="large"
-                                    style={{ color: grey[900] }}
-                                />
-                            </IconButton>
-                        </a>
                         <IconButton
                             onClick={() => handleLike(projectId, user)}
                             id={project?._id}
@@ -74,7 +67,7 @@ export default function ProjectProfile() {
                         </IconButton>
                         {project?.likes.length}
                         <IconButton>
-                            <VisibilityOutlinedIcon fontSize="large" />
+                            <VisibilityOutlinedIcon fontSize="large" style={{ color: grey[900] }}/>
                         </IconButton>
                         {project?.views?.length}
                     </div>
@@ -97,26 +90,45 @@ export default function ProjectProfile() {
                     </div>
                 </div>
                 <hr style={{ width: '900px' }} />
-                <div className={styles.usercontactscont}>
-                <IconButton>
-                            <VisibilityOutlinedIcon fontSize="large" />
-                        </IconButton>
-                </div>
-
                 <div className={styles.socseti}>
+                    <a href={project?.website}>
+                        <IconButton>
+                            <AddToHomeScreenIcon
+                                fontSize="large"
+                                style={{ color: grey[900] }}
+                            />
+                        </IconButton>
+                    </a>
+                    <a href={project?.gitHub}>
+                        <IconButton>
+                            <GitHubIcon
+                                fontSize="large"
+                                style={{ color: grey[900] }}
+                            />
+                        </IconButton>
+                    </a>
                     <a href={project?.twitter}>
                         <IconButton>
-                            <TwitterIcon fontSize="large" />
+                            <TwitterIcon
+                                fontSize="large"
+                                style={{ color: grey[900] }}
+                            />
                         </IconButton>
                     </a>
                     <a href={project?.instagram}>
                         <IconButton>
-                            <InstagramIcon fontSize="large" />
+                            <InstagramIcon
+                                fontSize="large"
+                                style={{ color: grey[900] }}
+                            />
                         </IconButton>
                     </a>
                     <a href={project?.facebook}>
                         <IconButton>
-                            <FacebookIcon fontSize="large" />
+                            <FacebookIcon
+                                fontSize="large"
+                                style={{ color: grey[900] }}
+                            />
                         </IconButton>
                     </a>
                 </div>
