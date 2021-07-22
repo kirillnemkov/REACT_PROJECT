@@ -108,6 +108,7 @@ export const checkAuth = (history, errors) => async (dispatch) => {
             withCredentials: true,
         })
         const { user, accessToken } = response.data
+        console.log(response.data)
         dispatch(setUser(user))
         localStorage.setItem('token', accessToken)
         if (errors) dispatch(deleteError())
@@ -177,7 +178,6 @@ export const sendResetPasswordLetter =
         export const updateInformation = (id, payload, errors) => async (dispatch) => {
             dispatch(enableLoader())
             try {
-                console.log(payload)
                 const response = await UserService.updateInformation(id, payload)
                 const {about, firstName, middleName, lastName, location, gitHub, instagram, job, twitter, facebook} = response.data
                 const newObj = {about, firstName, middleName, lastName, location, gitHub, instagram, job, twitter, facebook}
@@ -197,7 +197,6 @@ export const sendResetPasswordLetter =
         export const initUserInfo = (id, errors) => async (dispatch) => {
             dispatch(enableLoader())
             try {
-                
                 const response = await UserService.getUserInfo(id)
                 dispatch(setUser(response.data))
                 if (errors) dispatch(deleteError())

@@ -9,6 +9,7 @@ const UserProjects = () => {
 
     const dispatch = useDispatch()
     const projects = useSelector((state) => state.projects)
+    const user = useSelector((state) => state.AnotherUser)
 
     useEffect(() => {
         dispatch(getAllProjects())
@@ -16,7 +17,7 @@ const UserProjects = () => {
 
     return (
         <div className={styles.rootcard}>
-            {projects.map((el) => <ProjectsCard el={el} />)}
+            {user.userProjects.map((el) => <ProjectsCard el={el} />)}
         </div>
     )
 }

@@ -11,7 +11,6 @@ const UserSchema = mongoose.Schema({
   firstName: { type: String },
   middleName: { type: String },
   // isfollow: [ { type : mongoose.Schema.Types.ObjectId, ref: "Team"}],
-  // isfavourite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
   about: { type: String },
   location: { type: String },
   job: { type: String },
@@ -31,6 +30,7 @@ const UserSchema = mongoose.Schema({
   instagram: { type: String },
   facebook: { type: String },
   date: { type: String },
+  userProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
 });
 
 module.exports = mongoose.model("User", UserSchema);

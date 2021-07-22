@@ -83,6 +83,7 @@ const UserProfile = () => {
 
     const {id} = useParams() 
 
+    console.log(id)
     
     useEffect(() => {
         const skill = (currentUser, anotherUser, id) => currentUser?.id == id ? currentUser?.skills : anotherUser?.skills

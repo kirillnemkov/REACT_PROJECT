@@ -1,11 +1,9 @@
 import { ResponsivePie } from '@nivo/pie'
-// import { useSelector } from 'react-redux'
 
-const MyResponsivePie = ({ skills }) => {
-    const arr = Object.entries(skills).map((el) =>
-        el.filter((el, i, arr) => el)
-    )
-    const data = arr.filter((el) => (el.length > 1 ? el : null))
+const MyResponsivePie = ({skills}) => {
+
+    const arr = Object.entries(skills).map((el) => el.filter((el, i, arr) => el))
+    const data = arr.filter((el) => el.length > 1 ? el : null)
 
     const newObj = data.reduce((acc, item) => {
         acc.push({ id: item[0], lable: item[0], value: item[1] })

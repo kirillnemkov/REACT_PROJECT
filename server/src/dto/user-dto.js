@@ -12,5 +12,6 @@ module.exports = class UserDto {
     this.skills = model.skills;
     this.info = { firstName: model.firstName, middleName: model.middleName, lastName: model.lastName, about: model.about, location: model.location, job: model.job, gitHub: model.gitHub, twitter: model.twitter, instagram: model.instagram, facebook: model.facebook, userProjects: model.userProjects }
     this.image = model.image
+    this.userProjects = model.userProjects
   }
 };

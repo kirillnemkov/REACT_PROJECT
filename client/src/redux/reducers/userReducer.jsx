@@ -3,8 +3,10 @@ import { DELETE_USER, SET_USER, GET_SKILLS, SET_IMG, INIT_USERINFO} from "../typ
 const userReducer = (state = null, action) => {
 
   switch (action.type) {
-    case SET_USER:
+    case SET_USER:{
+      console.log(action.payload)
       return action.payload
+    }
 
       case SET_IMG:
       return {...state, image: action.payload.url}
@@ -19,6 +21,7 @@ const userReducer = (state = null, action) => {
     
     case INIT_USERINFO: {
       const {info} = action.payload
+      console.log(info, 'innnnffffffooooooo')
       return {...state, info}
     }
     default:
