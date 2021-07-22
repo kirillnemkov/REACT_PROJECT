@@ -33,14 +33,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 
-const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
-    const user = useSelector((state) => state.user?.info)
+const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
+    const currentUser = useSelector(state => state?.user)
+    const anotherUser = useSelector(state => state?.AnotherUser)
     const classes = useStyles()
     const dispatch = useDispatch()
     const userPhoto = useSelector((state) => state.user)
     const [drag, setDrag] = useState(false)
     const flag = 'user'
-    const id = user?.id
 
     function changeHandler(e) {
         const [file] = e.target.files
@@ -98,17 +98,17 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                 </div>
                 <div className={styles.name_and_info_container}>
                     <h5 className={styles.user_name}>
-                        {(user?.firstName, user?.middleName, user?.lastName)}
+                        {id == currentUser?.id ? (currentUser?.info?.firstName, currentUser?.info?.middleName, currentUser?.info?.lastName) : (anotherUser.firstName, anotherUser.middleName, anotherUser.lastName)}
                     </h5>
                     <div className={styles.location}>
-                        <p className={styles.location_name}>location</p>
+                        <p className={styles.location_name}>{id == currentUser?.id ? currentUser?.info?.location : anotherUser?.location}</p>
                         <img
                             className={styles.location_img}
                             src="/location.png"
                             alt=""
                         ></img>
                     </div>
-                    <p>{user?.job}</p>
+                    <p>{id == currentUser?.id ? currentUser?.info?.job : anotherUser?.job}</p>
                 </div>
                 <div className={styles.button_group__userProfile}>
                     <div className={styles.upButtons}>

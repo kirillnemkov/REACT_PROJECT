@@ -5,6 +5,7 @@ import errorReducer from "./errorReducer";
 import projectsReducer from "./projectsReducer";
 import projectReducer from "./projectReducer";
 import commentReducer from "./commentReducer"
+import AnotherProfileReducer from "./AnotherProfileReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   project: projectReducer,
   error: errorReducer,
   comment: commentReducer,
+  AnotherUser: AnotherProfileReducer,
 })
 
 export default rootReducer;

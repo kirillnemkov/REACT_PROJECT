@@ -199,7 +199,6 @@ export const sendResetPasswordLetter =
             try {
                 
                 const response = await UserService.getUserInfo(id)
-                console.log(response.data, 'user dataaaaaaa----------')
                 dispatch(setUser(response.data))
                 if (errors) dispatch(deleteError())
             } catch (error) {
