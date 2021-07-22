@@ -6,6 +6,7 @@ import styles from './About.module.css'
 
 const About = () => {
     const user = useSelector(state => state.user?.info?.about)
+    console.log(user)
 
     return (
         <>

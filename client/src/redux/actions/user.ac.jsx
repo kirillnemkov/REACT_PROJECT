@@ -54,7 +54,7 @@ export const signIn = (payload, history, errors) => async (dispatch) => {
         dispatch(setUser(user))
         localStorage.setItem('token', accessToken)
         if (errors) dispatch(deleteError())
-        history.replace('/main')
+        history.replace('/')
     } catch (error) {
         const message = error?.response?.data?.message
         message
@@ -146,7 +146,7 @@ export const sendResetPasswordLetter =
               dispatch(setUser(user))
               localStorage.setItem('token', accessToken)
               if (errors) dispatch(deleteError())
-              history.push('/main')
+              history.push('/')
           } catch (error) {
               const message = error?.response?.data?.message
               message
