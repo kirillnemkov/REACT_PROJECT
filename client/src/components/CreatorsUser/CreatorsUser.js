@@ -8,18 +8,20 @@ import {
     CardContent,
     Typography,
 } from '@material-ui/core'
+import { grey } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: 250,
+        width: 300,
         marginTop: 10,
         marginLeft: 15,
+        backgroundColor: grey[400],
+        color: grey[100],
     },
     media: {
         height: 0,
         paddingTop: '80%',
     },
-    
 }))
 
 export default function CreatorsUser({ el }) {
@@ -27,17 +29,11 @@ export default function CreatorsUser({ el }) {
 
     return (
         <Link to={`/profile/${el._id}`}>
-            <Card className={classes.root} id={styles.media} key={el.id}>
-                <CardHeader title={`${el?.lastName} ${el?.firstName}`} />
+            <Card className={classes.root} id={styles.media} key={el?.id}>
                 <CardMedia className={classes.media} image={el?.image} />
+                <CardHeader title={`${el?.lastName} ${el?.firstName}`} />
                 <CardContent>
-                    <Typography
-                        variant="body2"
-                        color="textSecondary"
-                        component="p"
-                    >
-                        {el?.about && el.about}
-                    </Typography>
+                    <Typography variant="body2">{el?.date}</Typography>
                 </CardContent>
             </Card>
         </Link>

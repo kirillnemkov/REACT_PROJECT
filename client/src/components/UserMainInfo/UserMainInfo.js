@@ -92,7 +92,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen }) => {
                         onChange={changeHandler}
                         className={styles.file}
                     />
-                    <Button variant="contained" color="secondary">
+                    <Button variant="contained" color="light">
                         <label htmlFor="file">Добавить фото</label>
                     </Button>
                 </div>
