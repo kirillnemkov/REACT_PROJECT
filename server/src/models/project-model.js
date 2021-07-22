@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const ProjectSchema = mongoose.Schema({
-  title: { type: String},
+  title: { type: String },
   // team: { type: mongoose.Schema.Types.ObjectId, ref: "Team" },
   creators: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   likes: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
@@ -14,8 +14,8 @@ const ProjectSchema = mongoose.Schema({
   image: [{ type: String }],
   date: { type: String },
   hashtags: [{ type: String }],
-  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
+  views: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 });
 
 module.exports = mongoose.model("Project", ProjectSchema);

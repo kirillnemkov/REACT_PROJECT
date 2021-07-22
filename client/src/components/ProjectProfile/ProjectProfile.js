@@ -3,7 +3,11 @@ import { useEffect } from 'react'
 import { makeStyles } from '@material-ui/core/'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css'
-import { getOneProjects, likeProject } from '../../redux/actions/projects.ac'
+import {
+    getOneProjects,
+    likeProject,
+    viewsProject,
+} from '../../redux/actions/projects.ac'
 import CreatorsUser from '../CreatorsUser/CreatorsUser'
 import { Carousel } from '3d-react-carousal'
 import { checkAuth } from '../../redux/actions/user.ac'
@@ -47,12 +51,13 @@ export default function ProjectProfile() {
     const errors = useSelector((state) => state.errors)
     const user = useSelector((state) => state.user)
     const history = useHistory()
-
+    console.log(project)
     const { id } = useParams()
 
     useEffect(() => {
         dispatch(checkAuth(history, errors))
         dispatch(getOneProjects(id, errors))
+        dispatch(viewsProject(id, user))
     }, [id])
 
     let slides = project?.image?.map((el) => {
@@ -103,7 +108,7 @@ export default function ProjectProfile() {
                     <IconButton>
                         <VisibilityOutlinedIcon fontSize="large" />
                     </IconButton>
-                    {project?.views}
+                    {project?.views.length}
                 </div>
 
                 <div className={styles.about}>

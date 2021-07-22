@@ -1,48 +1,63 @@
-import React from 'react';
+import { useParams} from 'react-router-dom'
+import {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import { useDispatch, useSelector } from 'react-redux'
-import FormControl from '@material-ui/core/FormControl';
-import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
-import {Avatar} from '@material-ui/core';
+import {Avatar, IconButton, TextField} from '@material-ui/core';
+import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
+import {postComment} from "../../redux/actions/comment.ac"
+import { getComment } from '../../redux/actions/comment.ac'; 
 
 const useStyles = makeStyles(theme => ({
   margin: {
-    // margin: theme.spacing(1),
-    // position: "absolute",
     marginTop: 100,
   },
+  root: {
+    position: "absolute",
+    top: 200,
+  }
 }));
 
 export default function Comment() {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const project = useSelector((state) => state.project)
   const user = useSelector((state) => state.user)
+  const [commnets, setComments] = ([])
+  const [input, setInput] = useState('')
+  const { id } = useParams()
 
-  const handleSubmit = () => {
 
+  useEffect(() => {
+    dispatch(getComment(id))
+  }, [])
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postComment(id, user, input))
   }
 
-  const hadleChange = () => {
-    
+  const hadleChange = (e) => {
+    setInput(e.target.value);
   }
-
 
   return (
     <>
-      <FormControl className={classes.margin}>
+      <form onSubmit={handleSubmit} method="POST" className={classes.margin} >
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
           <Avatar alt="Remy Sharp" src={user?.image} />
           </Grid>
           <Grid item>
-            <TextField id="input-with-icon-grid" label="Your comment here" />
+            <TextField onChange={(e) => hadleChange(e)} id="input-with-icon-grid" label="Your comment here" />
           </Grid>
+        <IconButton type="submit" color="secondary">
+          <ChevronRightOutlinedIcon />
+        </IconButton>
         </Grid>
-      </FormControl>
+      </form>
+      {/* <div className={classes.root}>{comment.map((el) => <p>{el.title}</p>)}</div> */}
       </>
   );
 }

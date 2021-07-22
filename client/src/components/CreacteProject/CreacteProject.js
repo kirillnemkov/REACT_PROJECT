@@ -74,9 +74,9 @@ const CreacteProject = () => {
 
 
     const onSubmit = (data) => {
-        const dataToSend = { ...data, hashtags: data.hashtags.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id], file }
-        console.log(dataToSend, file)
-        // dispatch(createProject(dataToSend))
+        const dataToSend = { ...data, hashtags: data.hashtags.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '').split(' '), creators: [user?.id] }
+        console.log(dataToSend)
+        dispatch(createProject(dataToSend))
         // Helpers.uploadFile(flag, file, dispatch, setError, setProjectImg, )
     }
     return (
