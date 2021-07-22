@@ -7,7 +7,7 @@ import Link from '@material-ui/core/Link';
 const useStyles = makeStyles((theme) => ({
   footer: {
     padding: theme.spacing(2, 0),
-    marginTop: '60px',
+    marginTop: '200px',
     // marginTop: 'auto',
     backgroundColor:
       theme.palette.type === 'light' ? theme.palette.grey[100] : theme.palette.grey[800],

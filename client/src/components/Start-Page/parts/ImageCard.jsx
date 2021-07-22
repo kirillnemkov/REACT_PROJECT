@@ -16,7 +16,7 @@ const useStyles = makeStyles({
     borderRadius: '20px'
   },
   title: {
-    fontFamily: "Nunito",
+    fontFamily: "Arial",
     fontWeight: "bold",
     fontSize: "2rem",
     color: "#fff",
@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     minHeight: '300px'
   },
   link: {
-    fontFamily: "Nunito",
+    fontFamily: "Arial",
     fontSize: "1.1rem",
     color: "#ddd",
     textDecoration: 'none',

@@ -45,7 +45,7 @@ function App() {
                     <StartPage />
                 </Route>
             </Switch>
-            <Footer/>
+            {/* <Footer/> */}
             </>
     )
 }

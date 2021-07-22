@@ -1,5 +1,4 @@
 .user_img {
-    /* padding-bottom: 20px; */
     max-width: 150px;
     align-items: center;
     border-radius: 50%;
@@ -15,6 +14,8 @@
     display: flex;
     flex-direction: row;
     line-height: normal;
+    letter-spacing: 1px;
+    margin-top: 10px;
 }
 
 .userProfile_container {
@@ -30,8 +31,6 @@
     padding-top: 10%;
     margin-left: 15%;
     margin-right: 15%;
-    /* background-color: #e6e6e6; */
-    /* background-color: black */
 }
 
 .name_and_info_container {
@@ -59,16 +58,28 @@
     margin: 0;
     margin-bottom: 20px;
     text-align: center;
+    font-family: Helvetica, sans-serif;
+    font-size: 19px;
 }
 
 .upButtons {
     display: flex;
-    justify-content: inherit;
+    justify-content: space-between;
 }
 
 .file {
-  opacity: 0;
-  width: 0.1px;
-  height: 0.1px;
-  position: absolute;
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+}
+
+.job {
+    font-family: Helvetica, sans-serif;
+    font-size: 19px;
+    padding-top: 10px;
+}
+.falsh{
+  margin-right: 1px;
+  margin-left: 1px;
 }

@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        
     },
     projectimgmodal: {
         backgroundColor: theme.palette.background.paper,

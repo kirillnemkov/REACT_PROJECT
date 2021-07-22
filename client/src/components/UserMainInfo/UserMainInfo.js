@@ -8,12 +8,11 @@ import Helpers from '../../helpers/UploadsHelper'
 import { setError } from '../../redux/actions/errors.ac'
 import { setUserImg } from '../../redux/actions/user.ac'
 import { useState } from 'react'
-import grey from '@material-ui/core/colors/grey'
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        backgroundColor: grey[500],
-        marginLeft: '8px',
+      marginTop:"10px",
+        backgroundColor: '#FF4268',
         '& .MuiButton-label': {
             justifyContent: 'end',
         },
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     addButton: {
-        backgroundColor: grey[500],
+        backgroundColor: '#FF4268',
         width: '100%',
         height: '36px',
         '& .MuiButton-endIcon': {
@@ -34,11 +33,15 @@ const useStyles = makeStyles((theme) => ({
         boxShadow:
             '0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%), 0px 3px 0px -2px rgb(0 0 0 / 12%)',
     },
+    photobutton: {
+        // backgroundColor: '#4521ab',
+        // color: 'white',
+    },
 }))
 
 const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
-    const currentUser = useSelector(state => state?.user)
-    const anotherUser = useSelector(state => state?.AnotherUser)
+    const currentUser = useSelector((state) => state?.user)
+    const anotherUser = useSelector((state) => state?.AnotherUser)
     const classes = useStyles()
     const dispatch = useDispatch()
     const userPhoto = useSelector((state) => state.user)
@@ -101,18 +104,36 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                     </Button>
                 </div>
                 <div className={styles.name_and_info_container}>
-                    <h5 className={styles.user_name}>
-                        {id == currentUser?.id ? (currentUser?.info?.firstName, currentUser?.info?.middleName, currentUser?.info?.lastName) : (anotherUser?.firstName, anotherUser?.middleName, anotherUser?.lastName)}
-                    </h5>
+                    <h1 className={styles.user_name}>
+                        {/* Немков Кирилл Константинович */}
+                        {/* {id == currentUser?.id
+                            ? (currentUser?.info?.firstName,
+                              currentUser?.info?.middleName,
+                              currentUser?.info?.lastName)
+                            : (anotherUser?.firstName,
+                              anotherUser?.middleName,
+                              anotherUser?.lastName)}
+                        {id == currentUser?.id ? (currentUser?.info?.firstName) (currentUser?.info?.middleName) (currentUser?.info?.lastName) :
+                         (anotherUser?.firstName)(anotherUser?.middleName) (anotherUser?.lastName)} */}
+                    </h1>
                     <div className={styles.location}>
-                        <p className={styles.location_name}>{id == currentUser?.id ? currentUser?.info?.location : anotherUser?.location}</p>
+                        <div className={styles.location_name}>
+                            {id == currentUser?.id
+                                ? currentUser?.info?.location
+                                : anotherUser?.location}
+                        </div>
                         <img
                             className={styles.location_img}
                             src="/location.png"
                             alt=""
                         ></img>
                     </div>
-                    <p>{id == currentUser?.id ? currentUser?.info?.job : anotherUser?.job}</p>
+                    <div className={styles.job}>
+                        Место работы:{' '}
+                        {id == currentUser?.id
+                            ? currentUser?.info?.job
+                            : anotherUser?.job}
+                    </div>
                 </div>
                 <div className={styles.button_group__userProfile}>
                     <div className={styles.upButtons}>
@@ -121,6 +142,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                             className={classes.button}
                             endIcon={<SendIcon />}
                         ></Button>
+                        <div className={styles.falsh}></div>
                         <Button
                             variant="contained"
                             onClick={handleOpen}

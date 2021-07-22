@@ -4,6 +4,11 @@
 .skills {
 }
 
+body {
+    /* background-color: rgba(230, 236, 235, 0.842); */
+    margin: 0;
+}
+
 .location {
     display: flex;
     flex-direction: row;
@@ -49,7 +54,10 @@
 .skills_container {
 }
 
-a, a:hover, a:focus, a:active{
+a,
+a:hover,
+a:focus,
+a:active {
     color: inherit; /* blue colors for links too */
     text-decoration: inherit; /* no underline */
 }
