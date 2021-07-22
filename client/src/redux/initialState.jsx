@@ -4,6 +4,7 @@ const initState = {
   user: null,
   loader: false,
   error: null,
+  AnotherUser: null
 }
 
 const getInitState = () => {
