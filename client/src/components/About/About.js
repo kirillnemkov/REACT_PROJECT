@@ -6,7 +6,12 @@ import styles from './About.module.css'
 
 const About = () => {
     const user = useSelector(state => state.user?.info?.about)
-    console.log(user)
+    const dispatch = useDispatch()
+    const {id} = useParams()
+
+    useEffect(() => {
+        dispatch(initUserInfo(id))
+    })
 
     return (
         <>
