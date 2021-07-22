@@ -1,5 +1,6 @@
 const Project = require("../models/project-model");
 const Comment = require("../models/comment-model");
+const User = require("../models/user-model")
 const treelize = require('../service/helper-service')
 
 class ProjectController {
@@ -61,7 +62,11 @@ try {
 
   async createProject(req, res, next) {
     try {
-      const newProject = await Project.create(req.body);
+      const { id, ...rest} = req.body;
+      const newProject = await Project.create(rest);
+      if(newProject){
+        await User.findByIdAndUpdate(id, {$push: {userProjects: [newProject._id]}}, {new: true})
+      }
       return res.json(newProject);
     } catch (err) {
       next(err);

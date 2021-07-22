@@ -17,7 +17,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import Comment from '../Comment/Comment'
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
-import { grey } from '@material-ui/core/colors'
+import { grey, blue, pink, indigo} from '@material-ui/core/colors'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import FacebookIcon from '@material-ui/icons/Facebook'
@@ -86,7 +86,7 @@ export default function ProjectProfile() {
                         <IconButton>
                             <AddToHomeScreenIcon
                                 fontSize="large"
-                                style={{ color: grey[900] }}
+                                style={{ color: grey[700] }}
                             />
                         </IconButton>
                     </a>
@@ -94,7 +94,7 @@ export default function ProjectProfile() {
                         <IconButton>
                             <GitHubIcon
                                 fontSize="large"
-                                style={{ color: grey[900] }}
+                                style={{ color: grey[50] }}
                             />
                         </IconButton>
                     </a>
@@ -102,7 +102,7 @@ export default function ProjectProfile() {
                         <IconButton>
                             <TwitterIcon
                                 fontSize="large"
-                                style={{ color: grey[900] }}
+                                style={{ color: blue[600] }}
                             />
                         </IconButton>
                     </a>
@@ -110,7 +110,7 @@ export default function ProjectProfile() {
                         <IconButton>
                             <InstagramIcon
                                 fontSize="large"
-                                style={{ color: grey[900] }}
+                                style={{ color: pink[400] }}
                             />
                         </IconButton>
                     </a>
@@ -118,12 +118,12 @@ export default function ProjectProfile() {
                         <IconButton>
                             <FacebookIcon
                                 fontSize="large"
-                                style={{ color: grey[900] }}
+                                style={{ color: indigo[500] }}
                             />
                         </IconButton>
                     </a>
                 </div>
-                <hr style={{ width: '900px' }} />
+                <hr style={{ width: '1300px' }} />
                 <b className={styles.text}>
                     {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
                 </b>
@@ -134,14 +134,14 @@ export default function ProjectProfile() {
                         })}
                     </div>
                 </div>
-                <hr style={{ width: '900px' }} />
+                <hr style={{ width: '1300px' }} />
                 <b className={styles.text}>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
                 <div className={styles.conteinerUser}>
                     {projects.map((el) => {
                         return <ProjectsCard el={el} />
                     })}
                 </div>
-                <hr style={{ width: '900px' }} />
+                <hr style={{ width: '1300px' }} />
                 <b className={styles.text}>КОММЕНТАРИИ К ПРОЕКТУ</b>
 
                 <div>

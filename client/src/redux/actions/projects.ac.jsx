@@ -1,6 +1,6 @@
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
-import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, SET_PROJECT_IMG, PROJECT_VIEWS,} from '../types/projectsTypes'
+import {PROJECTS_INIT,PROJECT_DELETE,PROJECT_EDIT,PROJECT_CREATE, PROJECT_ONE, PROJECT_LIKE, SET_PROJECT_IMG, PROJECT_VIEWS} from '../types/projectsTypes'
 import ProjectsService from '../../services/ProjectsService'
 import axios from 'axios'
 
@@ -8,6 +8,7 @@ const projectOne = (project) => ({
     type: PROJECT_ONE,
     payload: { project },
 })
+
 
 const projectsInit = (projects) => ({
     type: PROJECTS_INIT,
@@ -43,6 +44,7 @@ export const setProjectImg = (url) => ({
     type: SET_PROJECT_IMG,
     payload: {url},
 })
+
 
 export const likeProject = (id, user, errors) => async (dispatch) => {
     dispatch(enableLoader())

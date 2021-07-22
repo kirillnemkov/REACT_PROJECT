@@ -85,7 +85,7 @@ const UserProfile = () => {
 
     
     useEffect(() => {
-        const skill = (currentUser, anotherUser, id) => currentUser.id == id ? currentUser?.skills : anotherUser.skills
+        const skill = (currentUser, anotherUser, id) => currentUser?.id == id ? currentUser?.skills : anotherUser?.skills
         setSkills(skill(currentUser, anotherUser, id))
     })  
 

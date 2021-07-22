@@ -5,3 +5,4 @@ export const SET_INFO = 'SET_INFO'
 export const INIT_USERINFO = 'INIT_USERINFO'
 
 export const SET_IMG = 'SET_IMG'
+

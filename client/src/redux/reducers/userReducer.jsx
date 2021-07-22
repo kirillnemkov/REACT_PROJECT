@@ -1,4 +1,4 @@
-import { DELETE_USER, SET_USER, GET_SKILLS, SET_IMG, INIT_USERINFO } from "../types/userTypes";
+import { DELETE_USER, SET_USER, GET_SKILLS, SET_IMG, INIT_USERINFO} from "../types/userTypes";
 
 const userReducer = (state = null, action) => {
 
@@ -21,7 +21,6 @@ const userReducer = (state = null, action) => {
       const {info} = action.payload
       return {...state, info}
     }
-
     default:
       return state
   }

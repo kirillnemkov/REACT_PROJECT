@@ -1,4 +1,4 @@
-import { SET_USER, DELETE_USER, GET_SKILLS, SET_INFO, SET_IMG, INIT_USERINFO  } from '../types/userTypes'
+import { SET_USER, DELETE_USER, GET_SKILLS, SET_IMG, INIT_USERINFO} from '../types/userTypes'
 import { disableLoader, enableLoader } from './loader.ac'
 import { setError, deleteError } from './errors.ac'
 import axios from 'axios'
@@ -210,5 +210,5 @@ export const sendResetPasswordLetter =
                 dispatch(disableLoader())
             }
         }
-
+        
         

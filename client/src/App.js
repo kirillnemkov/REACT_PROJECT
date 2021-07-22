@@ -14,7 +14,7 @@ import Footer from "./components/Footer/Footer.jsx"
 function App() {
   
     return (
-        <div style={{ backgroundColor: "#D8D8D8"}}>
+      <>
             <Navbar />
             <Switch>
                 <Route exact path="/start">
@@ -46,7 +46,7 @@ function App() {
                 </Route>
             </Switch>
             <Footer/>
-        </div>
+            </>
     )
 }
 

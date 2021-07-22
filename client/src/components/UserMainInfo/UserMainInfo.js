@@ -102,7 +102,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                 </div>
                 <div className={styles.name_and_info_container}>
                     <h5 className={styles.user_name}>
-                        {id == currentUser?.id ? (currentUser?.info?.firstName, currentUser?.info?.middleName, currentUser?.info?.lastName) : (anotherUser.firstName, anotherUser.middleName, anotherUser.lastName)}
+                        {id == currentUser?.id ? (currentUser?.info?.firstName, currentUser?.info?.middleName, currentUser?.info?.lastName) : (anotherUser?.firstName, anotherUser?.middleName, anotherUser?.lastName)}
                     </h5>
                     <div className={styles.location}>
                         <p className={styles.location_name}>{id == currentUser?.id ? currentUser?.info?.location : anotherUser?.location}</p>

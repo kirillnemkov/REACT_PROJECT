@@ -22,7 +22,7 @@ const useStyles = makeStyles({
     color: "#fff",
   },
   desc: {
-    fontFamily: "Nunito",
+    fontFamily: "Arial",
     fontSize: "1.1rem",
     color: "#ddd",
     overflow: 'hidden',
@@ -52,7 +52,6 @@ const useStyles = makeStyles({
 
 export default function ImageCard({payload, handleClick, checked}) {
   const classes = useStyles();
-  // console.log([payload])
 
   return (
       <Card className={classes.root}>

@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
   username: { type: String, unique: true, required: true },
   email: { type: String, unique: true, require: true },
+  userProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
   password: { type: String, require: true },
   isActivated: { type: Boolean, default: false },
   activationLink: { type: String },
@@ -10,7 +11,7 @@ const UserSchema = mongoose.Schema({
   firstName: { type: String },
   middleName: { type: String },
   // isfollow: [ { type : mongoose.Schema.Types.ObjectId, ref: "Team"}],
-  isfavourite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
+  // isfavourite: [{ type: mongoose.Schema.Types.ObjectId, ref: "Project" }],
   about: { type: String },
   location: { type: String },
   job: { type: String },

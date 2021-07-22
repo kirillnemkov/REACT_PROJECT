@@ -12,5 +12,4 @@ export default class UserService {
   static async getUserInfo(id) {
     return $api.get(`/profile/${id}`)
   }
-  getUserInfo
 }

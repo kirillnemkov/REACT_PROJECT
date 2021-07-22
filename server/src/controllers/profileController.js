@@ -4,8 +4,8 @@ class ProfileController {
   async getProfile(req, res, next) {
     try {
       const { id } = req.params;
-      const oneUser = await User.findById(id);
-      console.log(oneUser)
+      const oneUser = await User.findById(id).populate("userProjects");
+      console.log(oneUser);
       return res.json(oneUser);
     } catch (err) {
       next(err);
@@ -15,42 +15,33 @@ class ProfileController {
   async editProfile(req, res, next) {
     try {
       const { id } = req.params;
-      const { firstName,
-        middleName,
-        lastName,
-        about,
-        location,
-        job,
-        url,
-        gitHub,
-        twitter,
-        instagram,
-        facebook } = req.body
+      const { firstName, middleName, lastName, about, location, job, url, gitHub, twitter, instagram, facebook } = req.body;
       if (firstName || middleName || about || location || job || url || gitHub || twitter || instagram || facebook) {
-        console.log(id)
-        const editUser = await User.findOneAndUpdate({_id: id}, {
-          firstName,
-          middleName,
-          lastName,
-          about,
-          location,
-          job,
-          url,
-          gitHub,
-          twitter,
-          instagram,
-          facebook,
-        }, { new: true });
-        console.log(editUser)
+        console.log(id);
+        const editUser = await User.findOneAndUpdate(
+          { _id: id },
+          {
+            firstName,
+            middleName,
+            lastName,
+            about,
+            location,
+            job,
+            url,
+            gitHub,
+            twitter,
+            instagram,
+            facebook,
+          },
+          { new: true }
+        );
+        console.log(editUser);
         return res.json(editUser);
-      }
-      else {
+      } else {
         const editUserSkills = await User.findByIdAndUpdate(id, { skills: req.body }, { new: true });
-        console.log(editUserSkills)
+        console.log(editUserSkills);
         return res.json(editUserSkills);
       }
-
-
     } catch (err) {
       next(err);
     }

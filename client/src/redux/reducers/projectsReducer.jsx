@@ -7,6 +7,7 @@ const projectsReducer = (state = [], action) => {
       const { projects } = payload;
       return projects;
     }
+    
     default: {
       return state;
     }
