@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Grid from '@material-ui/core/Grid';
 import {Avatar, IconButton, TextField} from '@material-ui/core';
 import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
-import {postComment} from "../../redux/actions/comment.ac"
-import { getComment } from '../../redux/actions/comment.ac'; 
+import {setComment} from "../../redux/actions/comment.ac"
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -18,20 +17,26 @@ export default function Comment() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const project = useSelector((state) => state.project)
+  // const comments = useSelector((state) => state.comment)
+  const error = useSelector((state) => state.error)
   const user = useSelector((state) => state.user)
   const [comments, setComments] = ([])
   const [input, setInput] = useState('')
-  const { id } = useParams()
+  const { projectId } = useParams()
 
 
-  useEffect(() => {
-    dispatch(getComment(id))
-  }, [])
+  // useEffect(() => {
+  //   dispatch(getComment(id))
+  // }, [])
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postComment(id, user, input))
+    let parentId
+    if(e.currentTarget.id !== "input-with-icon-grid"){
+     parentId = e.currentTarget.id
+    } 
+    dispatch(setComment(projectId, user.id, input, parentId, error))
   }
 
   const hadleChange = (e) => {
@@ -51,6 +56,13 @@ export default function Comment() {
         <IconButton type="submit" color="secondary">
           <ChevronRightOutlinedIcon />
         </IconButton>
+      {comments?.map(item => {
+        return (
+          <IconButton id={item._id} type="submit" color="secondary">
+            Ответить
+          </IconButton>
+        )
+        })}
         </Grid>
       </form>
       </>
