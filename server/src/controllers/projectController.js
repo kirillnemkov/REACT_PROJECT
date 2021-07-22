@@ -41,7 +41,7 @@ class ProjectController {
   async updateViewsProject(req, res, next) {
 try {
   const {projectId} = req.params
-  const {userId} = req.body
+  const {userIp: userId} = req.body
   const project = await Project.findById(projectId).populate("creators");
   if(!project.views.includes(userId)) {
     const projectWithUpdatedViews = await Project.findByIdAndUpdate(

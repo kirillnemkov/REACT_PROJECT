@@ -57,7 +57,7 @@ export default function ProjectProfile() {
     useEffect(() => {
         dispatch(checkAuth(history, errors))
         dispatch(getOneProjects(projectId, errors))
-        dispatch(viewsProject(projectId, user))
+        dispatch(viewsProject(projectId))
     }, [projectId])
 
     let slides = project?.image?.map((el) => {
