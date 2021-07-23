@@ -145,7 +145,7 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                             variant="contained"
                             className={classes.button}
                             endIcon={<SendIcon />}
-                        ></Button>
+                        ><a href={`mailto:${anotherUser?.email}`}>Send</a></Button>
                         <div className={styles.falsh}></div>
                         {id == currentUser?.id ? (<Button
                             variant="contained"
