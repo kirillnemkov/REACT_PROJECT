@@ -7,7 +7,7 @@ const AnotherProfileReducer = (state = {}, action) => {
       case SET_ANOTHER_INFO: {
         const{ payload } = action
         console.log(payload)
-        const info = {...state, id: payload._id ,firstName: payload.firstName, middleName: payload.middleName, lastName: payload.lastName, about: payload.about, location: payload.location, job: payload.job, gitHub: payload.gitHub, twitter: payload.twitter, instagram: payload.instagram, facebook: payload.facebook, skills: payload.skills, userProjects: payload.userProjects }
+        const info = {...state, id: payload._id ,firstName: payload.firstName, middleName: payload.middleName, lastName: payload.lastName, about: payload.about, location: payload.location, job: payload.job, gitHub: payload.gitHub, twitter: payload.twitter, instagram: payload.instagram, facebook: payload.facebook, skills: payload.skills, userProjects: payload.userProjects, image: payload.image }
         return info
       }
     

@@ -7,9 +7,10 @@ import IconButton from '@material-ui/core/IconButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { updateInformation } from '../../../redux/actions/user.ac';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 const useStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
@@ -20,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: '15px',
         width: '140px',
-        marginBottom:"15px",
+        marginBottom: "15px",
     },
     TextField: {
         marginTop: '15px',
@@ -35,90 +36,179 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
     },
     formContainer: {
-        margin: '0 auto'
+        margin: '0 auto',
     },
     IconButton: {
     }
 }));
 const InformationForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
+    const data = useSelector(state => state.user?.info)
+    const [inputData, setInputData] = useState(null)
+    useEffect(() => {
+        setInputData(data)
+    }, [])
+
+    const preloadedValues = {
+        firstName: inputData?.firstName,
+        middleName: inputData?.middleName
+    }
     const classes = useStyles();
-    const { register, handleSubmit } = useForm()
+    const { handleSubmit, control } = useForm();
     const dispatch = useDispatch()
     const { id } = useParams()
     const onSubmit = (data) => dispatch(updateInformation(id, data))
-    const data = useSelector(state => state.user?.info)
+    const inputToStorage = () => {
+
+    }
+
+
     return (
         <><form onSubmit={handleSubmit(onSubmit)} className={classes.formContainer} noValidate autoComplete="off">
             <div className={styles.formContainer}>
                 <span className={styles.formSpan}>Редактирование профиля</span>
-                <TextField
-                    type="text"
-                    data-id='firstName'
-                    id="standard-basic"
-                    label="Имя"
+                <Controller
+                    name="firstName"
+                    control={control}
+                    defaultValue={data?.firstName}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Имя"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
+                />
 
-                    className={classes.TextField}
-                    {...register('firstName')}
+                <Controller
+                    name="middleName"
+                    control={control}
+                    defaultValue={data?.middleName}
+                    className={classes.TextField_first}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Отчество"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
-                <TextField
-                    id="standard-basic"
-                    label="Отчесто"
+                <Controller
+                    name="lastName"
+                    control={control}
+                    defaultValue={data?.lastName}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Фамилия"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
+                />
+                <Controller
+                    name="about"
+                    control={control}
+                    defaultValue={data?.about}
+                    className={classes.TextField_first}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="О себе"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
+                />
 
-                    className={classes.TextField}
-                    {...register('middleName')}
+                <Controller
+                    name="location"
+                    control={control}
+                    defaultValue={data?.location}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Город"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
-                <TextField
-                    id="standard-basic"
-                    label="Фамилия"
-
-                    className={classes.TextField}
-                    {...register('lastName')}
+                <Controller
+                    name="job"
+                    control={control}
+                    defaultValue={data?.job}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Работа"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
-                <TextField
-                    id="standard-basic"
-                    label="О себе"
-
-                    {...register('about')}
-                    className={classes.TextField}
+                <Controller
+                    name="gitHub"
+                    control={control}
+                    defaultValue={data?.gitHub}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="GitHub"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
-                <TextField
-                    id="standard-basic"
-                    label="Город"
-
-                    className={classes.TextField}
-                    {...register('location')}
+                <Controller
+                    name="twitter"
+                    control={control}
+                    defaultValue={data?.twitter}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Twitter"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
-                <TextField
-                    {...register('job')}
-                    id="standard-basic"
-                 
-                    label="Работа"
-                    className={classes.TextField}
+                <Controller
+                    name="instagram"
+                    control={control}
+                    defaultValue={data?.instagram}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Instagram"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
-                <TextField
-                    id="standard-basic"
-                    label="GitHub"
-
-                    {...register('gitHub')}
-                    className={classes.TextField}
-                />
-                <TextField
-                    id="standard-basic"
-                    label="Twitter"
-                    {...register('twitter')}
-                    className={classes.TextField}
-                />
-                <TextField
-                    id="standard-basic"
-                    label="Instagram"
-                    {...register('instagram')}
-                    className={classes.TextField}
-                />
-                <TextField
-                    id="standard-basic"
-                    label="Facebook"
-                    {...register('facebook')}
-                    className={classes.TextField}
+                <Controller
+                    name="facebook"
+                    control={control}
+                    defaultValue={data?.facebook}
+                    render={({ field: { onChange, value } }) => (
+                        <TextField
+                            label="Facebook"
+                            variant="filled"
+                            value={value}
+                            onChange={onChange}
+                            className={classes.TextField_first}
+                        />
+                    )}
                 />
                 <div className={styles.button_group}>
                     <Button

@@ -72,14 +72,14 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
         Angular: false,
         HBS: false,
         Pyton: false,
-        Haskel: false,
+        Haskell: false,
     });
 
     const dispatch = useDispatch()
     const { id } = useParams()
 
-    const [inputValue, setInputValue] = useState({ Javascript: 0, NodeJS: 0, Vue: 0, React: 0, Angular: 0, HBS: 0, Pyton: 0, Haskel: 0 })
-    const { JavaScript, React, NodeJS, Vue, Angular, HBS, Pyton, Haskel } = skills;
+    const [inputValue, setInputValue] = useState({ Javascript: 0, NodeJS: 0, Vue: 0, React: 0, Angular: 0, HBS: 0, Pyton: 0, Haskell: 0 })
+    const { JavaScript, React, NodeJS, Vue, Angular, HBS, Pyton, Haskell } = skills;
 
     const handleSkillChange = (event) => {
         setSkills({ ...skills, [event.target.name]: event.target.checked });
@@ -193,14 +193,14 @@ const SkillsForm = ({ previousPageButtonHandler, nextPageButtonHandler }) => {
                                 className={classes.checkbox}
                                 control={
                                     <Checkbox
-                                        checked={Haskel}
+                                        checked={Haskell}
                                         onChange={handleSkillChange}
-                                        name="Haskel"
+                                        name="Haskell"
                                     />
                                 }
-                                label="Haskel"
+                                label="Haskell"
                             />
-                            {Haskel ? (<UserEditSlider aria={'Haskell'} id={'Haskell'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Haskel} />) : null}
+                            {Haskell ? (<UserEditSlider aria={'Haskell'} id={'Haskell'} handleClickChange={handleSliderChange} handleSliderChange={handleSliderChange} inputValue={inputValue.Haskell} />) : null}
                         </FormGroup>
                     </FormControl>
                     <div className={styles.button_group}>
