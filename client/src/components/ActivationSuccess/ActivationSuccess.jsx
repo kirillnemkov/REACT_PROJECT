@@ -17,8 +17,12 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
     },
     alertik: {
-        width: '700px',
+        width: '850px',
+        fontSize:"19px",
     },
+    alertq:{
+      fontSize:"20px"
+    }
 }))
 
 const ActivationSuccess = () => {
@@ -41,12 +45,12 @@ const ActivationSuccess = () => {
       
         <div className={classes.root}>
             <Alert className={classes.alertik} severity="success">
-                <AlertTitle>Hey Guys, у нас всё найс!</AlertTitle>
-                <strong>
+                <AlertTitle className={classes.alertq}><strong>Hey Guys, у нас всё найс!</strong></AlertTitle>
+               
                     Вы будете автоматически перенаправлены на главную страницу
                     через {timer}{' '}
                     {timer <= 1 ? 'секунду' : timer < 5 ? 'секунды' : 'секунд'}
-                </strong>
+                
             </Alert>
         </div>
     )

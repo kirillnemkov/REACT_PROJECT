@@ -11,15 +11,6 @@ const useStyles = makeStyles((theme) => ({
     width: 70,
     borderRadius: "50px",
   },
-  root: {
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #002884 90%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
-    height: 48,
-    padding: '0 30px',
-  },
   head: {
     display: 'flex',
     justifyContent: 'center',
@@ -40,18 +31,20 @@ const useStyles = makeStyles((theme) => ({
     width: 'auto',
   },
   colorText: {
-    color: '#4520ab',
+    fontFamily: "Arial",
+    color: '#0f217d',
   },
   container: {
     textAlign: 'center',
   },
   title: {
-    color: '#66eefb',
+    color: '#0f217d',
     fontSize: '4.5rem',
+    fontFamily: "Arial",
     position: 'relative'
   },
   goDown: {
-    color: '#4520ab',
+    color: '#0f217d',
     fontSize: '4rem',
   },
   video: {
@@ -74,7 +67,7 @@ export default function Header({changeHandler, searchText}) {
   return (
       <div className={classes.head} id="header">
         <Navbar changeHandler={changeHandler} searchText={searchText} />
-        <video className={classes.video} src="video.mp4" muted loop autoPlay>
+        <video className={classes.video} src="https://elbrusboot.camp/images/index.mp4" muted loop autoPlay>
           </video>
       <Collapse
         in={checked}

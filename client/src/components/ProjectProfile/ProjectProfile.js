@@ -152,12 +152,6 @@ export default function ProjectProfile() {
                 </div>
                 <hr style={{ width: '1400px' }} />
                 <b className={styles.text}>КОММЕНТАРИИ К ПРОЕКТУ</b>
-
-                {/* <div>
-                    <div className={styles.commentContainer}>
-                        <p className={styles.textForComment}></p>
-                    </div>
-                </div> */}
                 <div className={styles.comment}>
                     <Comment />
                 </div>

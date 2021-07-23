@@ -13,8 +13,13 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
     },
     alertik: {
-        width: '700px',
+        width: '800px',
+        height:"150px",
+        fontSize:"19px"
     },
+    alertq:{
+      fontSize:"20px"
+    }
 }))
 
 const SignupSuccessMessage = () => {
@@ -22,12 +27,12 @@ const SignupSuccessMessage = () => {
     return (
         <div className={classes.root}>
             <Alert className={classes.alertik} severity="info">
-                <AlertTitle>Эй ты, посмотри на меня!</AlertTitle>
-                <strong>
+            <AlertTitle className={classes.alertq}><strong>Эй ты, посмотри на меня!</strong></AlertTitle>
+                
                     Для завершения регистрации вам необходимо подтвердить адрес
                     электронной почты. Пожалуйста, проверьте почту и перейдите
                     по ссылке для активации аккаунта.
-                </strong>
+               
             </Alert>
         </div>
     )

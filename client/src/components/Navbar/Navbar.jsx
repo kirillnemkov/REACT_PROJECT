@@ -90,6 +90,7 @@ export default function Navbar({searchText, changeHandler}) {
             </Grid>
             </Grid>
             }
+            {/* <p style={{color: "#0f217d", fontFamily: "Arial"}}>Made by Elbrus</p> */}
           {!user ? 
             <Grid container spacing={2} direction='row' justifyContent='flex-end'>
             <Link to='/'><IconButton id={styles.media} className={classes.root} color="inherit">Главная</IconButton></Link>
