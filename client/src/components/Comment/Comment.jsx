@@ -21,6 +21,7 @@ export default function Comment() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const comments = useSelector((state) => state.comment)
+  const currentUser = useSelector(state => state.user)
   const error = useSelector((state) => state.error)
   const user = useSelector((state) => state.user)
   const [input, setInput] = useState('')
@@ -56,10 +57,10 @@ export default function Comment() {
       <form onSubmit={(e) => e.preventDefault()} style={{width: '100%', maxWidth: '600px'}} method="POST" className={classes.margin} >
         <Grid container spacing={1} alignItems="flex-end">
           <Grid item>
-          <Avatar alt="Remy Sharp"  />
+          <Avatar alt="Remy Sharp"  src={currentUser?.image}/>
           </Grid>
           <Grid item>
-            <TextField onChange={(e) => hadleChange(e)} value={input} id="input-with-icon-grid" label="Написать комментарий" />
+            <TextField onChange={(e) => hadleChange(e)} value={input} id="input-with-icon-grid" label="Прокомментировать" />
           </Grid>
         <IconButton onClick={clickHandler} data-id="head-input" type="submit" color="secondary">
           <ChevronRightOutlinedIcon />
