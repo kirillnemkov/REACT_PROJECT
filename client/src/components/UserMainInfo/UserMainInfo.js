@@ -8,11 +8,11 @@ import Helpers from '../../helpers/UploadsHelper'
 import { setError } from '../../redux/actions/errors.ac'
 import { setUserImg } from '../../redux/actions/user.ac'
 import { useState } from 'react'
-import { indigo, pink } from '@material-ui/core/colors'
+import { indigo } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
     button: {
-      color: "black",
+        color: 'white',
         marginTop: '10px',
         backgroundColor: indigo[400],
         '& .MuiButton-label': {
@@ -22,18 +22,19 @@ const useStyles = makeStyles((theme) => ({
             margin: 0,
         },
         '&:hover': {
-          backgroundColor: "#FF4268",
+            backgroundColor: '#FF4268',
         },
     },
     addButton: {
         backgroundColor: indigo[400],
+        color: 'white',
         width: '100%',
         height: '36px',
         '& .MuiButton-endIcon': {
             marginLeft: 0,
         },
         '&:hover': {
-          backgroundColor: "#FF4268",
+            backgroundColor: '#FF4268',
         },
     },
     root: {
@@ -116,11 +117,11 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                     </Button>
                 </div>
                 <div className={styles.name_and_info_container}>
-                    <h5 className={styles.user_name}>
+                    <h2 className={styles.user_name}>
                         {id == currentUser?.id
-                            ? `${currentUser?.info?.firstName} ${currentUser?.info?.middleName} ${currentUser?.info?.lastName}`
-                            : `${anotherUser?.firstName} ${anotherUser?.middleName} ${anotherUser?.lastName}`}
-                    </h5>
+                            ? `${currentUser?.info?.lastName} ${currentUser?.info?.firstName} ${currentUser?.info?.middleName} `
+                            : `${anotherUser?.lastName} ${anotherUser?.firstName} ${anotherUser?.middleName} `}
+                    </h2>
                     <div className={styles.location}>
                         <div className={styles.location_name}>
                             {id == currentUser?.id

@@ -8,7 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import Grid from "@material-ui/core/Grid";
-import { indigo} from '@material-ui/core/colors'
+import { grey, indigo} from '@material-ui/core/colors'
 
 
 const useStyles = makeStyles({
@@ -118,11 +118,23 @@ export default function ImageCard({payload, handleClick, checked}) {
               component="p"
               className={classes.desc}
             >
-              <IconButton aria-label="add to favorites">
-                <VisibilityOutlinedIcon fontSize="large" />
-              </IconButton>{payload?.views?.length}
             </Typography>
           </Grid>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              className={classes.desc}
+            >
+            <Typography style={{display: "flex",justifyContent: "space-between", alignItems: "center"}}>
+            <Typography>{payload?.date}</Typography>
+            <Typography>
+              <IconButton>
+                <VisibilityOutlinedIcon fontSize="large" style={{color:grey[200]}} />
+              </IconButton>{payload?.views?.length}</Typography>
+            </Typography>
+
+            </Typography>
         </CardContent>
         </Link>
       </Card>
