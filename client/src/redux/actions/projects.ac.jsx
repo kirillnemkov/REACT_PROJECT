@@ -30,10 +30,6 @@ const projectEdit = (project) => ({
     payload: { project },
 })
 
-const projectDelete = (id) => ({
-    type: PROJECT_DELETE,
-    payload: { id },
-})
 
 export const projectCreate = (project) => ({
     type: PROJECT_CREATE,
@@ -146,18 +142,4 @@ export const editProject = (payload, errors) => async (dispatch) => {
     }
 }
 
-export const deleteProject = (id, errors) => async (dispatch) => {
-    dispatch(enableLoader())
-    try {
-        await ProjectsService.deleteProject(id)
-        dispatch(projectDelete({ id }))
-        if (errors) dispatch(deleteError())
-    } catch (error) {
-        const message = error?.response?.data?.message
-        message
-            ? dispatch(setError(message))
-            : dispatch(setError('Возникли технические проблемы на сервере'))
-    } finally {
-        dispatch(disableLoader())
-    }
-}
+

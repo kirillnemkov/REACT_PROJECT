@@ -1,13 +1,13 @@
 const Project = require("../models/project-model");
 const Comment = require("../models/comment-model");
-const User = require("../models/user-model")
-const treelize = require('../service/helper-service')
+const User = require("../models/user-model");
+const treelize = require("../service/helper-service");
 
 class ProjectController {
   async getOneProjects(req, res, next) {
     try {
       const { id } = req.params;
-      const project = await Project.findById(id).populate("creators").populate('userProjects');
+      const project = await Project.findById(id).populate("creators").populate("userProjects");
       const projects = await Project.find({ date: project.date });
       return res.json({ project, projects });
     } catch (err) {
@@ -16,7 +16,7 @@ class ProjectController {
   }
   async getAllProjects(req, res, next) {
     try {
-      const projects = await Project.find();
+      const projects = await Project.find().sort("date");
       return res.json(projects);
     } catch (err) {
       next(err);
@@ -27,13 +27,17 @@ class ProjectController {
     try {
       const project = await Project.findById(req.params.id).populate("creators");
       if (!project.likes.includes(req.body.id) && req.body.id) {
-        const projectWithUpdatedLikes = await Project.findByIdAndUpdate(req.params.id, { $push: { likes: { $each: [req.body.id] } } }, { new: true }).populate(
+        const projectWithUpdatedLikes = await Project.findByIdAndUpdate(
+          req.params.id,
+          { $push: { likes: { $each: [req.body.id] } } },
+          { new: true }
+        ).populate("creators");
+        return res.json(projectWithUpdatedLikes);
+      } else {
+        const projectWithUpdatedLikes = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate(
           "creators"
         );
-        return res.json(projectWithUpdatedLikes)
-      } else {
-        const projectWithUpdatedLikes = await Project.findByIdAndUpdate(req.params.id, { $pull: { likes: req.body.id } }, { new: true }).populate("creators");
-        return res.json(projectWithUpdatedLikes)
+        return res.json(projectWithUpdatedLikes);
       }
     } catch (err) {
       next(err);
@@ -42,18 +46,14 @@ class ProjectController {
 
   async updateViewsProject(req, res, next) {
     try {
-      const { projectId } = req.params
-      const { userIp: userId } = req.body
+      const { projectId } = req.params;
+      const { userIp: userId } = req.body;
       const project = await Project.findById(projectId).populate("creators");
       if (!project.views.includes(userId)) {
-        const projectWithUpdatedViews = await Project.findByIdAndUpdate(
-          projectId,
-          { $push: { views: userId } },
-          { new: true }
-        ).populate("creators");
-        return res.json(projectWithUpdatedViews)
+        const projectWithUpdatedViews = await Project.findByIdAndUpdate(projectId, { $push: { views: userId } }, { new: true }).populate("creators");
+        return res.json(projectWithUpdatedViews);
       } else {
-        return res.json(project)
+        return res.json(project);
       }
     } catch (err) {
       next(err);
@@ -62,10 +62,10 @@ class ProjectController {
 
   async createProject(req, res, next) {
     try {
-      const { id, ...rest } = req.body
-      const newProject = await Project.create(rest)
+      const { id, ...rest } = req.body;
+      const newProject = await Project.create(rest);
       if (newProject) {
-        await User.findByIdAndUpdate(id, { $push: { userProjects: [newProject._id] } }, { new: true }).populate('userProjects')
+        await User.findByIdAndUpdate(id, { $push: { userProjects: [newProject._id] } }, { new: true }).populate("userProjects");
       }
       return res.json(newProject);
     } catch (err) {
@@ -75,11 +75,11 @@ class ProjectController {
 
   async getComment(req, res, next) {
     try {
-      const { id } = req.params
-      const { userId } = req.body
-      const project = await Project.findById(id)
-      const b = project.comments
-      console.log(b)
+      const { id } = req.params;
+      const { userId } = req.body;
+      const project = await Project.findById(id);
+      const b = project.comments;
+      console.log(b);
     } catch (err) {
       next(err);
     }
@@ -87,17 +87,17 @@ class ProjectController {
 
   async createComment(req, res, next) {
     try {
-      const {projectId} = req.params;
-      const {authorId, text, parentId} = req.body
+      const { projectId } = req.params;
+      const { authorId, text, parentId } = req.body;
       if (parentId.length === 0) {
-        await Comment.create({authorId, text, projectId});
+        await Comment.create({ authorId, text, projectId });
       } else if (parentId.length !== 0) {
-        await Comment.create({authorId, text, projectId, parentId});
+        await Comment.create({ authorId, text, projectId, parentId });
       }
-      const allCurrentProjectComments = await Comment.find({projectId}).populate('parentId').populate('authorId')
-      const a = allCurrentProjectComments.map(item => item.toJSON())
+      const allCurrentProjectComments = await Comment.find({ projectId }).populate("parentId").populate("authorId");
+      const a = allCurrentProjectComments.map((item) => item.toJSON());
       const structuredComments = await treelize(a);
-      return res.json(structuredComments)
+      return res.json(structuredComments);
     } catch (err) {
       next(err);
     }
@@ -106,11 +106,7 @@ class ProjectController {
   async editProject(req, res, next) {
     try {
       const { id } = req.params;
-      const updatedProject = await Project.findOneAndReplace(
-        { _id: id },
-        req.body,
-        { new: true }
-      );
+      const updatedProject = await Project.findOneAndReplace({ _id: id }, req.body, { new: true });
       return res.json(updatedProject);
     } catch (err) {
       next(err);
@@ -120,8 +116,8 @@ class ProjectController {
   async deleteProject(req, res, next) {
     try {
       const { id } = req.params;
-      await Project.findByIdAndDelete(id);
-      return res.sendStatus(200);
+      const deletedCard = await Project.findByIdAndDelete(id);
+      return res.json(deletedCard);
     } catch (err) {
       next(err);
     }

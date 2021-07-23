@@ -72,7 +72,8 @@ export default function Projects ({content}) {
             <div className={classes.root} id="place-to-visit">
             <Grid container spacing={0.5}>
           {  content?.map(item => {
-            return<Grid item xs={4}><Link  className={classes.link} to={`/projects/${item._id}`}><ImageCard key={item._id} payload={item} checked={checked} /></Link></Grid>
+            return<Grid item xs={4} style={{display: 'flex', flexDirection: 'column', alignItems: 'stretch', paddingTop: '20px',}}>
+              <ImageCard key={item._id} payload={item} checked={checked} /></Grid>
             })}
             </Grid>
             </div>

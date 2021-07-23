@@ -8,24 +8,33 @@ import Helpers from '../../helpers/UploadsHelper'
 import { setError } from '../../redux/actions/errors.ac'
 import { setUserImg } from '../../redux/actions/user.ac'
 import { useState } from 'react'
+import { indigo } from '@material-ui/core/colors'
 
 const useStyles = makeStyles((theme) => ({
     button: {
-        marginTop: "10px",
-        backgroundColor: '#FF4268',
+        color: 'white',
+        marginTop: '10px',
+        backgroundColor: indigo[400],
         '& .MuiButton-label': {
             justifyContent: 'end',
         },
         '& .makeStyles-button-10:nth-child(1)': {
             margin: 0,
         },
+        '&:hover': {
+            backgroundColor: '#FF4268',
+        },
     },
     addButton: {
-        backgroundColor: '#FF4268',
+        backgroundColor: indigo[400],
+        color: 'white',
         width: '100%',
         height: '36px',
         '& .MuiButton-endIcon': {
             marginLeft: 0,
+        },
+        '&:hover': {
+            backgroundColor: '#FF4268',
         },
     },
     root: {
@@ -61,7 +70,6 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
         )
     }
 
-
     function dragStartHandler(e) {
         e.preventDefault()
         setDrag(true)
@@ -89,8 +97,13 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                         onDrop={onDropHandler}
                     >
                         <img
-                            src={id == currentUser?.id ? userPhoto?.image || '/profile-user.png' : anotherUser?.image || '/profile-user.png'}
-                            className={styles.user_img} alt=""
+                            src={
+                                id == currentUser?.id
+                                    ? userPhoto?.image || '/profile-user.png'
+                                    : anotherUser?.image || '/profile-user.png'
+                            }
+                            className={styles.user_img}
+                            alt=""
                         ></img>
                     </div>
                     <input

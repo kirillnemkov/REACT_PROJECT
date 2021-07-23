@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
         '& > * + *': {
             marginTop: theme.spacing(2),
         },
-        marginTop: '300px',
+        marginTop: '400px',
         display: 'flex',
         justifyContent: 'center',
     },

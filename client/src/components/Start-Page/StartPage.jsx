@@ -63,7 +63,7 @@ const StartPage = () => {
             const sortItems = [...content].sort((a, b) => b.views.length - a.views.length)
             setContent(sortItems)
         } else if (flag === 'date') {
-            const sortItems1 = [...content].sort((a, b) => b.data - a.data)
+            const sortItems1 = [...content].sort((a, b) => b.date - a.date)
             setContent(sortItems1)
         }
     }, [flag])

@@ -17,7 +17,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 import Comment from '../Comment/Comment'
 import AddToHomeScreenIcon from '@material-ui/icons/AddToHomeScreen'
-import { grey, blue, pink, indigo} from '@material-ui/core/colors'
+import { grey, blue, pink, indigo } from '@material-ui/core/colors'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import FacebookIcon from '@material-ui/icons/Facebook'
@@ -52,7 +52,16 @@ export default function ProjectProfile() {
         <>
             <div className={styles.projectContainer}>
                 <div className={styles.imageContainer}>
-                    {project?.image?.length > 0 && <Carousel slides={slides} />}
+                    {project?.image?.length > 0 && (
+                        <Carousel
+                            navButtonsProps={{
+                                style: {
+                                    color: 'black',
+                                },
+                            }}
+                            slides={slides}
+                        />
+                    )}
                 </div>
 
                 <div className={styles.title}>
@@ -94,7 +103,7 @@ export default function ProjectProfile() {
                         <IconButton>
                             <GitHubIcon
                                 fontSize="large"
-                                style={{ color: grey[50] }}
+                                style={{ color: grey[500] }}
                             />
                         </IconButton>
                     </a>

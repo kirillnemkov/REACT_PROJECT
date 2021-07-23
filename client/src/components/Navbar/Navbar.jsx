@@ -9,8 +9,9 @@ import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import Box from '@material-ui/core/Box';
 import { checkAuth, signOut } from "../../redux/actions/user.ac";
+import { indigo } from '@material-ui/core/colors'
+
 
 const useStyles = makeStyles((theme) => ({
   media: {
@@ -23,9 +24,10 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: '10%',
   },
   root: {
-    background: 'linear-gradient(45deg, #ff4553 30%, #ff4268 60%)',
+    // background: 'linear-gradient(45deg, #ff4553 30%, #5c6bc0 60%)',
+    // borderColor: "#5c6bc0",
     borderRadius: "7%",
-    color: 'white',
+    color: indigo[700],
     height: 46,
     padding: '0 30px',
   },
