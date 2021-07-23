@@ -132,7 +132,7 @@ export default function ProjectProfile() {
                         </IconButton>
                     </a>
                 </div>
-                <hr style={{ width: '1300px' }} />
+                <hr style={{ width: '1400px' }} />
                 <b className={styles.text}>
                     {project?.creators?.length > 1 ? 'СОЗДАТЕЛИ' : 'СОЗДАТЕЛЬ'}
                 </b>
@@ -143,24 +143,21 @@ export default function ProjectProfile() {
                         })}
                     </div>
                 </div>
-                <hr style={{ width: '1300px' }} />
+                <hr style={{ width: '1400px' }} />
                 <b className={styles.text}>ПРОЕКТЫ ЭТОГО ВЫПУСКА</b>
                 <div className={styles.conteinerUser}>
                     {projects.map((el) => {
                         return <ProjectsCard el={el} />
                     })}
                 </div>
-                <hr style={{ width: '1300px' }} />
+                <hr style={{ width: '1400px' }} />
                 <b className={styles.text}>КОММЕНТАРИИ К ПРОЕКТУ</b>
 
-                <div>
+                {/* <div>
                     <div className={styles.commentContainer}>
-                        {comment.map((el) => (
-                            <p>{el}</p>
-                        ))}
-                        <p className={styles.textForComment}>here comment</p>
+                        <p className={styles.textForComment}></p>
                     </div>
-                </div>
+                </div> */}
                 <div className={styles.comment}>
                     <Comment />
                 </div>
