@@ -2,6 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Avatar, IconButton, TextField} from '@material-ui/core';
 import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
+import {useState} from 'react';
+import { useParams} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import {setComment} from "../../redux/actions/comment.ac"
 
 const useStyles = makeStyles(theme => ({
   margin: {
@@ -22,36 +26,65 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-const CommentCard = ({hadleChange, clickHandler, comment, type}) => {
+const CommentCard = ({comment, type}) => {
+  const [input, setInput] = useState('')
+  const [showInput, setShowInput] = useState(false)
   const classes = useStyles();
+  const dispatch = useDispatch()
+  const error = useSelector((state) => state.error)
+  const user = useSelector((state) => state.user)
+  const { projectId } = useParams()
 
-  const nestedComments = (comment.children || []).map(childComment => {
-    return <CommentCard key={childComment._id} hadleChange={hadleChange} clickHandler={clickHandler} comment={childComment} type="childComment" />
+const hadleChange = (e) => {
+  setInput(e.target.value);
+}
+
+const clickHandler = (e) => {
+  e.stopPropagation()
+  if(input.length > 0 ){
+      setShowInput(true)
+      const parentId = e.currentTarget.dataset.id;
+      dispatch(setComment(projectId, user?.id, input, parentId, error))
+      setInput('')
+      setShowInput(false)
+  } else{
+    setShowInput(true)
+  }
+}
+
+  const nestedComments = (comment?.children || []).map(childComment => {
+    return <CommentCard key={childComment._id} hadleChange={hadleChange} clickHandler={clickHandler} comment={childComment} type="childComment" input={input}/>
   })
 
     return (
         <div className={`${classes.commentCard} ${classes[type]}`}>
         <Grid container wrap="nowrap" spacing={2} direction='column'>
           <Grid item>
-            <Avatar alt="Remy Sharp" src={comment.img} />
+            <Avatar alt="Remy Sharp" src={comment?.authorId?.image} />
           </Grid>
           <Grid justifyContent="left" item xs zeroMinWidth >
-            <h4 style={{ margin: 0, textAlign: "left" }}>{comment.username}</h4>
+            <h4 style={{ margin: 0, textAlign: "left" }}>{comment?.authorId?.username}</h4>
             <p style={{ textAlign: "left" }}>
-   {comment.text}
+   {comment?.text}
             </p>
             <p style={{ textAlign: "left", color: "gray"}}>
               
             </p>
-            <a style={{cursor: 'pointer'}}>
+            {user?.id !== comment?.authorId?._id &&
+            <a style={{cursor: 'pointer'}} onClick={clickHandler} >
               Ответить
         </a>
+}
           </Grid>
           <Grid container item xs style={{display: 'flex'}}>
-        <TextField  onChange={(e) => hadleChange(e)} style={{flexGrow: 1}} id="outlined-basic" label="type your answer here" variant="outlined"  multiline />
-        <IconButton data-id={comment._id} onClick={clickHandler} type="submit" color="secondary">
+            {showInput &&
+            <>
+        <TextField  onChange={(e) => hadleChange(e)} value={input} style={{flexGrow: 1}} id="outlined-basic" label="type your answer here" variant="outlined"  multiline />
+        <IconButton data-id={comment?._id} onClick={clickHandler} type="submit" color="secondary">
           <ChevronRightOutlinedIcon />
         </IconButton>
+        </>
+}
         {nestedComments}
         </Grid>
         </Grid>

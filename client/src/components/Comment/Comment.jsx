@@ -1,7 +1,7 @@
 import { useParams} from 'react-router-dom'
 import {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { useDispatch, useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Avatar, IconButton, TextField} from '@material-ui/core';
 import ChevronRightOutlinedIcon from '@material-ui/icons/ChevronRightOutlined';
@@ -20,42 +20,36 @@ const useStyles = makeStyles(theme => ({
 export default function Comment() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const project = useSelector((state) => state.project)
   const comments = useSelector((state) => state.comment)
   const error = useSelector((state) => state.error)
   const user = useSelector((state) => state.user)
   const [input, setInput] = useState('')
+  const [showInput, setShowInput] = useState(false)
   const { projectId } = useParams()
+  
 
   useEffect(() => {
     dispatch(getAllComments(projectId))
   }, [])
-
-
+  
   const clickHandler = (e) => {
     e.stopPropagation()
-    if(input){
-    if(e.currentTarget.dataset.id === "head-input"){
-    let parentId;
-    dispatch(setComment(projectId, user.id, input, parentId, error))
-    } else{
-      const parentId = e.currentTarget.dataset.id;
-      dispatch(setComment(projectId, user.id, input, parentId, error))
+    if(input.length > 0 ){
+      if(e.currentTarget.dataset.id === "head-input"){
+        let parentId;
+        dispatch(setComment(projectId, user?.id, input, parentId, error))
+        setInput('')
+      } else{
+        const parentId = e.currentTarget.dataset.id;
+        dispatch(setComment(projectId, user?.id, input, parentId, error))
+        setInput('')
+      }
     }
-  }
 }
 
   const hadleChange = (e) => {
     setInput(e.target.value);
   }
-
-  // function clickHandler(e) {
-  //   e.stopPropagation()
-  //   const parentId = e.currentTarget.dataset.id
-  //   console.log(parentId)
-  //   dispatch(setComment(projectId, user.id, input, parentId, error))
-  // }
-
 
   return (
     <>
@@ -65,7 +59,7 @@ export default function Comment() {
           <Avatar alt="Remy Sharp"  />
           </Grid>
           <Grid item>
-            <TextField onChange={(e) => hadleChange(e)} id="input-with-icon-grid" label="Your comment here" />
+            <TextField onChange={(e) => hadleChange(e)} value={input} id="input-with-icon-grid" label="Your comment here" />
           </Grid>
         <IconButton onClick={clickHandler} data-id="head-input" type="submit" color="secondary">
           <ChevronRightOutlinedIcon />
@@ -76,10 +70,10 @@ export default function Comment() {
       <Paper style={{ padding: " 0 20px", width: '100%' }}>
         
       {
-        comments.length ? 
+        comments.length && user ?
           comments.map(comment => 
-        <CommentCard key={comment._id} clickHandler={clickHandler} hadleChange={hadleChange} comment={comment}/> )
-        : <p>Comments not found</p>
+        <CommentCard key={comment?._id} clickHandler={clickHandler} hadleChange={hadleChange} comment={comment}/> )
+        : <p>Данный проект еще никто не комментировал</p>
         
         }
 
