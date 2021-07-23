@@ -59,7 +59,7 @@ export default function Comment() {
           <Avatar alt="Remy Sharp"  />
           </Grid>
           <Grid item>
-            <TextField onChange={(e) => hadleChange(e)} value={input} id="input-with-icon-grid" label="Your comment here" />
+            <TextField onChange={(e) => hadleChange(e)} value={input} id="input-with-icon-grid" label="Написать комментарий" />
           </Grid>
         <IconButton onClick={clickHandler} data-id="head-input" type="submit" color="secondary">
           <ChevronRightOutlinedIcon />
@@ -72,7 +72,7 @@ export default function Comment() {
       {
         comments.length && user ?
           comments.map(comment => 
-        <CommentCard key={comment?._id} clickHandler={clickHandler} hadleChange={hadleChange} comment={comment}/> )
+        <CommentCard key={comment?._id} isRoot clickHandler={clickHandler} hadleChange={hadleChange} comment={comment}/> )
         : <p>Данный проект еще никто не комментировал</p>
         
         }

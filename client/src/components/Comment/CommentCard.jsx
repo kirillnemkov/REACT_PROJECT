@@ -11,13 +11,16 @@ const useStyles = makeStyles(theme => ({
   margin: {
     marginTop: 50,
   },
+  rootCommentCard: {
+    paddingTop: 20,
+    width: '100%',
+    position: 'relative',
+    borderBottom: '1px solid #bdbdbd'
+  },
   commentCard: {
     paddingTop: 20,
     width: '100%',
     position: 'relative',
-    '& .MuiGrid-container': {
-      borderBottom: '1px solid #bdbdbd'
-    },
   },
   childComment: {
     marginLeft: 100,
@@ -26,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   
 }));
 
-const CommentCard = ({comment, type}) => {
+const CommentCard = ({comment, type,isRoot = false}) => {
   const [input, setInput] = useState('')
   const [showInput, setShowInput] = useState(false)
   const classes = useStyles();
@@ -57,7 +60,7 @@ const clickHandler = (e) => {
   })
 
     return (
-        <div className={`${classes.commentCard} ${classes[type]}`}>
+        <div className={`${isRoot ? classes.rootCommentCard : classes.commentCard} ${classes[type]}`}>
         <Grid container wrap="nowrap" spacing={2} direction='column'>
           <Grid item>
             <Avatar alt="Remy Sharp" src={comment?.authorId?.image} />
@@ -79,7 +82,7 @@ const clickHandler = (e) => {
           <Grid container item xs style={{display: 'flex'}}>
             {showInput &&
             <>
-        <TextField  onChange={(e) => hadleChange(e)} value={input} style={{flexGrow: 1}} id="outlined-basic" label="type your answer here" variant="outlined"  multiline />
+        <TextField  onChange={(e) => hadleChange(e)} value={input} style={{flexGrow: 1}} id="outlined-basic" label='ответ' variant="outlined"  multiline />
         <IconButton data-id={comment?._id} onClick={clickHandler} type="submit" color="secondary">
           <ChevronRightOutlinedIcon />
         </IconButton>
