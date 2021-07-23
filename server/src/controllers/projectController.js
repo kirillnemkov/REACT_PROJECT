@@ -74,7 +74,6 @@ try {
       const {userId} = req.body
       const project = await Project.findById(id)
       const b = project.comments
-      console.log(b)
     } catch (err) {
       next(err);
     }
@@ -84,18 +83,30 @@ try {
     try {
       const {projectId} = req.params;
       const {authorId, text, parentId} = req.body
-      if (parentId.length === 0) {
+      if (!parentId) {
         await Comment.create({authorId, text, projectId});
-      } else if (parentId.length !== 0) {
+      } else if (parentId) {
         await Comment.create({authorId, text, projectId, parentId});
       }
-      const allCurrentProjectComments = await Comment.find({projectId}).populate('parentId').populate('authorId')
-      const a = allCurrentProjectComments.map(item => item.toJSON())
-      const structuredComments = await treelize(a);
+      const allCurrentProjectComments = await Comment.find({projectId}).populate('authorId').sort({date: -1})
+      const result = allCurrentProjectComments.map(item => item.toJSON())
+      const structuredComments = treelize(result);
       return res.json(structuredComments)
     } catch (err) {
       next(err);
     }
+  }
+
+  async getAllComments(req, res, next){
+    try{
+    const {projectId} = req.params;
+    const allCurrentProjectComments = await Comment.find({projectId}).populate('authorId').sort({date: -1})
+    const result = allCurrentProjectComments.map(item => item.toJSON())
+    const structuredComments = treelize(result);
+    return res.json(structuredComments)
+  } catch (err) {
+    next(err);
+  }
   }
 
   async editProject(req, res, next) {

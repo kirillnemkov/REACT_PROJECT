@@ -5,7 +5,6 @@ class ProfileController {
     try {
       const { id } = req.params;
       const oneUser = await User.findById(id);
-      console.log(oneUser)
       return res.json(oneUser);
     } catch (err) {
       next(err);
@@ -27,7 +26,6 @@ class ProfileController {
         instagram,
         facebook } = req.body
       if (firstName || middleName || about || location || job || url || gitHub || twitter || instagram || facebook) {
-        console.log(id)
         const editUser = await User.findOneAndUpdate({_id: id}, {
           firstName,
           middleName,
@@ -41,12 +39,10 @@ class ProfileController {
           instagram,
           facebook,
         }, { new: true });
-        console.log(editUser)
         return res.json(editUser);
       }
       else {
         const editUserSkills = await User.findByIdAndUpdate(id, { skills: req.body }, { new: true });
-        console.log(editUserSkills)
         return res.json(editUserSkills);
       }
 

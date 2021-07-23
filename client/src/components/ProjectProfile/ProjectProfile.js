@@ -146,9 +146,6 @@ export default function ProjectProfile() {
 
                 <div>
                     <div className={styles.commentContainer}>
-                        {comment.map((el) => (
-                            <p>{el}</p>
-                        ))}
                         <p className={styles.textForComment}>here comment</p>
                     </div>
                 </div>

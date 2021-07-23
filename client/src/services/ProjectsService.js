@@ -31,4 +31,8 @@ export default class ProjectService {
     static async createProject(payload) {
         return $api.post(`/projects/newProject`, payload)
     }
+
+    static async getAllComments({projectId}) {
+        return $api.get(`/projects/all/${projectId}`, )
+    }
 }
