@@ -18,7 +18,6 @@ const projectReducer = (state = [], action) => {
     case PROJECT_CREATE: {
       const { project } = payload;
       const newState = [...state, project];
-      console.log(newState)
       return newState
     }
     case PROJECT_EDIT: {
