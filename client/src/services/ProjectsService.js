@@ -24,9 +24,6 @@ export default class ProjectService {
         return $api.put(`/projects/${payload.id}`, payload)
     }
 
-    static async deleteProject(id) {
-        return $api.delete(`/projects/${id}`)
-    }
 
     static async createProject(payload) {
         return $api.post(`/projects/newProject`, payload)

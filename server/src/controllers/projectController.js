@@ -127,8 +127,8 @@ class ProjectController {
   async deleteProject(req, res, next) {
     try {
       const { id } = req.params;
-      await Project.findByIdAndDelete(id);
-      return res.sendStatus(200);
+      const deletedCard = await Project.findByIdAndDelete(id);
+      return res.json(deletedCard);
     } catch (err) {
       next(err);
     }

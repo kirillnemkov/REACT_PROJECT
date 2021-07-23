@@ -1,4 +1,4 @@
-import { SET_ANOTHER_INFO } from "../types/anotherUserTypes"
+import { SET_ANOTHER_INFO, PROJECT_DELETE } from "../types/anotherUserTypes"
 
 const AnotherProfileReducer = (state = {}, action) => {
 
@@ -11,6 +11,11 @@ const AnotherProfileReducer = (state = {}, action) => {
         return info
       }
     
+      case PROJECT_DELETE: {
+        const { id } = action.payload;
+        const newState = state.userProjects.filter(item => item._id !== id)
+        return {...state, userProjects: newState}
+      }
 
     default:
       return state

@@ -11,7 +11,8 @@ import {
 import { grey, indigo} from '@material-ui/core/colors'
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import IconButton from '@material-ui/core/IconButton'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProject } from '../../redux/actions/AnotherProfileReducer.ac' 
 
 
 
@@ -33,24 +34,36 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export default function ProjectsCardForUser({ el }) {
-  const classes = useStyles()
-  const currentUser = useSelector((state) => state?.user)
-  const {id} = useParams()
+    const classes = useStyles()
+    const currentUser = useSelector((state) => state?.user)
+    const {id} = useParams()
+    const dispatch = useDispatch()
+
+    const handleDeleteProject = (e, el) => {
+       if(e.target.dataset.id){
+        dispatch(deleteProject(el))
+       }
+    } 
+
     return (
-        <Link to={`/projects/${el._id}`} >
+        <>
             <Card className={classes.root} id={styles.media} key={el?._id}>
+            <Link to={`/projects/${el._id}`} >
                 <CardMedia className={classes.media} image={el?.image[0]} />
                 <CardHeader title={el?.title}/>
+                </Link>
                 <CardContent style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
                  <Typography variant="body2"> {el?.date} </Typography> 
-                 <Typography> {id == currentUser?.id &&<IconButton>
-                            <DeleteOutlineIcon
+                
+                 <Typography> {id == currentUser?.id &&<IconButton onClick={(e) => handleDeleteProject(e, el?._id)}> 
+                            <DeleteOutlineIcon 
+                            data-id='delete'
                                 fontSize="medium"
                                 style={{ color: grey[100] }}
                             />
                         </IconButton>}</Typography>
              </CardContent> 
             </Card>
-        </Link>
+        </>
   )
 }
