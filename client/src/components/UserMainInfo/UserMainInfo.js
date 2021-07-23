@@ -112,16 +112,14 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                         onChange={changeHandler}
                         className={styles.file}
                     />
-                    <Button variant="contained" className={classes.button}>
+                    {id == currentUser?.id ? <Button variant="contained" className={classes.button}>
                         <label htmlFor="file">Добавить фото</label>
-                    </Button>
+                    </Button> : null}
                 </div>
                 <div className={styles.name_and_info_container}>
-                    <h2 className={styles.user_name}>
-                        {id == currentUser?.id
-                            ? `${currentUser?.info?.lastName} ${currentUser?.info?.firstName} ${currentUser?.info?.middleName} `
-                            : `${anotherUser?.lastName} ${anotherUser?.firstName} ${anotherUser?.middleName} `}
-                    </h2>
+                    {(<h2 className={styles.user_name}>
+                        {id == currentUser?.id ? ((currentUser?.info?.firstName || currentUser?.info?.middleName || currentUser?.info?.lastName) ? (`${currentUser?.info?.firstName} ${currentUser?.info?.middleName} ${currentUser?.info?.lastName}`) : null) : (`${anotherUser?.firstName} ${anotherUser?.middleName} ${anotherUser?.lastName}`)}
+                    </h2>)}
                     <div className={styles.location}>
                         <div className={styles.location_name}>
                             {id == currentUser?.id
@@ -149,20 +147,20 @@ const UserMainInfo = ({ handleOpen, handleProjectModalOpen, id }) => {
                             endIcon={<SendIcon />}
                         ></Button>
                         <div className={styles.falsh}></div>
-                        <Button
+                        {id == currentUser?.id ? (<Button
                             variant="contained"
                             onClick={handleOpen}
                             className={classes.button}
                             endIcon={<EditIcon />}
-                        ></Button>
+                        ></Button>) : null}
                     </div>
                     <div>
-                        <Button
+                        {id == currentUser?.id ? (<Button
                             variant="contained"
                             onClick={handleProjectModalOpen}
                             className={classes.addButton}
                             endIcon={<AddIcon />}
-                        ></Button>
+                        ></Button>) : null}
                     </div>
                 </div>
             </div>
