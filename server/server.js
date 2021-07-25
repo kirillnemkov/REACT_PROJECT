@@ -6,9 +6,10 @@ const multer = require("multer");
 const { connect } = require("./src/db/db");
 const app = express();
 const userRouter = require("./src/routes/userRouter");
-const fileRouter = require("./src/routes/fileRouter");
+const profileRouter = require("./src/routes/profileRouter");
+const projectRouter = require("./src/routes/projectRouter");
 const errorMiddleware = require("./src/middlewars/error-middleware");
-
+const authMiddleware = require('./src/middlewars/auth-middleware')
 const { PORT } = process.env;
 
 const storage = multer.memoryStorage();
@@ -23,18 +24,16 @@ app.use(
     credentials: true,
   })
 );
-
 app.use("/api/v1", userRouter);
-app.use("/api/v1/files", fileRouter);
+app.use("/profile", profileRouter);
+app.use("/projects", projectRouter);
 
 app.use(errorMiddleware);
 
 const start = async () => {
   try {
     await connect();
-    app.listen(PORT, () =>
-      console.log(`Server has been started on PORT: ${PORT} `)
-    );
+    app.listen(PORT, () => console.log(`Server has been started on PORT: ${PORT} `));
   } catch (e) {
     console.log(e);
   }

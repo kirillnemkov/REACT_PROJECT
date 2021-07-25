@@ -1,8 +1,10 @@
 const initState = {
-  files: [],
+  projects: [],
+  project: null,
   user: null,
   loader: false,
-  error: null
+  error: null,
+  AnotherUser: null
 }
 
 const getInitState = () => {

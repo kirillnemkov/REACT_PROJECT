@@ -11,11 +11,11 @@ $api.interceptors.request.use((config) => {
     return config
 })
 
-$api.interceptors.request.use(
+$api.interceptors.response.use(
     (config) => {
         return config
     },
-    async((error) => {
+    async (error) => {
         const originalRequest = error.config
         if (
             error.response.status == 401 &&
@@ -37,5 +37,5 @@ $api.interceptors.request.use(
         }
         throw error
     })
-)
+
 export default $api

@@ -1,17 +1,38 @@
-import { Alert } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-const { Heading } = Alert
+import React from 'react'
+import { makeStyles } from '@material-ui/core/styles'
+import { Alert, AlertTitle } from '@material-ui/lab'
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+        '& > * + *': {
+            marginTop: theme.spacing(2),
+        },
+        marginTop: '400px',
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    alertik: {
+        width: '800px',
+        height:"150px",
+        fontSize:"19px"
+    },
+    alertq:{
+      fontSize:"20px"
+    }
+}))
 
 const SignupSuccessMessage = () => {
+    const classes = useStyles()
     return (
-        <div style={{ textAlign: 'center' }}>
-            <Alert variant="success">
-                <Alert.Heading>
-                    {' '}
-                    Для завершения регистрации вам необходимо подтвердить ваш
-                    email адрес. Пожалуйста проверьте почту и перейдите по
-                    ссылке для активации аккаунта
-                </Alert.Heading>
+        <div className={classes.root}>
+            <Alert className={classes.alertik} severity="info">
+            <AlertTitle className={classes.alertq}><strong>Эй ты, посмотри на меня!</strong></AlertTitle>
+                
+                    Для завершения регистрации вам необходимо подтвердить адрес
+                    электронной почты. Пожалуйста, проверьте почту и перейдите
+                    по ссылке для активации аккаунта.
+               
             </Alert>
         </div>
     )
