@@ -12,8 +12,8 @@ export default class ProjectService {
     static async setCommenttForProject({projectId, authorId, text, parentId}) {
         return $api.put(`/projects/${projectId}/comment`,  {authorId, text, parentId, projectId} )
     }
-    static async updateViewsProject({projectId, userId}) {
-        return $api.patch(`/projects/views/${projectId}`, {userId})
+    static async updateViewsProject({projectId, userIp}) {
+        return $api.patch(`/projects/views/${projectId}`, {userIp})
     }
 
     static async getAllProjects() {

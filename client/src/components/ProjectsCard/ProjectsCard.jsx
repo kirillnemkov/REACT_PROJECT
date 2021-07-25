@@ -33,7 +33,7 @@ export default function ProjectsCard({ el }) {
         <Link to={`/projects/${el._id}`} >
             <Card className={classes.root} id={styles.media} key={el?._id}>
                 <CardMedia className={classes.media} image={el?.image[0]} />
-                <CardHeader title={el?.title}/>
+                <CardHeader style={{minHeight: "100px"}} title={el?.title}/>
                 <CardContent>
                  <Typography variant="body2"> {el?.date} </Typography> 
              </CardContent> 

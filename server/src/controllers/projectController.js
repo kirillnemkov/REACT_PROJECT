@@ -48,6 +48,7 @@ class ProjectController {
     try {
       const { projectId } = req.params;
       const { userIp: userId } = req.body;
+      console.log(req.body)
       const project = await Project.findById(projectId).populate("creators");
       if (!project.views.includes(userId)) {
         const projectWithUpdatedViews = await Project.findByIdAndUpdate(projectId, { $push: { views: userId } }, { new: true }).populate("creators");
